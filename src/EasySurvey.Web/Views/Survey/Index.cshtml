@@ -1,4 +1,4 @@
-@model IEnumerable<EasySurvey.Web.Models.SurveyListView>
+@model IEnumerable<SurveyListView>
 
 @{
     ViewData["Title"] = "Survey";
@@ -17,44 +17,44 @@
 </p>
 <table class="table">
     <tr>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.SurveyTemplateId)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.SurveyState)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.CustomerId)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.CustomerName)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.UserId)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.UserName)
         </th>
-        <th></th>
+        <th>Actions</th>
     </tr>
     
 @foreach (var item in Model) {
     <tr>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.SurveyTemplateId)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.SurveyState)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.CustomerId)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.CustomerName)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.UserId)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.UserName)
         </td>

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using EasySurvey.Services.Mock;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -54,7 +51,7 @@ namespace EasySurvey.Web
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
 
-            services.AddTransient<EasySurvey.Services.ISurveyService, EasySurvey.Services.Impl.SurveyMockService>();
+            services.AddTransient<EasySurvey.Services.ISurveyService, SurveyServiceMock>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,11 +1,10 @@
-﻿{
+{
   "version": "1.0.0-*",
   "description": "EasySurvey.Services Class Library",
   "authors": [ "bah" ],
   "tags": [ "" ],
   "projectUrl": "",
   "licenseUrl": "",
-
   "frameworks": {
     "net451": { },
     "dnxcore50": {
@@ -17,5 +16,8 @@
         "System.Threading": "4.0.11-beta-23516"
       }
     }
+  },
+  "dependencies": {
+    "EasySurvey.Common": "1.0.0-*"
   }
 }

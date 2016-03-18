@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
-using Microsoft.Data.Entity;
 using Microsoft.Extensions.Logging;
 using EasySurvey.Web.Models;
 using EasySurvey.Web.Services;
@@ -314,12 +311,12 @@ namespace EasySurvey.Web.Controllers
             if (user == null)
             {
                 // Don't reveal that the user does not exist
-                return RedirectToAction(nameof(AccountController.ResetPasswordConfirmation), "Account");
+                return RedirectToAction(nameof(ResetPasswordConfirmation), "Account");
             }
             var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
             if (result.Succeeded)
             {
-                return RedirectToAction(nameof(AccountController.ResetPasswordConfirmation), "Account");
+                return RedirectToAction(nameof(ResetPasswordConfirmation), "Account");
             }
             AddErrors(result);
             return View();

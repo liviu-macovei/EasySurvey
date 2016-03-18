@@ -1,10 +1,10 @@
+using EasySurvey.Common.Models;
 using Microsoft.Data.Entity;
 using Microsoft.Data.Entity.Metadata;
-using EasySurvey.Services.Models;
 
-namespace EasySurvey.Repositories
+namespace EasySurvey.Repositories.Sql
 {
-    public partial class EasySurveyStore_DevContext : DbContext
+    public class EasySurveyStore_DevContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {

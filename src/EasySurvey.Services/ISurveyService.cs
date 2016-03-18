@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using EasySurvey.Common.Models;
 
 namespace EasySurvey.Services
 {
     public interface ISurveyService
     {
-        List<EasySurvey.Services.Models.Survey> GetByUserId(string userId);
+        List<Survey> GetByUserId(string userId);
+        Survey GetByUserIdAndId(string userId, Guid id);
     }
 }
