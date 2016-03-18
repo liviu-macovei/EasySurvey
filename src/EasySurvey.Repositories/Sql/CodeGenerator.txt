@@ -1,0 +1,22 @@
+1. cd C:\Study\WorkSpace\V1\EasySurvey\src\EasySurvey.Repositories
+2. dnvm list 
+Active Version           Runtime Architecture Location                   Alias
+------ -------           ------- ------------ --------                   -----
+       1.0.0-beta5       clr     x64          C:\Users\bah\.dnx\runtimes
+       1.0.0-beta5       clr     x86          C:\Users\bah\.dnx\runtimes
+       1.0.0-beta5       coreclr x64          C:\Users\bah\.dnx\runtimes
+       1.0.0-beta5       coreclr x86          C:\Users\bah\.dnx\runtimes
+       1.0.0-rc1-update1 clr     x64          C:\Users\bah\.dnx\runtimes
+       1.0.0-rc1-update1 clr     x86          C:\Users\bah\.dnx\runtimes
+  *    1.0.0-rc1-update1 coreclr x64          C:\Users\bah\.dnx\runtimes
+       1.0.0-rc1-update1 coreclr x86          C:\Users\bah\.dnx\runtimes
+       1.0.0-rc2-16595   clr     x86          C:\Users\bah\.dnx\runtimes
+       1.0.0-rc2-16595   coreclr x64          C:\Users\bah\.dnx\runtimes
+       1.0.0-rc2-16595   coreclr x86          C:\Users\bah\.dnx\runtimes
+
+3. dnvm use 1.0.0-rc1-update1 -r coreclr -arch x64
+4. dnu restore
+5. dnx ef
+   Should show EF Logo
+6. Commad to generate POCO with Scaffold 
+dnx ef dbcontext scaffold "Server=tcp:tstprgazuredb1.database.windows.net,1433;Database=EasySurveyStore_Dev;User ID=sa2@tstprgazuredb1;Password=Start123;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"  EntityFramework.MicrosoftSqlServer

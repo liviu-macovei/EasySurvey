@@ -1,0 +1,44 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "EasySurvey.Repositories Class Library",
+  "authors": [ "bah" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+  "frameworks": {
+    "net451": { },
+    "dnxcore50": {
+      "dependencies": {
+        "Microsoft.CSharp": "4.0.1-beta-23516",
+        "System.Collections": "4.0.11-beta-23516",
+        "System.Linq": "4.0.1-beta-23516",
+        "System.Runtime": "4.0.21-beta-23516",
+        "System.Threading": "4.0.11-beta-23516",
+        "EntityFramework.Core": "7.0.0-rc1-final",
+        "EntityFramework.Commands": "7.0.0-rc1-final",
+        "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
+        "EntityFramework.MicrosoftSqlServer.Design": "7.0.0-rc1-final",
+        "Microsoft.Extensions.CodeGeneration": "1.0.0-rc1-final",
+        "Microsoft.Extensions.PlatformAbstractions": "1.0.0-rc1-final",
+        "Microsoft.Extensions.Logging": "1.0.0-rc1-final",
+        "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final"
+      }
+    }
+  },
+  "commands": {
+    "EasySurvey.Repositories": "EasySurvey.Repositories",
+    "gen": "Microsoft.Extensions.CodeGeneration",
+    "ef": "EntityFramework.Commands"
+  },
+  "dependencies": {
+    "EntityFramework.Relational": "7.0.0-rc1-final",
+    "EntityFramework.Core": "7.0.0-rc1-final",
+    "EntityFramework.Commands": "7.0.0-rc1-final",
+    "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
+    "EntityFramework.MicrosoftSqlServer.Design": "7.0.0-rc1-final",
+    "Microsoft.Extensions.PlatformAbstractions": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Logging": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+    "EasySurvey.Services": "1.0.0-*"
+  }
+}

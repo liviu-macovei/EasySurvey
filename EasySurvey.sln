@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A9DEB35D-8CD1-4FAA-A8BC-697F8777DA01}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B5413D78-3A76-4480-A01A-7953A6A9DB1D}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "EasySurvey.Web", "src\EasySurvey.Web\EasySurvey.Web.xproj", "{552EA4CC-5F73-4D1B-92D6-88DF3496C459}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "EasySurvey.Database", "src\EasySurvey.Database\EasySurvey.Database.sqlproj", "{15F73447-7F97-478E-9228-F098EFD939B1}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "EasySurvey.Services", "src\EasySurvey.Services\EasySurvey.Services.xproj", "{EFA0B890-56B6-4170-BC25-4E5791E847A6}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "EasySurvey.Repositories", "src\EasySurvey.Repositories\EasySurvey.Repositories.xproj", "{C396A7FA-E479-4B5E-A0CA-1006D0B83E6A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{552EA4CC-5F73-4D1B-92D6-88DF3496C459}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{552EA4CC-5F73-4D1B-92D6-88DF3496C459}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{552EA4CC-5F73-4D1B-92D6-88DF3496C459}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{552EA4CC-5F73-4D1B-92D6-88DF3496C459}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15F73447-7F97-478E-9228-F098EFD939B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15F73447-7F97-478E-9228-F098EFD939B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15F73447-7F97-478E-9228-F098EFD939B1}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{15F73447-7F97-478E-9228-F098EFD939B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15F73447-7F97-478E-9228-F098EFD939B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15F73447-7F97-478E-9228-F098EFD939B1}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{EFA0B890-56B6-4170-BC25-4E5791E847A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFA0B890-56B6-4170-BC25-4E5791E847A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFA0B890-56B6-4170-BC25-4E5791E847A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFA0B890-56B6-4170-BC25-4E5791E847A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C396A7FA-E479-4B5E-A0CA-1006D0B83E6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C396A7FA-E479-4B5E-A0CA-1006D0B83E6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C396A7FA-E479-4B5E-A0CA-1006D0B83E6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C396A7FA-E479-4B5E-A0CA-1006D0B83E6A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{552EA4CC-5F73-4D1B-92D6-88DF3496C459} = {A9DEB35D-8CD1-4FAA-A8BC-697F8777DA01}
+		{15F73447-7F97-478E-9228-F098EFD939B1} = {A9DEB35D-8CD1-4FAA-A8BC-697F8777DA01}
+		{EFA0B890-56B6-4170-BC25-4E5791E847A6} = {A9DEB35D-8CD1-4FAA-A8BC-697F8777DA01}
+		{C396A7FA-E479-4B5E-A0CA-1006D0B83E6A} = {A9DEB35D-8CD1-4FAA-A8BC-697F8777DA01}
+	EndGlobalSection
+EndGlobal
