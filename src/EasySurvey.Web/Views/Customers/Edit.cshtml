@@ -1,0 +1,164 @@
+@model EasySurvey.Common.Models.Customer
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<form asp-action="Edit">
+    <div class="form-horizontal">
+        <h4>Customer</h4>
+        <hr />
+        <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+        <div class="form-group">
+            <label asp-for="Address" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Board" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Board" class="form-control" />
+                <span asp-validation-for="Board" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="CVR" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="CVR" class="form-control" />
+                <span asp-validation-for="CVR" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="CreatedBy" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="CreatedBy" class="form-control" />
+                <span asp-validation-for="CreatedBy" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="CreatedOn" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="CreatedOn" class="form-control" />
+                <span asp-validation-for="CreatedOn" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="EmployeeCount" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="EmployeeCount" class="form-control" />
+                <span asp-validation-for="EmployeeCount" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="GroupSales" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="GroupSales" class="form-control" />
+                <span asp-validation-for="GroupSales" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="HomePage" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="HomePage" class="form-control" />
+                <span asp-validation-for="HomePage" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="IndustrialAssociationMembership" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="IndustrialAssociationMembership" class="form-control" />
+                <span asp-validation-for="IndustrialAssociationMembership" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="IndustrialClassification" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="IndustrialClassification" class="form-control" />
+                <span asp-validation-for="IndustrialClassification" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="IsPBSPayment" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="IsPBSPayment" class="form-control" />
+                <span asp-validation-for="IsPBSPayment" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Management" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Management" class="form-control" />
+                <span asp-validation-for="Management" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ModifiedBy" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ModifiedBy" class="form-control" />
+                <span asp-validation-for="ModifiedBy" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ModifiedOn" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ModifiedOn" class="form-control" />
+                <span asp-validation-for="ModifiedOn" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Name" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Owner" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Owner" class="form-control" />
+                <span asp-validation-for="Owner" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Responsible" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Responsible" class="form-control" />
+                <span asp-validation-for="Responsible" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Subsidiaries" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Subsidiaries" class="form-control" />
+                <span asp-validation-for="Subsidiaries" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Telephone" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Telephone" class="form-control" />
+                <span asp-validation-for="Telephone" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

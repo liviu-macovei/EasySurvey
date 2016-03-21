@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using EasySurvey.Common.Models;
+using EasySurvey.Services.ServiceDefinitions;
 
 namespace EasySurvey.Services.Mock
 {
@@ -26,6 +27,29 @@ namespace EasySurvey.Services.Mock
                 GetById(new Guid()),
                 GetById(new Guid())
             };
+        }
+
+        public bool Save(Section section)
+        {
+            return true;
+            //TODO Complete this
+        }
+
+        public bool Delete(Section section)
+        {
+            return true;
+            //TODO Complete this
+        }
+
+        public bool DeleteById(Guid value)
+        {
+            return true;
+            //TODO Complete this
+        }
+
+        public Section GetById(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

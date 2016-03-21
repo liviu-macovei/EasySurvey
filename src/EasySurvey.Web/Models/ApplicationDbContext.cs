@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
+using EasySurvey.Common.Models;
 
 namespace EasySurvey.Web.Models
 {
@@ -12,5 +13,8 @@ namespace EasySurvey.Web.Models
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+        public DbSet<Section> Section { get; set; }
+        public DbSet<SectionGroup> SectionGroup { get; set; }
+        public DbSet<Customer> Customer { get; set; }
     }
 }

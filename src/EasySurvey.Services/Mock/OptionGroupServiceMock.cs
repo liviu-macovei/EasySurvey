@@ -1,4 +1,6 @@
-﻿using EasySurvey.Common.Models;
+﻿using System;
+using EasySurvey.Common.Models;
+using EasySurvey.Services.ServiceDefinitions;
 
 namespace EasySurvey.Services.Mock
 {
@@ -11,6 +13,21 @@ namespace EasySurvey.Services.Mock
                 Id = id,
                 Name = "Mock Option Group" + id
             };
+        }
+
+        public bool Save(OptionGroup element)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(OptionGroup element)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteById(Guid value)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using EasySurvey.Services;
+using EasySurvey.Services.ServiceDefinitions;
+using EasySurvey.Web.Models;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
-
-using EasySurvey.Web.Models;
-using EasySurvey.Services;
-using EasySurvey.Common.Models;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,11 +13,14 @@ namespace EasySurvey.Web.Controllers
     [Authorize]
     public class SurveyController : Controller
     {
-        readonly ISurveyService surveyService;
+        private readonly ISurveyService surveyService;
+        private readonly ISurveyTemplateService surveyTemplateService;
 
-        public SurveyController(ISurveyService surveyService)
+        public SurveyController(IServiceProviderFactory serviceProviderFactory)
         {
-            this.surveyService = surveyService;
+            var serviceProvider = serviceProviderFactory.GetServiceProvider();
+            surveyService = serviceProvider.GetSurveyService();
+            surveyTemplateService = serviceProvider.GetSurveyTemplateService();
         }
 
         // GET: /<controller>/
@@ -30,15 +32,15 @@ namespace EasySurvey.Web.Controllers
             var result = new List<SurveyListView>();
             foreach (var survey in surveys)
             {
-                result.Add(new SurveyListView()
+                result.Add(new SurveyListView
                 {
-                    Id = survey.Id,                    
+                    Id = survey.Id,
                     SurveyTemplateId = survey.SurveyTemplateId,
                     SurveyState = survey.SurveyState.ToString(),
                     CustomerId = survey.Customer.Id,
                     CustomerName = survey.Customer.Name,
                     UserId = survey.UserId,
-                    UserName = "SomeName",
+                    UserName = "SomeName"
                     //SurveyTemplate=survey.SurveyTemplate.ToString()
                 });
             }
@@ -47,9 +49,10 @@ namespace EasySurvey.Web.Controllers
 
         // GET: Surveys/Details/5
         public IActionResult Details(Guid id)
-        {           
+        {
             var userId = User.Identity.Name;
-            Survey survey = surveyService.GetByUserIdAndId(userId,id);
+            var survey = surveyService.GetById(id);
+            survey.SurveyTemplate = surveyTemplateService.GetById(survey.SurveyTemplateId);
             if (survey == null)
             {
                 return HttpNotFound();
@@ -57,6 +60,5 @@ namespace EasySurvey.Web.Controllers
 
             return View(survey);
         }
-
     }
 }

@@ -1,0 +1,132 @@
+@model EasySurvey.Common.Models.Customer
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Customer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Board)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Board)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CVR)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CVR)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreatedOn)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeCount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeCount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GroupSales)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GroupSales)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HomePage)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HomePage)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IndustrialAssociationMembership)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IndustrialAssociationMembership)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IndustrialClassification)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IndustrialClassification)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsPBSPayment)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsPBSPayment)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Management)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Management)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedBy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedBy)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedOn)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedOn)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Owner)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Owner)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Responsible)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Responsible)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Subsidiaries)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Subsidiaries)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Telephone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Telephone)
+        </dd>
+    </dl>
+</div>
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</p>

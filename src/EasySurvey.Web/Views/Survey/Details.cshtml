@@ -6,8 +6,8 @@
     {
         do
         {
-            var section = Model.SurveyTemplate.SectionGroup.GetEnumerator().Current;
-            await Html.RenderPartialAsync("~/views/section/_Section.cshtml", section, ViewData);
+            var sectionGroup = Model.SurveyTemplate.SectionGroup.GetEnumerator().Current;
+            await Html.RenderPartialAsync("~/views/sectionsGroups/Details.cshtml", sectionGroup, ViewData);
         } while (Model.SurveyTemplate.SectionGroup.GetEnumerator().MoveNext());
         <input type="submit" class="btn btn-primary sectionGroupSubmit" value="Submit Section">
     }

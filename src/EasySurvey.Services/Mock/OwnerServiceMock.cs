@@ -1,5 +1,6 @@
 ﻿using System;
 using EasySurvey.Common.Models;
+using EasySurvey.Services.ServiceDefinitions;
 
 namespace EasySurvey.Services.Mock
 {
@@ -22,6 +23,26 @@ namespace EasySurvey.Services.Mock
         public Owner GetOwnerForSurveyId(Guid id)
         {
             return GetById(new Guid());
+        }
+
+        public bool Save(Owner element)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(Owner element)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteById(Guid value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Owner GetById(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

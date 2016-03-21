@@ -1,31 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
 using EasySurvey.Common.Models;
 using EasySurvey.Services.ServiceDefinitions;
 
 namespace EasySurvey.Services.Mock
 {
-    public class NextQuestionServiceMock : INextQuestionService
+    public class OptionServiceMock : IOptionService
     {
-        public int GetIdOfNextQuestionAfterId(int id)
+        public List<Option> GetOptionsByOptionGroupId(int id)
         {
-            return id + 1;
-        }
-
-        public NextQuestion GetNextQuestionAfterId(int id)
-        {
-            return new NextQuestion
+            // synchronize
+            return new List<Option>
             {
-                Id = new Guid(),
-                NextQuestionId = id + 1
+                new Option {Id = 1, Name = "Yes"},
+                new Option {Id = 2, Name = "No"},
+                new Option {Id = 3, Name = "Maybe"}
             };
         }
 
-        public bool Save(NextQuestion element)
+        public bool Save(Option element)
         {
             throw new NotImplementedException();
         }
 
-        public bool Delete(NextQuestion element)
+        public bool Delete(Option element)
         {
             throw new NotImplementedException();
         }
@@ -35,7 +33,7 @@ namespace EasySurvey.Services.Mock
             throw new NotImplementedException();
         }
 
-        public NextQuestion GetById(int id)
+        public Option GetById(int id)
         {
             throw new NotImplementedException();
         }
