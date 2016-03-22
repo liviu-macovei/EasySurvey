@@ -22,7 +22,7 @@ namespace EasySurvey.Services.Mock
 
         public Owner GetOwnerForSurveyId(Guid id)
         {
-            return GetById(new Guid());
+            return GetById(Guid.NewGuid());
         }
 
         public bool Save(Owner element)

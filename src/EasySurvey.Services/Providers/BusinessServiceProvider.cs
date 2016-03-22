@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EasySurvey.Services.ServiceDefinitions;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace EasySurvey.Services.Providers
 {
@@ -86,6 +88,11 @@ namespace EasySurvey.Services.Providers
         public ISurveyTypeService GetSurveyTypeService()
         {
             throw new NotImplementedException();
+        }
+
+        public IServiceCollection GetAllServices()
+        {            
+            return null;
         }
     }
 }

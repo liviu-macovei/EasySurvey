@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using EasySurvey.Common.Models;
 using EasySurvey.Services.ServiceDefinitions;
 
@@ -14,8 +15,14 @@ namespace EasySurvey.Services.Mock
                 Id = id,
                 Title = "Mock Section" + id,
                 Description = "Mock Description of section",
-                SectionGroupId = new Guid(),
-                SortOrder = new Random().Next(100)
+                SectionGroupId = Guid.NewGuid(),
+                SortOrder = MockRandom.Random().Next(100),
+                Question = new List<Question>
+                {
+                    new QuestionServiceMock().GetById(MockRandom.Random().Next(100)),
+                    new QuestionServiceMock().GetById(MockRandom.Random().Next(100)),
+                    new QuestionServiceMock().GetById(MockRandom.Random().Next(100))
+                }
             };
         }
 
@@ -23,10 +30,10 @@ namespace EasySurvey.Services.Mock
         {
             return new List<Section>
             {
-                GetById(new Guid()),
-                GetById(new Guid()),
-                GetById(new Guid())
-            };
+                GetById(Guid.NewGuid()),
+                GetById(Guid.NewGuid()),
+                GetById(Guid.NewGuid())
+            }.OrderBy(m => m.SortOrder).ToList();
         }
 
         public bool Save(Section section)

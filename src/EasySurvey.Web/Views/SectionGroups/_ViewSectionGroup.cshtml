@@ -1,0 +1,34 @@
+@model EasySurvey.Common.Models.SectionGroup
+
+
+<div class="section_group row">
+      @{
+        var titlecssClass = "title_bar_section_group" + Model.Id;
+        var insidecssClass = "inside_section_group" + Model.Id;
+    }
+    <div class="title_bar_section_group @titlecssClass">
+        <div >
+            @Html.HiddenFor(model => model.IsMandatory)
+            @if (Model.IsMandatory != null && Model.IsMandatory.Value)
+            {
+                @Html.LabelFor(m => m.IsMandatory, " *", new {@class = "red"})
+            }
+            @Html.LabelFor(model => model.Title, Model.Title, new {@Class = "left"})</div>
+        <div class="button" target="@insidecssClass">-</div>
+    </div>
+    @*  <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SortOrder)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SortOrder)
+        </dd>
+
+    </dl>*@
+    <div class="inside_section_group @insidecssClass">
+        @foreach (var section in Model.Section)
+        {
+            await Html.RenderPartialAsync("~/views/Sections/_ViewSection.cshtml", section, ViewData);
+        }
+    </div>
+</div>

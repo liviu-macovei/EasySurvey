@@ -1,13 +1,12 @@
-@model EasySurvey.Common.Models.Section
+@model EasySurvey.Common.Models.Survey
 
-@{
-    ViewData["Title"] = "Edit";
-}
-
-<h2>Edit</h2>
-<form asp-action="Edit">
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</p>
+<form asp-action="View">
     <div class="form-horizontal">
-        <h4>Section</h4>
+        <h4>Survey</h4>
         <hr />
         <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="Id" />
@@ -26,10 +25,10 @@
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="Description" class="col-md-2 control-label"></label>
+            <label asp-for="CustomerId" class="control-label col-md-2">CustomerId</label>
             <div class="col-md-10">
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger" />
+                <select asp-for="CustomerId" class="form-control" />
+                <span asp-validation-for="CustomerId" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
@@ -47,24 +46,24 @@
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="SectionGroupId" class="control-label col-md-2">SectionGroupId</label>
+            <label asp-for="SurveyStateId" class="control-label col-md-2">SurveyStateId</label>
             <div class="col-md-10">
-                <select asp-for="SectionGroupId" class="form-control" />
-                <span asp-validation-for="SectionGroupId" class="text-danger" />
+                <select asp-for="SurveyStateId" class="form-control" />
+                <span asp-validation-for="SurveyStateId" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="SortOrder" class="col-md-2 control-label"></label>
+            <label asp-for="SurveyTemplateId" class="control-label col-md-2">SurveyTemplateId</label>
             <div class="col-md-10">
-                <input asp-for="SortOrder" class="form-control" />
-                <span asp-validation-for="SortOrder" class="text-danger" />
+                <select asp-for="SurveyTemplateId" class="form-control" />
+                <span asp-validation-for="SurveyTemplateId" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="Title" class="col-md-2 control-label"></label>
+            <label asp-for="UserId" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger" />
+                <input asp-for="UserId" class="form-control" />
+                <span asp-validation-for="UserId" class="text-danger" />
             </div>
         </div>
         <div class="form-group">

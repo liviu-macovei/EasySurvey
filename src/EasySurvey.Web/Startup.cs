@@ -1,5 +1,7 @@
-﻿using EasySurvey.Services;
-using EasySurvey.Services.Providers;
+﻿using EasySurvey.Services.Mock;
+using EasySurvey.Services.ServiceDefinitions;
+using EasySurvey.Web.Models;
+using EasySurvey.Web.Services;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -7,8 +9,6 @@ using Microsoft.Data.Entity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using EasySurvey.Web.Models;
-using EasySurvey.Web.Services;
 
 namespace EasySurvey.Web
 {
@@ -19,7 +19,7 @@ namespace EasySurvey.Web
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true);
 
             if (env.IsDevelopment())
             {
@@ -52,9 +52,25 @@ namespace EasySurvey.Web
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
 
-            services.AddTransient < IServiceProviderFactory, ServiceProviderFactory > ();
-            
+            //Register external services.//TODO SEE IF THIS CAN BE DONE IN SERVICES PROJECT
+            services.AddTransient<ISurveyService, SurveyServiceMock>();
+            services.AddTransient<ISurveyTypeService, SurveyTypeServiceMock>();
+            services.AddTransient<ISurveyStateService, SurveyStateServiceMock>();
+            services.AddTransient<ISurveyTemplateService, SurveyTemplateServiceMock>();
+            services.AddTransient<ISectionService, SectionServiceMock>();
+            services.AddTransient<ISectionGroupService, SectionGroupServiceMock>();
+            services.AddTransient<IQuestionService, QuestionServiceMock>();
+            services.AddTransient<IQuestionTypeService, QuestionTypeServiceMock>();
+            services.AddTransient<IOwnerService, OwnerServiceMock>();
+            services.AddTransient<IOptionService, OptionServiceMock>();
+            services.AddTransient<IOptionGroupService, OptionGroupServiceMock>();
+            services.AddTransient<INextQuestionService, NextQuestionServiceMock>();
+            services.AddTransient<ICustomerService, CustomerServiceMock>();
+            services.AddTransient<ICommentService, CommentServiceMock>();
+            services.AddTransient<IAnswerService, AnswerServiceMock>();
+            services.AddTransient<IAnswerGroupService, AnswerGroupServiceMock>();         
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -79,10 +95,12 @@ namespace EasySurvey.Web
                         .CreateScope())
                     {
                         serviceScope.ServiceProvider.GetService<ApplicationDbContext>()
-                             .Database.Migrate();
+                            .Database.Migrate();
                     }
                 }
-                catch { }
+                catch
+                {
+                }
             }
 
             app.UseIISPlatformHandler(options => options.AuthenticationDescriptions.Clear());
@@ -96,8 +114,8 @@ namespace EasySurvey.Web
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    "default",
+                    "{controller=Home}/{action=Index}/{id?}");
             });
         }
 

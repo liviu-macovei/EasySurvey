@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using EasySurvey.Services;
+using System.Linq;
 using EasySurvey.Services.ServiceDefinitions;
 using EasySurvey.Web.Models;
 using Microsoft.AspNet.Authorization;
@@ -15,12 +15,13 @@ namespace EasySurvey.Web.Controllers
     {
         private readonly ISurveyService surveyService;
         private readonly ISurveyTemplateService surveyTemplateService;
+        private readonly ICustomerService customerService;
 
-        public SurveyController(IServiceProviderFactory serviceProviderFactory)
+        public SurveyController(ISurveyService surveyService, ISurveyTemplateService surveyTemplateService,ICustomerService customerService)
         {
-            var serviceProvider = serviceProviderFactory.GetServiceProvider();
-            surveyService = serviceProvider.GetSurveyService();
-            surveyTemplateService = serviceProvider.GetSurveyTemplateService();
+            this.surveyService = surveyService;
+            this.surveyTemplateService = surveyTemplateService;
+            this.customerService = customerService;
         }
 
         // GET: /<controller>/
@@ -53,6 +54,8 @@ namespace EasySurvey.Web.Controllers
             var userId = User.Identity.Name;
             var survey = surveyService.GetById(id);
             survey.SurveyTemplate = surveyTemplateService.GetById(survey.SurveyTemplateId);
+            survey.SurveyTemplate.SectionGroup = survey.SurveyTemplate.SectionGroup.OrderBy(m => m.SortOrder).ToArray();
+            survey.Customer = customerService.GetById(survey.CustomerId);
             if (survey == null)
             {
                 return HttpNotFound();

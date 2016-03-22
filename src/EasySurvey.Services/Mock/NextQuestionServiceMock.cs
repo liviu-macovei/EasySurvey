@@ -15,7 +15,7 @@ namespace EasySurvey.Services.Mock
         {
             return new NextQuestion
             {
-                Id = new Guid(),
+                Id =Guid.NewGuid(),
                 NextQuestionId = id + 1
             };
         }

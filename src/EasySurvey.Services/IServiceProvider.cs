@@ -1,7 +1,12 @@
-﻿using EasySurvey.Services.ServiceDefinitions;
+﻿using System.Collections;
+using EasySurvey.Services.ServiceDefinitions;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace EasySurvey.Services
 {
+    /// <summary>
+    /// NOT USED YET
+    /// </summary>
     public interface IServiceProvider
     {
         //TODO Consider Singleton pattern!
@@ -21,5 +26,6 @@ namespace EasySurvey.Services
         ISurveyService GetSurveyService();
         ISurveyTemplateService GetSurveyTemplateService();
         ISurveyTypeService GetSurveyTypeService();
+        IServiceCollection GetAllServices();
     }
 }

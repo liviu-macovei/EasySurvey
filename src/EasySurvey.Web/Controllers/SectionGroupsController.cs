@@ -16,11 +16,10 @@ namespace EasySurvey.Web.Controllers
         private readonly ISurveyTemplateService surveyTemplateService;
 
 
-        public SectionGroupsController(IServiceProviderFactory serviceProviderFactory)
-        {
-            var serviceProvider = serviceProviderFactory.GetServiceProvider();
-            sectionGroupService = serviceProvider.GetSectionGroupService();
-            surveyTemplateService = serviceProvider.GetSurveyTemplateService();
+        public SectionGroupsController(ISectionGroupService sectionGroupService, ISurveyTemplateService surveyTemplateService)
+        {           
+            this.sectionGroupService = sectionGroupService;
+            this.surveyTemplateService = surveyTemplateService;
         }
 
         // GET: SectionGroups

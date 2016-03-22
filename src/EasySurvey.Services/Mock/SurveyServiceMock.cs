@@ -49,7 +49,7 @@ namespace EasySurvey.Services.Mock
                 SurveyTemplateId = Guid.NewGuid(),
                 SurveyState = currentState,
                 Customer = currentCustomer,
-                UserId = new Guid().ToString()
+                UserId =Guid.NewGuid().ToString()
             };
         }
 

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using EasySurvey.Common.Models;
 using EasySurvey.Services.ServiceDefinitions;
 
@@ -15,8 +17,14 @@ namespace EasySurvey.Services.Mock
                 Title = "Base Survey Template",
                 Id = id,
                 Description = "Another kind of description",
-                OwnerId = new OwnerServiceMock().GetById(new Guid()).Id,
-                SurveyTypeId = new SurveyTypeServiceMock().GetById(1).Id
+                OwnerId = new OwnerServiceMock().GetById(Guid.NewGuid()).Id,
+                SurveyTypeId = new SurveyTypeServiceMock().GetById(1).Id,
+                SectionGroup = new List<SectionGroup>()
+                {
+                    new SectionGroupServiceMock().GetById(Guid.NewGuid()),
+                    new SectionGroupServiceMock().GetById(Guid.NewGuid()),
+                    new SectionGroupServiceMock().GetById(Guid.NewGuid())                    
+                }.OrderBy(m=>m.SortOrder).ToList()                
             };
         }
 

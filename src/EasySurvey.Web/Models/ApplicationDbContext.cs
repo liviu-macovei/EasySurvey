@@ -16,5 +16,7 @@ namespace EasySurvey.Web.Models
         public DbSet<Section> Section { get; set; }
         public DbSet<SectionGroup> SectionGroup { get; set; }
         public DbSet<Customer> Customer { get; set; }
+        public DbSet<Question> Question { get; set; }
+        public DbSet<Survey> Survey { get; set; }
     }
 }

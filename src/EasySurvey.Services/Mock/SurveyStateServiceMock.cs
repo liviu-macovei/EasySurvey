@@ -14,7 +14,7 @@ namespace EasySurvey.Services.Mock
         private string RandomEnumValue<T>()
         {
             var v = Enum.GetValues(typeof(T));
-            return (string) v.GetValue(new Random().Next(v.Length));
+            return (string) v.GetValue( MockRandom.Random().Next(v.Length));
         }
 
         private enum States

@@ -13,7 +13,7 @@ namespace EasySurvey.Services.Mock
             {
                 Id = id,
                 Description = "Something Something by id",
-                AnalysisId = new Guid(),
+                AnalysisId =Guid.NewGuid(),
                 UserId = new Guid?()
             };
         }
@@ -24,7 +24,7 @@ namespace EasySurvey.Services.Mock
             {
                 new Comment
                 {
-                    Id = new Guid(),
+                    Id =Guid.NewGuid(),
                     Description = "Something Something by survey",
                     AnalysisId = id,
                     UserId = new Guid?()
@@ -38,7 +38,7 @@ namespace EasySurvey.Services.Mock
             {
                 new Comment
                 {
-                    Id = new Guid(),
+                    Id =Guid.NewGuid(),
                     Description = "Something Something by user",
                     AnalysisId = new Guid?(),
                     UserId = id

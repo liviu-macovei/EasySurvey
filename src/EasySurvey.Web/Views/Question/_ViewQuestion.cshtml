@@ -1,0 +1,35 @@
+@model EasySurvey.Common.Models.Question
+
+<div class="row">
+    @{
+        var titlecssClass = "title_bar_question" + Model.Id;
+        var insidecssClass = "inside_question" + Model.Id;
+    }
+    <div class="@titlecssClass title_bar_question">
+        <div >
+            @Html.HiddenFor(model => model.IsMandatory)
+            @if (Model.IsMandatory != null && Model.IsMandatory.Value)
+            {
+                @Html.LabelFor(m => m.IsMandatory, " *", new {@class = "red"})
+            }
+            @Html.LabelFor(model => model.QuestionText, Model.QuestionText, new {Class = "QuestionText left", title = Model.HelpText})</div>
+        <div class="button" target="@insidecssClass">-</div>
+    </div>
+    <div class="@insidecssClass inside_question">
+        <div>
+            @Html.DisplayFor(model => model.AnswerLabel)
+        </div>
+        <div>
+            @* @{
+                await Html.RenderPartialAsync("~/views/Answers/_ViewAnswers.cshtml", Model.Answer, ViewData);
+            }*@
+            <textarea>Answer in the future here</textarea>
+        </div>
+        <div>
+            @Html.LabelFor(model => model.Comments)
+        </div>
+        <div>
+            @Html.TextAreaFor(model => model.Comments)
+        </div>
+    </div>
+</div>

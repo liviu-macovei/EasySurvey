@@ -11,10 +11,9 @@ namespace EasySurvey.Web.Controllers
     {
         private readonly ICustomerService customerService;
 
-        public CustomersController(IServiceProviderFactory serviceProviderFactory)
+        public CustomersController(ICustomerService customerService)
         {
-            var serviceProvider = serviceProviderFactory.GetServiceProvider();
-            customerService = serviceProvider.GetCustomerService();
+            this.customerService = customerService;
         }
 
         // GET: Customers

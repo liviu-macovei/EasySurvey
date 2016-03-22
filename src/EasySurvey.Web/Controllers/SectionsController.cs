@@ -1,6 +1,5 @@
 using System;
 using EasySurvey.Common.Models;
-using EasySurvey.Services;
 using EasySurvey.Services.ServiceDefinitions;
 using Microsoft.AspNet.Mvc;
 
@@ -10,10 +9,9 @@ namespace EasySurvey.Web.Controllers
     {
         private readonly ISectionService sectionService;
 
-        public SectionsController(IServiceProviderFactory serviceProviderFactory)
+        public SectionsController(ISectionService sectionService)
         {
-            var serviceProvider = serviceProviderFactory.GetServiceProvider();
-            sectionService = serviceProvider.GetSectionService();
+            this.sectionService = sectionService;
         }
 
         // GET: Sections/Details/5

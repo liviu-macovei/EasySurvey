@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using EasySurvey.Common.Models;
 using EasySurvey.Services.ServiceDefinitions;
 
@@ -8,10 +10,36 @@ namespace EasySurvey.Services.Mock
     {
         public OptionGroup GetById(int id)
         {
-            return new OptionGroup
+            switch (id)
             {
-                Id = id,
-                Name = "Mock Option Group" + id
+                case 1:
+                    return new OptionGroup
+                    {
+                        Id = id,
+                        Name = "MultiSelect" + id
+                    };
+                case 2:
+                    return new OptionGroup
+                    {
+                        Id = id,
+                        Name = "SingleSelection" + id
+                    };
+                default:
+                    return new OptionGroup
+                    {
+                        Id = id,
+                        Name = "Yes/No" + id
+                    };
+            }
+        }
+
+        public IEnumerable GetAll()
+        {
+            return new List<OptionGroup>()
+            {
+                GetById(1),
+                GetById(2),
+                GetById(3)
             };
         }
 

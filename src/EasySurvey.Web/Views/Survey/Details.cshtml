@@ -1,14 +1,21 @@
 ﻿@using System.Threading.Tasks
 @model EasySurvey.Common.Models.Survey
 
-<div class="sectionGroupForm">
-    @using (Html.BeginForm(null, null, FormMethod.Post, null))
-    {
-        do
-        {
-            var sectionGroup = Model.SurveyTemplate.SectionGroup.GetEnumerator().Current;
-            await Html.RenderPartialAsync("~/views/sectionsGroups/Details.cshtml", sectionGroup, ViewData);
-        } while (Model.SurveyTemplate.SectionGroup.GetEnumerator().MoveNext());
-        <input type="submit" class="btn btn-primary sectionGroupSubmit" value="Submit Section">
+
+<div class="view">
+    @{
+        await Html.RenderPartialAsync("~/views/Customers/_ViewCustomer.cshtml", Model.Customer, ViewData);
     }
-</div> 
+</div>
+<div class="sectionGroupForm">
+    <hr />
+    <h4>Survey</h4>    
+    @{
+        foreach (var sectionGroup in Model.SurveyTemplate.SectionGroup)
+        {
+            await Html.RenderPartialAsync("~/views/sectionGroups/_ViewSectionGroup.cshtml", sectionGroup, ViewData);
+        }
+        @*<input type="submit" class="btn btn-primary sectionGroupSubmit" value="Submit Section">*@
+    }
+</div>
+<a asp-action="Index">Back to List</a>

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using EasySurvey.Common.Models;
 using EasySurvey.Services.ServiceDefinitions;
 
@@ -7,13 +9,13 @@ namespace EasySurvey.Services.Mock
 {
     public class SectionGroupServiceMock : ISectionGroupService
     {
-        public Collection<SectionGroup> GetBySurveyTemplateId(Guid id)
+        public ICollection<SectionGroup> GetBySurveyTemplateId(Guid id)
         {
-            return new Collection<SectionGroup>
+            return new List<SectionGroup>
             {
-                GetById(new Guid()),
-                GetById(new Guid())
-            };
+                GetById(Guid.NewGuid()),
+                GetById(Guid.NewGuid())
+            }.OrderBy(m=>m.SortOrder).ToList();
         }
 
         public SectionGroup GetById(Guid id)
@@ -21,10 +23,15 @@ namespace EasySurvey.Services.Mock
             return new SectionGroup
             {
                 Id = id,
-                IsMandatory = new Random().NextDouble() > 0.5,
-                SurveyTemplateId = new Guid?(),
-                SortOrder = new Random().Next(100),
-                Title = "Section Group Mock" + id
+                IsMandatory =  MockRandom.Random().NextDouble() > 0.5,
+                SurveyTemplateId = Guid.NewGuid(),
+                SortOrder =  MockRandom.Random().Next(100),
+                Title = "Section Group Mock" + id,
+                Section = new List<Section>()
+                {
+                    new SectionServiceMock().GetById(Guid.NewGuid()),
+                    new SectionServiceMock().GetById(Guid.NewGuid())
+                }.OrderBy(m=>m.SortOrder.Value).ToList()
             };
         }
 

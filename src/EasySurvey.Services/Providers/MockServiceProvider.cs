@@ -1,5 +1,7 @@
-﻿using EasySurvey.Services.Mock;
+﻿using System.Collections;
+using EasySurvey.Services.Mock;
 using EasySurvey.Services.ServiceDefinitions;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace EasySurvey.Services.Providers
 {
@@ -83,6 +85,11 @@ namespace EasySurvey.Services.Providers
         public ISurveyTypeService GetSurveyTypeService()
         {
             return new SurveyTypeServiceMock();
+        }
+
+        public IServiceCollection GetAllServices()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
