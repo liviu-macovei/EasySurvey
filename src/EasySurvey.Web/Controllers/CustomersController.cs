@@ -1,7 +1,5 @@
-using System;
 using System.Linq;
 using EasySurvey.Common.Models;
-using EasySurvey.Services;
 using EasySurvey.Services.ServiceDefinitions;
 using Microsoft.AspNet.Mvc;
 

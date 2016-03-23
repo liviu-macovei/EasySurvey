@@ -35,7 +35,12 @@ namespace EasySurvey.Services.Mock
 
         public ICollection<SurveyTemplate> GetAll(int ownerId)
         {
-            throw new NotImplementedException();
+            return new List<SurveyTemplate>()
+            {
+                GetById(MockRandom.Random().Next(199)),
+                GetById(MockRandom.Random().Next(199)),
+                GetById(MockRandom.Random().Next(199))
+            };
         }
 
         public bool Save(SurveyTemplate element)

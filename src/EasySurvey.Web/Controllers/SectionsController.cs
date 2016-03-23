@@ -1,4 +1,3 @@
-using System;
 using EasySurvey.Common.Models;
 using EasySurvey.Services.ServiceDefinitions;
 using Microsoft.AspNet.Mvc;

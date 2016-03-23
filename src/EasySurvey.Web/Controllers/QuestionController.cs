@@ -1,11 +1,8 @@
-using System;
 using System.Linq;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
-using Microsoft.Data.Entity;
 using EasySurvey.Common.Models;
 using EasySurvey.Services.ServiceDefinitions;
-using EasySurvey.Web.Models;
 
 namespace EasySurvey.Web.Controllers
 {

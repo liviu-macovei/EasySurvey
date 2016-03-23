@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace EasySurvey.Web.Models
+﻿namespace EasySurvey.Web.Models
 {
     public class SurveyListView
     {

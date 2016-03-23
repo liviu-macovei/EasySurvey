@@ -18,5 +18,6 @@ namespace EasySurvey.Web.Models
         public DbSet<Customer> Customer { get; set; }
         public DbSet<Question> Question { get; set; }
         public DbSet<Survey> Survey { get; set; }
+        public DbSet<SurveyTemplate> SurveyTemplate { get; set; }
     }
 }

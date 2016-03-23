@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using EasySurvey.Common.Models;
 using EasySurvey.Services.ServiceDefinitions;
 
@@ -18,7 +19,12 @@ namespace EasySurvey.Services.Mock
 
         public IEnumerable GetAll()
         {
-            throw new NotImplementedException();
+          return new List<SurveyType>()
+          {
+              GetById(MockRandom.Random().Next(100)),
+              GetById(MockRandom.Random().Next(100)),
+              GetById(MockRandom.Random().Next(100))
+          };
         }
 
         public bool Save(SurveyType element)

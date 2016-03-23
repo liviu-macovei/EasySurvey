@@ -15,24 +15,13 @@
                     @Html.LabelFor(model => model.QuestionText, Model.QuestionText, new {Class = "QuestionText left", title = Model.HelpText})
                 }
             </a>
-        </h4> 
-        @* <div >
-            @Html.HiddenFor(model => model.IsMandatory)
-            @if (Model.IsMandatory != null && Model.IsMandatory.Value)
-            {
-                @Html.LabelFor(m => m.IsMandatory, " *", new {@class = "red"})
-            }
-            @Html.LabelFor(model => model.QuestionText, Model.QuestionText, new {Class = "QuestionText left", title = Model.HelpText})</div>
-        <div id="collapseOne" class="button" target="@insidecssId">-</div>*@
+        </h4>       
     </div>
-    <div id="@insidecssId" class="inside_question panel-collapse collapse in">
+    <div id="@insidecssId" class="inside_question panel-collapse collapse in section_description">
         <div>
             @Html.LabelFor(model => model.AnswerLabel, Model.AnswerLabel)
         </div>
-        <div >
-            @* @{
-                await Html.RenderPartialAsync("~/views/Answers/_ViewAnswers.cshtml", Model.Answer, ViewData);
-            }*@
+        <div >            
             <p>Answer in the future here</p>
         </div>
         <div>

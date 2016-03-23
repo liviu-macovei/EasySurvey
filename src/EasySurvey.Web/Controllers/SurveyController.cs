@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using EasySurvey.Services.ServiceDefinitions;
 using EasySurvey.Web.Models;

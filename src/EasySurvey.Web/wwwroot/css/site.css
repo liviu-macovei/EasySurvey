@@ -28,6 +28,19 @@ textarea {
 p {
   margin: 0; }
 
+.panel-group {
+  float: left;
+  width: 100%; }
+
+.section_description {
+  float: left;
+  width: 100%; }
+
+.label_description {
+  float: left;
+  margin-right: 10px;
+  margin-left: 25px; }
+
 .title_bar_section_group {
   background: #2980b9;
   height: 30px;
