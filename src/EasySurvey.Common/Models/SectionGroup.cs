@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace EasySurvey.Common.Models
+namespace EasySurvey.Repositories
 {
-    public class SectionGroup
+    public partial class SectionGroup
     {
         public SectionGroup()
         {
@@ -11,14 +11,14 @@ namespace EasySurvey.Common.Models
             Section = new HashSet<Section>();
         }
 
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }
         public bool? IsMandatory { get; set; }
         public string ModifiedBy { get; set; }
         public DateTime? ModifiedOn { get; set; }
         public int SortOrder { get; set; }
-        public Guid? SurveyTemplateId { get; set; }
+        public int? SurveyTemplateId { get; set; }
         public string Title { get; set; }
 
         public virtual ICollection<AnswerGroup> AnswerGroup { get; set; }

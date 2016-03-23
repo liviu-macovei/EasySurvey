@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[SurveyState] (
-    [Id]          INT        NOT NULL,
-    [Name] NVARCHAR(1024) NULL,
+    [Id]           INT              NOT NULL,
+    [Name]         NVARCHAR(1024)   NULL,
 	[CreatedOn]    DATETIME         NULL,
     [CreatedBy]    NVARCHAR (100)   NULL,
     [ModifiedOn]   DATETIME         NULL,

@@ -1,11 +1,11 @@
 using System;
+using System.Collections.Generic;
 
-namespace EasySurvey.Common.Models
+namespace EasySurvey.Common.Model
 {
-    public class Answer
+    public partial class Answer
     {
-        public Guid Id { get; set; }
-        public Guid AnalysisId { get; set; }
+        public int Id { get; set; }
         public Guid? AnswerGroupId { get; set; }
         public string AnswerText { get; set; }
         public string CreatedBy { get; set; }
@@ -18,9 +18,10 @@ namespace EasySurvey.Common.Models
         public int? OptionGroupId { get; set; }
         public int? OptionId { get; set; }
         public int QuestionId { get; set; }
+        public int SurveyId { get; set; }
 
-        public virtual Survey Analysis { get; set; }
         public virtual Question Question { get; set; }
+        public virtual Survey Survey { get; set; }
         public virtual Option Option { get; set; }
     }
 }

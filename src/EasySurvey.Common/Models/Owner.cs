@@ -1,16 +1,16 @@
 using System;
 using System.Collections.Generic;
 
-namespace EasySurvey.Common.Models
+namespace EasySurvey.Repositories
 {
-    public class Owner
+    public partial class Owner
     {
         public Owner()
         {
             SurveyTemplate = new HashSet<SurveyTemplate>();
         }
 
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
         public string AddressLine3 { get; set; }

@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Section] (
-    [Id]             UNIQUEIDENTIFIER NOT NULL,
-    [SectionGroupId] UNIQUEIDENTIFIER NOT NULL,
+    [Id]             INT NOT NULL,
+    [SectionGroupId] INT NOT NULL,
     [Title]          NVARCHAR (1024)  NULL,
     [Description]    NVARCHAR (MAX)   NULL,
     [SortOrder]      INT              NULL,

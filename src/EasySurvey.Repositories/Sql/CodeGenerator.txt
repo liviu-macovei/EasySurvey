@@ -1,4 +1,4 @@
-1. cd C:\Study\WorkSpace\V1\EasySurvey\src\EasySurvey.Repositories
+1. cd C:\Study\WorkSpace\Git\EasySurvey\src\EasySurvey.Repositories
 2. dnvm list 
 Active Version           Runtime Architecture Location                   Alias
 ------ -------           ------- ------------ --------                   -----

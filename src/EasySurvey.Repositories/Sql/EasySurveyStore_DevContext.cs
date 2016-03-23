@@ -1,10 +1,9 @@
-using EasySurvey.Common.Models;
 using Microsoft.Data.Entity;
 using Microsoft.Data.Entity.Metadata;
 
 namespace EasySurvey.Repositories.Sql
 {
-    public class EasySurveyStore_DevContext : DbContext
+    public partial class EasySurveyStore_DevContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
@@ -25,9 +24,9 @@ namespace EasySurvey.Repositories.Sql
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
 
-                entity.HasOne(d => d.Analysis).WithMany(p => p.Answer).HasForeignKey(d => d.AnalysisId).OnDelete(DeleteBehavior.Restrict);
-
                 entity.HasOne(d => d.Question).WithMany(p => p.Answer).HasForeignKey(d => d.QuestionId).OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(d => d.Survey).WithMany(p => p.Answer).HasForeignKey(d => d.SurveyId).OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.Option).WithMany(p => p.Answer).HasForeignKey(d => new { d.OptionId, d.OptionGroupId });
             });
@@ -44,9 +43,9 @@ namespace EasySurvey.Repositories.Sql
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
 
-                entity.HasOne(d => d.Analysis).WithMany(p => p.AnswerGroup).HasForeignKey(d => d.AnalysisId);
-
                 entity.HasOne(d => d.SectionGroup).WithMany(p => p.AnswerGroup).HasForeignKey(d => d.SectionGroupId);
+
+                entity.HasOne(d => d.Survey).WithMany(p => p.AnswerGroup).HasForeignKey(d => d.SurveyId);
             });
 
             modelBuilder.Entity<Comment>(entity =>
@@ -61,7 +60,11 @@ namespace EasySurvey.Repositories.Sql
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
 
-                entity.HasOne(d => d.Analysis).WithMany(p => p.Comment).HasForeignKey(d => d.AnalysisId);
+                entity.Property(e => e.UserId)
+                    .IsRequired()
+                    .HasMaxLength(450);
+
+                entity.HasOne(d => d.Survey).WithMany(p => p.Comment).HasForeignKey(d => d.SurveyId).OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Customer>(entity =>
@@ -331,6 +334,13 @@ namespace EasySurvey.Repositories.Sql
 
                 entity.Property(e => e.Name).HasMaxLength(1024);
             });
+
+            modelBuilder.Entity<__RefactorLog>(entity =>
+            {
+                entity.HasKey(e => e.OperationKey);
+
+                entity.Property(e => e.OperationKey).ValueGeneratedNever();
+            });
         }
 
         public virtual DbSet<Answer> Answer { get; set; }
@@ -349,5 +359,6 @@ namespace EasySurvey.Repositories.Sql
         public virtual DbSet<SurveyState> SurveyState { get; set; }
         public virtual DbSet<SurveyTemplate> SurveyTemplate { get; set; }
         public virtual DbSet<SurveyType> SurveyType { get; set; }
+        public virtual DbSet<__RefactorLog> __RefactorLog { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Survey] (
-    [Id]                   UNIQUEIDENTIFIER NOT NULL,
-    [SurveyTemplateId]     UNIQUEIDENTIFIER NOT NULL,
-    [CustomerId]           UNIQUEIDENTIFIER NOT NULL,
+    [Id]                   INT NOT NULL,
+    [SurveyTemplateId]     INT NOT NULL,
+    [CustomerId]           INT NOT NULL,
     [UserId]               NVARCHAR (450)   NOT NULL,
     [SurveyStateId]        INT              NOT NULL,
     [CreatedOn]            DATETIME         NULL,

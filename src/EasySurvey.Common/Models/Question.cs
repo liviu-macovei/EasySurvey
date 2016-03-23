@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace EasySurvey.Common.Models
+namespace EasySurvey.Repositories
 {
-    public class Question
+    public partial class Question
     {
         public Question()
         {
@@ -25,7 +25,7 @@ namespace EasySurvey.Common.Models
         public int? OptionGroupId { get; set; }
         public string QuestionText { get; set; }
         public int QuestionTypeId { get; set; }
-        public Guid SectionId { get; set; }
+        public int SectionId { get; set; }
 
         public virtual ICollection<Answer> Answer { get; set; }
         public virtual ICollection<NextQuestion> NextQuestion { get; set; }

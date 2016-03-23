@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[NextQuestion] (
-    [Id]             UNIQUEIDENTIFIER NOT NULL,
+    [Id]             INT			  NOT NULL,
     [BaseQuestionId] INT              NOT NULL,
     [OptionGroupId]  INT              NOT NULL,
     [OptionId]       INT              NOT NULL,

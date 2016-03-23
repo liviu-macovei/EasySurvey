@@ -95,4 +95,7 @@
     <None Include="Scripts\DefaultData\01.PostDeployment.SurveyTypes.sql" />
     <None Include="Scripts\DefaultData\02.PostDeployment.SurveyStates.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="EasySurvey.Database.refactorlog" />
+  </ItemGroup>
 </Project>

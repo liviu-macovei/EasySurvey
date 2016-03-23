@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[Customer] (
-    [Id]                              UNIQUEIDENTIFIER NOT NULL,
+    [Id]                              INT NOT NULL,
     [Name]                            NVARCHAR (1024)  NOT NULL,
     [Address]                         NVARCHAR (1024)  NULL,
     [Telephone]                       NCHAR (10)       NULL,

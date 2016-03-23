@@ -1,10 +1,11 @@
 using System;
+using System.Collections.Generic;
 
-namespace EasySurvey.Common.Models
+namespace EasySurvey.Repositories
 {
-    public class NextQuestion
+    public partial class NextQuestion
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public int BaseQuestionId { get; set; }
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }

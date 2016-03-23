@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[SurveyTemplate] (
-    [Id]           UNIQUEIDENTIFIER NOT NULL,
-    [OwnerId]      UNIQUEIDENTIFIER NOT NULL,
+    [Id]           INT              NOT NULL,
+    [OwnerId]      INT              NOT NULL,
     [SurveyTypeId] INT              NOT NULL,
     [Title]        NVARCHAR (1024)  NULL,
     [Description]  NVARCHAR (MAX)   NULL,

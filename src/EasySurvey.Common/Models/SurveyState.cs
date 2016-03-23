@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace EasySurvey.Common.Models
+namespace EasySurvey.Repositories
 {
-    public class SurveyState
+    public partial class SurveyState
     {
         public SurveyState()
         {
@@ -18,10 +18,5 @@ namespace EasySurvey.Common.Models
         public string Name { get; set; }
 
         public virtual ICollection<Survey> Survey { get; set; }
-
-        public override string ToString()
-        {
-            return Name;
-        }
     }
 }

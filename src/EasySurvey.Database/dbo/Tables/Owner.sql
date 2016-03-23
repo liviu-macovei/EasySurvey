@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[Owner] (
-    [Id]            UNIQUEIDENTIFIER NOT NULL,
+    [Id]            INT NOT NULL,
     [Name]          NVARCHAR (1024)  NULL,
     [TemplateLimit] INT              NULL,
     [AddressLine1]  NVARCHAR (1024)  NULL,

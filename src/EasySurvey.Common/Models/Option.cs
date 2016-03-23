@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace EasySurvey.Common.Models
+namespace EasySurvey.Repositories
 {
-    public class Option
+    public partial class Option
     {
         public Option()
         {
