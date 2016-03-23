@@ -34,7 +34,7 @@ namespace EasySurvey.Services.Mock
             throw new NotImplementedException();
         }
 
-        public bool DeleteById(Guid value)
+        public bool DeleteById(int value)
         {
             throw new NotImplementedException();
         }

@@ -1,7 +1,6 @@
 using System;
-using System.Collections.Generic;
 
-namespace EasySurvey.Repositories
+namespace EasySurvey.Common.Models
 {
     public partial class NextQuestion
     {

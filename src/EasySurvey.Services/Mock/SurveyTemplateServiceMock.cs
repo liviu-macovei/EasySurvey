@@ -8,7 +8,7 @@ namespace EasySurvey.Services.Mock
 {
     public class SurveyTemplateServiceMock : ISurveyTemplateService
     {
-        public SurveyTemplate GetById(Guid id)
+        public SurveyTemplate GetById(int id)
         {
             return new SurveyTemplate
             {
@@ -17,20 +17,25 @@ namespace EasySurvey.Services.Mock
                 Title = "Base Survey Template",
                 Id = id,
                 Description = "Another kind of description",
-                OwnerId = new OwnerServiceMock().GetById(Guid.NewGuid()).Id,
+                OwnerId = new OwnerServiceMock().GetById(MockRandom.Random().Next(100)).Id,
                 SurveyTypeId = new SurveyTypeServiceMock().GetById(1).Id,
                 SectionGroup = new List<SectionGroup>()
                 {
-                    new SectionGroupServiceMock().GetById(Guid.NewGuid()),
-                    new SectionGroupServiceMock().GetById(Guid.NewGuid()),
-                    new SectionGroupServiceMock().GetById(Guid.NewGuid())                    
+                    new SectionGroupServiceMock().GetById(MockRandom.Random().Next(100)),
+                    new SectionGroupServiceMock().GetById(MockRandom.Random().Next(100)),
+                    new SectionGroupServiceMock().GetById(MockRandom.Random().Next(100))                    
                 }.OrderBy(m=>m.SortOrder).ToList()                
             };
         }
 
-        public bool Exists(Guid id)
+        public bool Exists(int id)
         {
             return true;
+        }
+
+        public ICollection<SurveyTemplate> GetAll(int ownerId)
+        {
+            throw new NotImplementedException();
         }
 
         public bool Save(SurveyTemplate element)
@@ -43,14 +48,10 @@ namespace EasySurvey.Services.Mock
             throw new NotImplementedException();
         }
 
-        public bool DeleteById(Guid value)
+        public bool DeleteById(int value)
         {
             throw new NotImplementedException();
         }
-
-        public SurveyTemplate GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

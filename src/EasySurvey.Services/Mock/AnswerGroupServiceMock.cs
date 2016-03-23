@@ -12,31 +12,27 @@ namespace EasySurvey.Services.Mock
             throw new NotImplementedException();
         }
 
-        public bool DeleteById(Guid value)
+        public bool DeleteById(int value)
         {
             throw new NotImplementedException();
         }
+      
 
         public AnswerGroup GetById(int id)
         {
-            throw new NotImplementedException();
+            return new AnswerGroup {Id = id, SurveyId = new int?(), SectionGroupId = MockRandom.Random().Next(100)};
         }
 
-        public AnswerGroup GetById(Guid id)
+        public AnswerGroup GetBySectionGroupId(int id)
         {
-            return new AnswerGroup {Id = id, AnalysisId = new Guid?(), SectionGroupId = Guid.NewGuid()};
+            return new AnswerGroup {Id = MockRandom.Random().Next(100), SurveyId = new int?(), SectionGroupId = id};
         }
 
-        public AnswerGroup GetBySectionGroupId(Guid id)
-        {
-            return new AnswerGroup {Id = Guid.NewGuid(), AnalysisId = new Guid?(), SectionGroupId = id};
-        }
-
-        public ICollection<AnswerGroup> GetBySurveyId(Guid id)
+        public ICollection<AnswerGroup> GetBySurveyId(int id)
         {
             return new List<AnswerGroup>
             {
-                new AnswerGroup {Id = Guid.NewGuid(), AnalysisId = id, SectionGroupId = Guid.NewGuid()}
+                new AnswerGroup {Id = MockRandom.Random().Next(100), SurveyId = id, SectionGroupId = MockRandom.Random().Next(100)}
             };
         }
 

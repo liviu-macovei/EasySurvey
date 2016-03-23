@@ -23,7 +23,7 @@ namespace EasySurvey.Web.Controllers
         }
 
         // GET: Questions
-        public IActionResult Index(Guid sectionId)
+        public IActionResult Index(int sectionId)
         {
             var questions = questionService.GetAll(sectionId);
             return View(questions.ToList());
@@ -47,7 +47,7 @@ namespace EasySurvey.Web.Controllers
         }
 
         // GET: Questions/Create
-        public IActionResult Create(Guid id)
+        public IActionResult Create(int id)
         {
             ViewData["OptionGroupId"] = new SelectList(optionGroupService.GetAll());
             ViewData["QuestionTypeId"] = new SelectList(questionTypeService.GetAll());

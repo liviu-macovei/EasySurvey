@@ -8,14 +8,14 @@ namespace EasySurvey.Services.Mock
 {
     public class SectionServiceMock : ISectionService
     {
-        public Section GetById(Guid id)
+        public Section GetById(int id)
         {
             return new Section
             {
                 Id = id,
                 Title = "Mock Section" + id,
                 Description = "Mock Description of section",
-                SectionGroupId = Guid.NewGuid(),
+                SectionGroupId = MockRandom.Random().Next(100),
                 SortOrder = MockRandom.Random().Next(100),
                 Question = new List<Question>
                 {
@@ -26,13 +26,13 @@ namespace EasySurvey.Services.Mock
             };
         }
 
-        public List<Section> GetBySectionGroupId(Guid id)
+        public List<Section> GetBySectionGroupId(int id)
         {
             return new List<Section>
             {
-                GetById(Guid.NewGuid()),
-                GetById(Guid.NewGuid()),
-                GetById(Guid.NewGuid())
+                GetById(MockRandom.Random().Next(100)),
+                GetById(MockRandom.Random().Next(100)),
+                GetById(MockRandom.Random().Next(100))
             }.OrderBy(m => m.SortOrder).ToList();
         }
 
@@ -48,15 +48,10 @@ namespace EasySurvey.Services.Mock
             //TODO Complete this
         }
 
-        public bool DeleteById(Guid value)
+        public bool DeleteById(int value)
         {
             return true;
             //TODO Complete this
-        }
-
-        public Section GetById(int id)
-        {
-            throw new NotImplementedException();
         }
     }
 }

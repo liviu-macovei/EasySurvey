@@ -24,7 +24,7 @@ namespace EasySurvey.Web.Controllers
         }
 
         // GET: Customers/Details/5
-        public IActionResult Details(Guid? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -53,7 +53,7 @@ namespace EasySurvey.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                customer.Id = Guid.NewGuid();
+                customer.Id = new int();
                 customerService.Save(customer);
                 return RedirectToAction("Index");
             }
@@ -61,7 +61,7 @@ namespace EasySurvey.Web.Controllers
         }
 
         // GET: Customers/Edit/5
-        public IActionResult Edit(Guid? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -91,7 +91,7 @@ namespace EasySurvey.Web.Controllers
 
         // GET: Customers/Delete/5
         [ActionName("Delete")]
-        public IActionResult Delete(Guid? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -110,7 +110,7 @@ namespace EasySurvey.Web.Controllers
         // POST: Customers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(Guid id)
+        public IActionResult DeleteConfirmed(int id)
         {
             customerService.DeleteById(id);
             return RedirectToAction("Index");

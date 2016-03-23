@@ -7,9 +7,9 @@ namespace EasySurvey.Services.ServiceDefinitions
 {
     public interface ISectionService:IProcessOperations<Section>
     {
-        Section GetById(Guid id);
+        Section GetById(int id);
 
-        List<Section> GetBySectionGroupId(Guid id);        
+        List<Section> GetBySectionGroupId(int id);        
         
     }
 }

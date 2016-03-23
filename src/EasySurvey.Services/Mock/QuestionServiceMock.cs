@@ -18,7 +18,7 @@ namespace EasySurvey.Services.Mock
                 Comments = "Should this be updated after the answer?",
                 HelpText = "This is the easiest question ever",
                 QuestionText = "How much is " +  MockRandom.Random().Next(10) + " + " +  MockRandom.Random().Next(10),
-                SectionId = Guid.NewGuid(),
+                SectionId = MockRandom.Random().Next(100),
                 AnswerValidationExpression = "42 the answer of everything",
                 OptionGroupId = new OptionGroupServiceMock().GetById( MockRandom.Random().Next(3)).Id,
                 QuestionTypeId = new QuestionTypeServiceMock().GetById( MockRandom.Random().Next(3)).Id
@@ -35,7 +35,7 @@ namespace EasySurvey.Services.Mock
             return GetById(new NextQuestionServiceMock().GetIdOfNextQuestionAfterId(id));
         }
 
-        public ICollection<Question> GetAll(Guid SectionId)
+        public ICollection<Question> GetAll(int SectionId)
         {
            return new List<Question>()
            {
@@ -56,7 +56,7 @@ namespace EasySurvey.Services.Mock
             throw new NotImplementedException();
         }
 
-        public bool DeleteById(Guid value)
+        public bool DeleteById(int value)
         {
             throw new NotImplementedException();
         }

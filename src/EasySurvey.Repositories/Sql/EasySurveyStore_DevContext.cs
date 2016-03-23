@@ -1,3 +1,4 @@
+using EasySurvey.Common.Models;
 using Microsoft.Data.Entity;
 using Microsoft.Data.Entity.Metadata;
 

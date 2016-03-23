@@ -11,27 +11,27 @@ namespace EasySurvey.Services.Mock
         {
             var result = new List<Survey>();
             var currentState = new SurveyState {Id = 1, Name = "Created"};
-            var currentCustomer = new Customer {Id = Guid.NewGuid(), Name = "Customer 1"};
+            var currentCustomer = new Customer {Id = MockRandom.Random().Next(100), Name = "Customer 1"};
             result.Add(new Survey
             {
-                Id = Guid.NewGuid(),
-                SurveyTemplateId = Guid.NewGuid(),
+                Id = MockRandom.Random().Next(100),
+                SurveyTemplateId = MockRandom.Random().Next(100),
                 SurveyState = currentState,
                 Customer = currentCustomer,
                 UserId = userId
             });
             result.Add(new Survey
             {
-                Id = Guid.NewGuid(),
-                SurveyTemplateId = Guid.NewGuid(),
+                Id = MockRandom.Random().Next(100),
+                SurveyTemplateId = MockRandom.Random().Next(100),
                 SurveyState = currentState,
                 Customer = currentCustomer,
                 UserId = userId
             });
             result.Add(new Survey
             {
-                Id = Guid.NewGuid(),
-                SurveyTemplateId = Guid.NewGuid(),
+                Id = MockRandom.Random().Next(100),
+                SurveyTemplateId = MockRandom.Random().Next(100),
                 SurveyState = currentState,
                 Customer = currentCustomer,
                 UserId = userId
@@ -39,17 +39,17 @@ namespace EasySurvey.Services.Mock
             return result;
         }
 
-        public Survey GetById(Guid id)
+        public Survey GetById(int id)
         {
             var currentState = new SurveyState {Id = 1, Name = "Created"};
-            var currentCustomer = new Customer {Id = Guid.NewGuid(), Name = "Customer 1"};
+            var currentCustomer = new Customer {Id = MockRandom.Random().Next(100), Name = "Customer 1"};
             return new Survey
             {
                 Id = id,
-                SurveyTemplateId = Guid.NewGuid(),
+                SurveyTemplateId = MockRandom.Random().Next(100),
                 SurveyState = currentState,
                 Customer = currentCustomer,
-                UserId =Guid.NewGuid().ToString()
+                UserId =MockRandom.Random().Next(100).ToString()
             };
         }
 
@@ -63,14 +63,10 @@ namespace EasySurvey.Services.Mock
             throw new NotImplementedException();
         }
 
-        public bool DeleteById(Guid value)
+        public bool DeleteById(int value)
         {
             throw new NotImplementedException();
         }
-
-        public Survey GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

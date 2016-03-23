@@ -15,7 +15,7 @@ namespace EasySurvey.Web.Controllers
         }
 
         // GET: Sections/Details/5
-        public IActionResult Details(Guid? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -32,7 +32,7 @@ namespace EasySurvey.Web.Controllers
         }
 
         // GET: Sections/Create
-        public IActionResult Create(Guid sectionGroupId)
+        public IActionResult Create(int sectionGroupId)
         {
             ViewData["SectionGroupId"] = sectionGroupId;
             return View();
@@ -45,7 +45,7 @@ namespace EasySurvey.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                section.Id = Guid.NewGuid();
+                section.Id = new int();
                 sectionService.Save(section);
                 return RedirectToAction("Details", new {id = section.Id});
             }
@@ -54,7 +54,7 @@ namespace EasySurvey.Web.Controllers
         }
 
         // GET: Sections/Edit/5
-        public IActionResult Edit(Guid? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -86,7 +86,7 @@ namespace EasySurvey.Web.Controllers
 
         // GET: Sections/Delete/5
         [ActionName("Delete")]
-        public IActionResult Delete(Guid? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -107,7 +107,7 @@ namespace EasySurvey.Web.Controllers
         // POST: Sections/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(Guid id)
+        public IActionResult DeleteConfirmed(int id)
         {
             // Section section = sectionService.GetById(id);
             //  sectionService.Delete(section);

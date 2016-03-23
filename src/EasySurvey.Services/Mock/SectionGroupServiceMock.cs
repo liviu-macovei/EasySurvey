@@ -9,28 +9,28 @@ namespace EasySurvey.Services.Mock
 {
     public class SectionGroupServiceMock : ISectionGroupService
     {
-        public ICollection<SectionGroup> GetBySurveyTemplateId(Guid id)
+        public ICollection<SectionGroup> GetBySurveyTemplateId(int id)
         {
             return new List<SectionGroup>
             {
-                GetById(Guid.NewGuid()),
-                GetById(Guid.NewGuid())
+                GetById(MockRandom.Random().Next(100)),
+                GetById(MockRandom.Random().Next(100))
             }.OrderBy(m=>m.SortOrder).ToList();
         }
 
-        public SectionGroup GetById(Guid id)
+        public SectionGroup GetById(int id)
         {
             return new SectionGroup
             {
                 Id = id,
                 IsMandatory =  MockRandom.Random().NextDouble() > 0.5,
-                SurveyTemplateId = Guid.NewGuid(),
+                SurveyTemplateId = MockRandom.Random().Next(100),
                 SortOrder =  MockRandom.Random().Next(100),
                 Title = "Section Group Mock" + id,
                 Section = new List<Section>()
                 {
-                    new SectionServiceMock().GetById(Guid.NewGuid()),
-                    new SectionServiceMock().GetById(Guid.NewGuid())
+                    new SectionServiceMock().GetById(MockRandom.Random().Next(100)),
+                    new SectionServiceMock().GetById(MockRandom.Random().Next(100))
                 }.OrderBy(m=>m.SortOrder.Value).ToList()
             };
         }
@@ -46,19 +46,15 @@ namespace EasySurvey.Services.Mock
             throw new NotImplementedException();
         }
 
-        public bool Exists(Guid? id)
+        public bool Exists(int? id)
         {
             return true;
         }
 
-        public bool DeleteById(Guid id)
+        public bool DeleteById(int id)
         {
             return true;
         }
-
-        public SectionGroup GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
+     
     }
 }

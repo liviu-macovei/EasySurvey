@@ -9,6 +9,6 @@ namespace EasySurvey.Services.ServiceDefinitions
     {
         Question GetNextQuestion(Question q);
         Question GetNextQuestion(int id);
-        ICollection<Question> GetAll(Guid SectionId);
+        ICollection<Question> GetAll(int SectionId);
     }
 }

@@ -23,14 +23,14 @@ namespace EasySurvey.Web.Controllers
         }
 
         // GET: SectionGroups
-        public IActionResult Index(Guid surveyTemplateId)
+        public IActionResult Index(int surveyTemplateId)
         {
             var sectionGroups = sectionGroupService.GetBySurveyTemplateId(surveyTemplateId);
             return View(sectionGroups);
         }
 
         // GET: SectionGroups/Details/5
-        public IActionResult Details(Guid? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -47,7 +47,7 @@ namespace EasySurvey.Web.Controllers
         }
 
         // GET: SectionGroups/Create
-        public IActionResult Create(Guid surveyTemplateId)
+        public IActionResult Create(int surveyTemplateId)
         {
             if(surveyTemplateService.Exists(surveyTemplateId))
             ViewData["SurveyTemplateId"] = surveyTemplateId;
@@ -61,7 +61,7 @@ namespace EasySurvey.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                sectionGroup.Id = Guid.NewGuid();
+                sectionGroup.Id = new int();
                 sectionGroupService.Save(sectionGroup);
                 return RedirectToAction("Index");
             }
@@ -70,7 +70,7 @@ namespace EasySurvey.Web.Controllers
         }
 
         // GET: SectionGroups/Edit/5
-        public IActionResult Edit(Guid? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -102,7 +102,7 @@ namespace EasySurvey.Web.Controllers
 
         // GET: SectionGroups/Delete/5
         [ActionName("Delete")]
-        public IActionResult Delete(Guid? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -121,7 +121,7 @@ namespace EasySurvey.Web.Controllers
         // POST: SectionGroups/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(Guid id)
+        public IActionResult DeleteConfirmed(int id)
         {
             sectionGroupService.DeleteById(id);
             return RedirectToAction("Index");

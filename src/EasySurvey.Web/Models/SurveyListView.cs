@@ -4,9 +4,9 @@ namespace EasySurvey.Web.Models
 {
     public class SurveyListView
     {
-        public Guid Id { get; set; }
-        public Guid SurveyTemplateId { get; set; }
-        public Guid CustomerId { get; set; }
+        public int Id { get; set; }
+        public int SurveyTemplateId { get; set; }
+        public int CustomerId { get; set; }
         public string CustomerName { get; set; }
         public string UserId { get; set; }
         public string UserName { get; set; }

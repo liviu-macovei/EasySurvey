@@ -7,19 +7,14 @@ namespace EasySurvey.Services.Mock
 {
     public class CustomerServiceMock : ICustomerService
     {
-        public Customer GetById(Guid id)
-        {
-            return new Customer {Id = id, Name = "CustomerName" + id, Telephone = "91 91 91 91"};
-        }
-
         public ICollection<Customer> GetAll()
         {
             return new List<Customer>
             {
-                GetById(Guid.NewGuid()),
-                GetById(Guid.NewGuid()),
-                GetById(Guid.NewGuid()),
-                GetById(Guid.NewGuid())
+                GetById(MockRandom.Random().Next(100)),
+                GetById(MockRandom.Random().Next(100)),
+                GetById(MockRandom.Random().Next(100)),
+                GetById(MockRandom.Random().Next(100))
             };
         }
 
@@ -33,14 +28,14 @@ namespace EasySurvey.Services.Mock
             return true;
         }
 
-        public bool DeleteById(Guid value)
+        public bool DeleteById(int value)
         {
             return true;
         }
 
         public Customer GetById(int id)
         {
-            return new Customer {Id = Guid.NewGuid(), Name = "CustomerName" + id};
+            return new Customer { Id = MockRandom.Random().Next(100), Name = "CustomerName" + id, Telephone = "91 91 91 91" };
         }
     }
 }

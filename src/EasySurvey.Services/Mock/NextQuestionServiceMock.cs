@@ -15,7 +15,7 @@ namespace EasySurvey.Services.Mock
         {
             return new NextQuestion
             {
-                Id =Guid.NewGuid(),
+                Id =MockRandom.Random().Next(100),
                 NextQuestionId = id + 1
             };
         }
@@ -30,7 +30,7 @@ namespace EasySurvey.Services.Mock
             throw new NotImplementedException();
         }
 
-        public bool DeleteById(Guid value)
+        public bool DeleteById(int value)
         {
             throw new NotImplementedException();
         }

@@ -7,40 +7,40 @@ namespace EasySurvey.Services.Mock
 {
     public class CommentServiceMock : ICommentService
     {
-        public Comment GetById(Guid id)
+        public Comment GetById(int id)
         {
             return new Comment
             {
                 Id = id,
                 Description = "Something Something by id",
-                AnalysisId =Guid.NewGuid(),
-                UserId = new Guid?()
+                SurveyId =MockRandom.Random().Next(100),
+                UserId = new int().ToString()
             };
         }
 
-        public ICollection<Comment> GetByAnalysisId(Guid id)
+        public ICollection<Comment> GetByAnalysisId(int id)
         {
             return new List<Comment>
             {
                 new Comment
                 {
-                    Id =Guid.NewGuid(),
+                    Id =MockRandom.Random().Next(100),
                     Description = "Something Something by survey",
-                    AnalysisId = id,
-                    UserId = new Guid?()
+                    SurveyId = id,
+                    UserId = new int().ToString()
                 }
             };
         }
 
-        ICollection<Comment> ICommentService.GetByUserId(Guid id)
+        ICollection<Comment> ICommentService.GetByUserId(string id)
         {
             return new List<Comment>
             {
                 new Comment
                 {
-                    Id =Guid.NewGuid(),
+                    Id =MockRandom.Random().Next(100),
                     Description = "Something Something by user",
-                    AnalysisId = new Guid?(),
+                    SurveyId = new int(),
                     UserId = id
                 }
             };
@@ -56,14 +56,10 @@ namespace EasySurvey.Services.Mock
             throw new NotImplementedException();
         }
 
-        public bool DeleteById(Guid value)
+        public bool DeleteById(int value)
         {
             throw new NotImplementedException();
         }
-
-        public Comment GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
+      
     }
 }

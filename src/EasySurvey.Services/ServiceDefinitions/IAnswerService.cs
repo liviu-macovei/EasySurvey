@@ -8,9 +8,9 @@ namespace EasySurvey.Services.ServiceDefinitions
 {
     public interface IAnswerService:IProcessOperations<Answer>
     {
-        Answer GetById(Guid id);
-        List<Answer> GetByAnswerGroupId(Guid id);
-        List<Answer> GetBySurveyId(Guid id);
+        Answer GetById(int id);
+        List<Answer> GetByAnswerGroupId(int id);
+        List<Answer> GetBySurveyId(int id);
         Answer GetByQuestionId(int id);
     }
 }

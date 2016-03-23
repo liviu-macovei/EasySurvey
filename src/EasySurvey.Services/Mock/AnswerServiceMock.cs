@@ -9,17 +9,17 @@ namespace EasySurvey.Services.Mock
 {
     public class AnswerServiceMock:IAnswerService
     {
-        public Answer GetById(Guid id)
+        public Answer GetById(int id)
         {
             return new Answer() {Id = id,};
         }
 
-        List<Answer> IAnswerService.GetByAnswerGroupId(Guid id)
+        List<Answer> IAnswerService.GetByAnswerGroupId(int id)
         {
             throw new NotImplementedException();
         }
 
-        List<Answer> IAnswerService.GetBySurveyId(Guid id)
+        List<Answer> IAnswerService.GetBySurveyId(int id)
         {
             throw new NotImplementedException();
         }
@@ -39,12 +39,7 @@ namespace EasySurvey.Services.Mock
             throw new NotImplementedException();
         }
 
-        public bool DeleteById(Guid value)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Answer GetById(int id)
+        public bool DeleteById(int value)
         {
             throw new NotImplementedException();
         }

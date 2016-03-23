@@ -7,7 +7,7 @@ namespace EasySurvey.Services.ServiceDefinitions
 {
     public interface ICustomerService:IProcessOperations<Customer>
     {
-        Customer GetById(Guid id);
+        Customer GetById(int id);
         ICollection<Customer> GetAll();
     }
 }

@@ -6,11 +6,11 @@ namespace EasySurvey.Services.Mock
 {
     public class OwnerServiceMock : IOwnerService
     {
-        public Owner GetById(Guid guid)
+        public Owner GetById(int id)
         {
             return new Owner
             {
-                Id = guid,
+                Id = id,
                 AddressLine1 = "Somewhere over the rainbow",
                 City = "CPH",
                 Country = "DK",
@@ -20,9 +20,9 @@ namespace EasySurvey.Services.Mock
             };
         }
 
-        public Owner GetOwnerForSurveyId(Guid id)
+        public Owner GetOwnerForSurveyId(int id)
         {
-            return GetById(Guid.NewGuid());
+            return GetById(MockRandom.Random().Next(100));
         }
 
         public bool Save(Owner element)
@@ -35,14 +35,10 @@ namespace EasySurvey.Services.Mock
             throw new NotImplementedException();
         }
 
-        public bool DeleteById(Guid value)
+        public bool DeleteById(int value)
         {
             throw new NotImplementedException();
         }
-
-        public Owner GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
+      
     }
 }

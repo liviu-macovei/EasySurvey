@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using EasySurvey.Common.Models;
 using EasySurvey.Services.ServiceDefinitions;
 
@@ -15,6 +16,11 @@ namespace EasySurvey.Services.Mock
             };
         }
 
+        public IEnumerable GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
         public bool Save(SurveyType element)
         {
             throw new NotImplementedException();
@@ -25,7 +31,7 @@ namespace EasySurvey.Services.Mock
             throw new NotImplementedException();
         }
 
-        public bool DeleteById(Guid value)
+        public bool DeleteById(int value)
         {
             throw new NotImplementedException();
         }

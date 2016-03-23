@@ -49,7 +49,7 @@ namespace EasySurvey.Web.Controllers
         }
 
         // GET: Surveys/Details/5
-        public IActionResult Details(Guid id)
+        public IActionResult Details(int id)
         {
             var userId = User.Identity.Name;
             var survey = surveyService.GetById(id);
