@@ -7,9 +7,11 @@ namespace EasySurvey.Repositories.Sql
 {
     public class SqlBaseRepository <T> 
     {
-        protected object GetById(Guid element)
+        private EasySurveyStore_DevContext db = new EasySurveyStore_DevContext();
+
+        protected object GetById(int id)
         {
-            return null;
+            return db.Survey;
         }
 
         protected List<T> GetAll()
@@ -27,7 +29,7 @@ namespace EasySurvey.Repositories.Sql
             return true;
         }
 
-        protected bool DeleteById(Guid value)
+        protected bool DeleteById(int id)
         {
             return true;
         }

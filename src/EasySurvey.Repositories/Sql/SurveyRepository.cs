@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime;
 using System.Linq;
 using System.Threading.Tasks;
 using EasySurvey.Common.Interfaces.Repositories;
@@ -8,21 +9,68 @@ using EasySurvey.Common.Models;
 
 namespace EasySurvey.Repositories.Sql
 {
-    public class SurveyRepository : SqlBaseRepository<Common.Models.Survey>, ISurveyRepository
+    public class SurveyRepository : ISurveyRepository
     {
-        public new bool Save(Survey survey)
+        private EasySurveyStore_DevContext _context;
+        public SurveyRepository(EasySurveyStore_DevContext context)
         {
-            return base.Save(survey);
+            _context = context;
         }
 
-        public new bool Delete(Survey survey)
+        public SurveyRepository()
         {
-            return base.Delete(survey);
+            _context = new EasySurveyStore_DevContext();
         }
 
-        public bool DeleteById(Guid surveyId)
+        public ICollection<Survey> GetAll()
         {
-            return base.DeleteById(surveyId);
+            var query = from survey in _context.Survey
+                        select survey;
+            return query.ToList();
+        }
+
+        public Survey Find(int surveyId)
+        {
+            var query = from survey in _context.Survey
+                        where survey.Id == surveyId
+                        select survey;
+            return query.FirstOrDefault();
+        }
+
+        public Survey Add(Survey survey)
+        {
+            _context.Survey.Add(survey);
+            _context.SaveChanges();
+            return survey;
+        }
+
+        public Survey Update(Survey survey)
+        {
+            _context.Survey.Update(survey);
+            _context.SaveChanges();
+            return survey;
+        }
+
+        public bool Delete(Survey survey)
+        {
+            _context.Survey.Remove(survey);
+            _context.SaveChanges();
+            return true;
+        }
+
+        public bool DeleteById(int surveyId)
+        {
+            var query = from survey in _context.Survey
+                        where survey.Id == surveyId
+                        select survey;
+
+            if (query.FirstOrDefault() != null)
+            {
+                _context.Survey.Remove(query.First());
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
         }
     }
 }
