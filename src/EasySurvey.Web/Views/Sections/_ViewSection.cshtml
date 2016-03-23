@@ -1,22 +1,28 @@
 @model EasySurvey.Common.Models.Section
-<div class="section row">
-      @{
-        var titlecssClass = "title_bar_section" + Model.Id;
-        var insidecssClass = "inside_section" + Model.Id;
+<div class="section row panel panel-default">
+    @{
+        var titleCssId = "title_bar_section" + Model.Id;
+        var insideCssId = "inside_section" + Model.Id;
     }
-    <div class="title_bar_section @titlecssClass">
-        <div > @Html.LabelFor(model => model.Title, Model.Title, new {@Class = "left"})</div>
-        <div class="button" target="@insidecssClass">-</div>
+    <div id="@titleCssId" class="title_bar_section panel-heading">
+         <h4 class="panel-title">
+            <a data-toggle="collapse" data-target="#@insideCssId" >
+        @Html.LabelFor(model => model.Title, Model.Title, new {Class = "left"})
+                  </a>
+        </h4> 
+        @* <div > @Html.LabelFor(model => model.Title, Model.Title, new {Class = "left"})</div>
+            <div class="button" target="@insideCssId">-</div>*@
     </div>
-    <div class="inside_section @insidecssClass">
-        <div >
+    <div id="@insideCssId" class="inside_section panel-group  panel-collapse collapse in">
+        <div>
             <div class="label_description">@Html.LabelFor(model => model.Description) </div>
             <div class="display_description">@Html.DisplayFor(model => model.Description) </div>
         </div>
-
-        @foreach (var question in Model.Question)
-        {
-            await Html.RenderPartialAsync("~/views/Question/_ViewQuestion.cshtml", question, ViewData);
-        }
+        <div class="panel-group" id="accordion">
+            @foreach (var question in Model.Question)
+            {
+                await Html.RenderPartialAsync("~/views/Question/_ViewQuestion.cshtml", question, ViewData);
+            }
+        </div>
     </div>
 </div>

@@ -1,0 +1,66 @@
+﻿
+//colors
+$color_boston_blue_approx: #2980b9;
+$color_niagara_approx: #16a085;
+$color_studio_approx: #8e44ad;
+$red: red;
+
+@mixin title_bar_design() {
+    height: 30px;
+    padding-left: 10px;
+     color: White;
+
+    a:after {
+        font-family: 'Glyphicons Halflings';
+        content: "\e114";
+        float: right;
+        color: grey;
+    }
+
+    a.collapsed:after {
+        content: "\e080";
+    }
+}
+
+.title_bar_section_group {
+    background: $color_boston_blue_approx;   
+    @include title_bar_design();
+}
+
+.title_bar_section {
+    background: $color_niagara_approx;    
+    @include title_bar_design();
+}
+
+.title_bar_question {
+    background: $color_studio_approx;    
+    @include title_bar_design();
+}
+
+
+
+.button {
+    border: solid 1px;
+    cursor: pointer;
+    float: right;
+    height: 23px;
+    width: 25px;
+}
+
+.red { 
+    color: $red;
+    float: left;
+    font-size: 24px;
+    line-height: 1;
+}
+
+.left {
+    width: 90%;
+    float: left;
+}
+
+.row {
+    margin-left: 25px;
+    margin-right: 0;
+    padding-left: 0;
+}

@@ -1,20 +1,33 @@
 @model EasySurvey.Common.Models.SectionGroup
 
 
-<div class="section_group row">
-      @{
-        var titlecssClass = "title_bar_section_group" + Model.Id;
-        var insidecssClass = "inside_section_group" + Model.Id;
+<div class="section_group row panel panel-default">
+    @{
+        var titleCssId = "title_bar_section_group" + Model.Id;
+        var insideCssId = "inside_section_group" + Model.Id;
     }
-    <div class="title_bar_section_group @titlecssClass">
-        <div >
+    <div id="@titleCssId" class="title_bar_section_group panel-heading">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" data-target="#@insideCssId">
+                @{
+                    @Html.HiddenFor(model => model.IsMandatory)
+
+                    if (Model.IsMandatory != null && Model.IsMandatory.Value)
+                    {
+                        @Html.LabelFor(m => m.IsMandatory, " *", new {@class = "red"})
+                    }
+                    @Html.LabelFor(model => model.Title, Model.Title, new {Class = "left"})
+                }
+            </a>
+        </h4> 
+        @* <div >
             @Html.HiddenFor(model => model.IsMandatory)
             @if (Model.IsMandatory != null && Model.IsMandatory.Value)
             {
                 @Html.LabelFor(m => m.IsMandatory, " *", new {@class = "red"})
             }
             @Html.LabelFor(model => model.Title, Model.Title, new {@Class = "left"})</div>
-        <div class="button" target="@insidecssClass">-</div>
+      <div class="button" target="@insidecssClass">-</div>*@
     </div>
     @*  <dl class="dl-horizontal">
         <dt>
@@ -25,7 +38,7 @@
         </dd>
 
     </dl>*@
-    <div class="inside_section_group @insidecssClass">
+    <div id="@insideCssId" class="inside_section_group ">
         @foreach (var section in Model.Section)
         {
             await Html.RenderPartialAsync("~/views/Sections/_ViewSection.cshtml", section, ViewData);

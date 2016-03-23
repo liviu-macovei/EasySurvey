@@ -1,35 +1,45 @@
 @model EasySurvey.Common.Models.Question
-
-<div class="row">
+<div class="row panel panel-default">
     @{
-        var titlecssClass = "title_bar_question" + Model.Id;
-        var insidecssClass = "inside_question" + Model.Id;
+        var titlecssId = "title_bar_question" + Model.Id;
+        var insidecssId = "inside_question" + Model.Id;
     }
-    <div class="@titlecssClass title_bar_question">
-        <div >
+    <div id="@titlecssId" class="title_bar_question panel-heading">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" data-target="#@insidecssId" >
+                @{
+                    if (Model.IsMandatory != null && Model.IsMandatory.Value)
+                    {
+                        @Html.LabelFor(m => m.IsMandatory, " *", new {@class = "red"})
+                    }
+                    @Html.LabelFor(model => model.QuestionText, Model.QuestionText, new {Class = "QuestionText left", title = Model.HelpText})
+                }
+            </a>
+        </h4> 
+        @* <div >
             @Html.HiddenFor(model => model.IsMandatory)
             @if (Model.IsMandatory != null && Model.IsMandatory.Value)
             {
                 @Html.LabelFor(m => m.IsMandatory, " *", new {@class = "red"})
             }
             @Html.LabelFor(model => model.QuestionText, Model.QuestionText, new {Class = "QuestionText left", title = Model.HelpText})</div>
-        <div class="button" target="@insidecssClass">-</div>
+        <div id="collapseOne" class="button" target="@insidecssId">-</div>*@
     </div>
-    <div class="@insidecssClass inside_question">
+    <div id="@insidecssId" class="inside_question panel-collapse collapse in">
         <div>
-            @Html.DisplayFor(model => model.AnswerLabel)
+            @Html.LabelFor(model => model.AnswerLabel, Model.AnswerLabel)
         </div>
-        <div>
+        <div >
             @* @{
                 await Html.RenderPartialAsync("~/views/Answers/_ViewAnswers.cshtml", Model.Answer, ViewData);
             }*@
-            <textarea>Answer in the future here</textarea>
+            <p>Answer in the future here</p>
         </div>
         <div>
             @Html.LabelFor(model => model.Comments)
         </div>
         <div>
-            @Html.TextAreaFor(model => model.Comments)
+            @Html.DisplayTextFor(model => model.Comments)
         </div>
     </div>
 </div>
