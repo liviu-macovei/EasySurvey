@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace EasySurvey.Common.Interfaces.Repositories
 {
     public interface ISurveyRepository
     {
-        bool Save(Common.Models.Survey survey);
+        ICollection<Models.Survey> GetAll();
+        Models.Survey Find(int surveyId);
+        Common.Models.Survey Add(Common.Models.Survey survey);
+        Common.Models.Survey Update(Common.Models.Survey survey);
         bool Delete(Common.Models.Survey survey);
-        bool DeleteById(Guid surveyId);
+        bool DeleteById(int surveyId);
     }
 }

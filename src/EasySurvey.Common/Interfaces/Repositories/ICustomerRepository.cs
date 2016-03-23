@@ -5,10 +5,11 @@ namespace EasySurvey.Common.Interfaces.Repositories
 {
     public interface ICustomerRepository
     {
-        IEnumerable<Customer> GetAll();
-        Customer Find(string key);
-        void Add(Customer customer);
-        void Delete(string Id);
-        void Update(Customer item);
+        ICollection<Customer> GetAll();
+        Customer Find(int id);
+        Customer Add(Customer customer);
+        Customer Update(Customer customer);
+        bool Delete(Customer customer);
+        bool DeleteById(int id);
     }
 }
