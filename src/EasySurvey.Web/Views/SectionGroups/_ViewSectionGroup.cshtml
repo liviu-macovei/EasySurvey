@@ -19,26 +19,9 @@
                     @Html.LabelFor(model => model.Title, Model.Title, new {Class = "left"})
                 }
             </a>
-        </h4> 
-        @* <div >
-            @Html.HiddenFor(model => model.IsMandatory)
-            @if (Model.IsMandatory != null && Model.IsMandatory.Value)
-            {
-                @Html.LabelFor(m => m.IsMandatory, " *", new {@class = "red"})
-            }
-            @Html.LabelFor(model => model.Title, Model.Title, new {@Class = "left"})</div>
-      <div class="button" target="@insidecssClass">-</div>*@
-    </div>
-    @*  <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.SortOrder)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.SortOrder)
-        </dd>
-
-    </dl>*@
-    <div id="@insideCssId" class="inside_section_group ">
+        </h4>       
+    </div>    
+    <div id="@insideCssId" class="inside_section_group panel-collapse collapse in">
         @foreach (var section in Model.Section)
         {
             await Html.RenderPartialAsync("~/views/Sections/_ViewSection.cshtml", section, ViewData);
