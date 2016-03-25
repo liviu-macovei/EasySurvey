@@ -10,10 +10,8 @@ Post-Deployment Script Template
 --------------------------------------------------------------------------------------
 */
 
-:r .\01.PostDeployment.SurveyTypes.sql	
-:r .\02.PostDeployment.SurveyStates.sql
-:r .\03.PostDeployment.DefaultOwner.sql
-:r .\04.PostDeployment.QuestionTypes.sql
-:r .\05.PostDeployment.OptionGroups.sql
-:r .\06.PostDeployment.SurveyTemplate.sql
+SET IDENTITY_INSERT [dbo].[Owner] ON
 
+INSERT [dbo].[Owner] ([Id], [Name], [TemplateLimit], [AddressLine1], [AddressLine2], [AddressLine3], [City], [PostalCode], [Country], [CreatedOn], [CreatedBy], [ModifiedOn], [ModifiedBy]) VALUES (1, N'ABC Company', 5, N'Address line 1', N'Address line 2', N'Address line 3',  N'City 1',  N'Postal Code 1', N'Country 1',  CAST(0x0000A36C009DF4CA AS DateTime), N'bah', CAST(0x0000A36C009DF4CA AS DateTime), N'bah')
+
+SET IDENTITY_INSERT [dbo].[Owner] OFF

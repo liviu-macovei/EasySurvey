@@ -1,24 +1,3 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
-  <Operation Name="Rename Refactor" Key="cab1792e-bd64-471d-9ada-0554f580ada5" ChangeDateTime="03/23/2016 11:57:24">
-    <Property Name="ElementName" Value="[dbo].[SectionGroup].[AnalysisDefinitionId]" />
-    <Property Name="ElementType" Value="SqlSimpleColumn" />
-    <Property Name="ParentElementName" Value="[dbo].[SectionGroup]" />
-    <Property Name="ParentElementType" Value="SqlTable" />
-    <Property Name="NewName" Value="SurveyTemplateId" />
-  </Operation>
-  <Operation Name="Rename Refactor" Key="1e7b852a-4d4a-443b-81d2-32199a4cd5bd" ChangeDateTime="03/23/2016 12:00:10">
-    <Property Name="ElementName" Value="[dbo].[Comment].[AnalysisId]" />
-    <Property Name="ElementType" Value="SqlSimpleColumn" />
-    <Property Name="ParentElementName" Value="[dbo].[Comment]" />
-    <Property Name="ParentElementType" Value="SqlTable" />
-    <Property Name="NewName" Value="SurveyId" />
-  </Operation>
-  <Operation Name="Rename Refactor" Key="614f6967-00d1-4176-bbab-5117d2b1f4f0" ChangeDateTime="03/23/2016 12:00:49">
-    <Property Name="ElementName" Value="[dbo].[AnswerGroup].[AnalysisId]" />
-    <Property Name="ElementType" Value="SqlSimpleColumn" />
-    <Property Name="ParentElementName" Value="[dbo].[AnswerGroup]" />
-    <Property Name="ParentElementType" Value="SqlTable" />
-    <Property Name="NewName" Value="SurveyId" />
-  </Operation>
 </Operations>

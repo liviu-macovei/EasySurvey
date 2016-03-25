@@ -7,7 +7,6 @@ namespace EasySurvey.Common.Interfaces.Services
         bool Save(T element);
         bool Delete(T element);
         bool DeleteById(int value);
-
         T GetById(int id);
     }
 }

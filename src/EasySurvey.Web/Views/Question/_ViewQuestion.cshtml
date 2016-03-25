@@ -8,7 +8,7 @@
         <h4 class="panel-title">
             <a data-toggle="collapse" data-target="#@insidecssId" >
                 @{
-                    if (Model.IsMandatory != null && Model.IsMandatory.Value)
+                    if (Model.IsMandatory)
                     {
                         @Html.LabelFor(m => m.IsMandatory, " *", new {@class = "red"})
                     }
@@ -25,10 +25,10 @@
             <p>Answer in the future here</p>
         </div>
         <div>
-            @Html.LabelFor(model => model.Comments)
+            @Html.LabelFor(model => model.DefaultComments)
         </div>
         <div>
-            @Html.DisplayTextFor(model => model.Comments)
+            @Html.DisplayTextFor(model => model.DefaultComments)
         </div>
     </div>
 </div>

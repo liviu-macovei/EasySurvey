@@ -22,7 +22,7 @@ namespace EasySurvey.Common.Models
         public DateTime? ModifiedOn { get; set; }
         public string Name { get; set; }
         public string PostalCode { get; set; }
-        public int? TemplateLimit { get; set; }
+        public int TemplateLimit { get; set; }
 
         public virtual ICollection<SurveyTemplate> SurveyTemplate { get; set; }
     }

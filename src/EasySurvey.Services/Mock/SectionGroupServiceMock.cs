@@ -31,7 +31,7 @@ namespace EasySurvey.Services.Mock
                 {
                     new SectionServiceMock().GetById(MockRandom.Random().Next(100)),
                     new SectionServiceMock().GetById(MockRandom.Random().Next(100))
-                }.OrderBy(m=>m.SortOrder.Value).ToList()
+                }.OrderBy(m=>m.SortOrder).ToList()
             };
         }
 

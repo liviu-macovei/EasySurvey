@@ -1,6 +1,6 @@
-using EasySurvey.Common.Models;
 using Microsoft.Data.Entity;
 using Microsoft.Data.Entity.Metadata;
+using EasySurvey.Common.Models;
 
 namespace EasySurvey.Repositories.Sql
 {
@@ -15,15 +15,15 @@ namespace EasySurvey.Repositories.Sql
         {
             modelBuilder.Entity<Answer>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedBy).HasMaxLength(100);
+                entity.Property(e => e.CreatedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
-                entity.Property(e => e.ModifiedBy).HasMaxLength(100);
+                entity.Property(e => e.ModifiedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
+
+                entity.HasOne(d => d.AnswerGroup).WithMany(p => p.Answer).HasForeignKey(d => d.AnswerGroupId).OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.Question).WithMany(p => p.Answer).HasForeignKey(d => d.QuestionId).OnDelete(DeleteBehavior.Restrict);
 
@@ -34,30 +34,26 @@ namespace EasySurvey.Repositories.Sql
 
             modelBuilder.Entity<AnswerGroup>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedBy).HasMaxLength(100);
+                entity.Property(e => e.CreatedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
-                entity.Property(e => e.ModifiedBy).HasMaxLength(100);
+                entity.Property(e => e.ModifiedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
 
-                entity.HasOne(d => d.SectionGroup).WithMany(p => p.AnswerGroup).HasForeignKey(d => d.SectionGroupId);
+                entity.HasOne(d => d.SectionGroup).WithMany(p => p.AnswerGroup).HasForeignKey(d => d.SectionGroupId).OnDelete(DeleteBehavior.Restrict);
 
-                entity.HasOne(d => d.Survey).WithMany(p => p.AnswerGroup).HasForeignKey(d => d.SurveyId);
+                entity.HasOne(d => d.Survey).WithMany(p => p.AnswerGroup).HasForeignKey(d => d.SurveyId).OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Comment>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedBy).HasMaxLength(100);
+                entity.Property(e => e.CreatedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
-                entity.Property(e => e.ModifiedBy).HasMaxLength(100);
+                entity.Property(e => e.ModifiedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
 
@@ -70,13 +66,7 @@ namespace EasySurvey.Repositories.Sql
 
             modelBuilder.Entity<Customer>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.Address).HasMaxLength(1024);
-
-                entity.Property(e => e.Board).HasMaxLength(1024);
-
-                entity.Property(e => e.CreatedBy).HasMaxLength(100);
+                entity.Property(e => e.CreatedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
@@ -84,21 +74,9 @@ namespace EasySurvey.Repositories.Sql
                     .HasMaxLength(10)
                     .HasColumnType("nchar");
 
-                entity.Property(e => e.EmployeeCount)
-                    .HasMaxLength(10)
-                    .HasColumnType("nchar");
-
-                entity.Property(e => e.GroupSales).HasMaxLength(1024);
-
                 entity.Property(e => e.HomePage).HasMaxLength(1024);
 
-                entity.Property(e => e.IndustrialAssociationMembership).HasMaxLength(1024);
-
-                entity.Property(e => e.IndustrialClassification).HasMaxLength(1024);
-
-                entity.Property(e => e.Management).HasMaxLength(1024);
-
-                entity.Property(e => e.ModifiedBy).HasMaxLength(100);
+                entity.Property(e => e.ModifiedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
 
@@ -108,24 +86,16 @@ namespace EasySurvey.Repositories.Sql
 
                 entity.Property(e => e.Owner).HasMaxLength(1024);
 
-                entity.Property(e => e.Responsible).HasMaxLength(1024);
-
-                entity.Property(e => e.Subsidiaries).HasMaxLength(1024);
-
-                entity.Property(e => e.Telephone)
-                    .HasMaxLength(10)
-                    .HasColumnType("nchar");
+                entity.Property(e => e.Telephone).HasMaxLength(1024);
             });
 
             modelBuilder.Entity<NextQuestion>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedBy).HasMaxLength(100);
+                entity.Property(e => e.CreatedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
-                entity.Property(e => e.ModifiedBy).HasMaxLength(100);
+                entity.Property(e => e.ModifiedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
 
@@ -138,11 +108,13 @@ namespace EasySurvey.Repositories.Sql
             {
                 entity.HasKey(e => new { e.Id, e.OptionGroupId });
 
-                entity.Property(e => e.CreatedBy).HasMaxLength(100);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.CreatedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
-                entity.Property(e => e.ModifiedBy).HasMaxLength(100);
+                entity.Property(e => e.ModifiedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
 
@@ -153,13 +125,11 @@ namespace EasySurvey.Repositories.Sql
 
             modelBuilder.Entity<OptionGroup>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedBy).HasMaxLength(100);
+                entity.Property(e => e.CreatedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
-                entity.Property(e => e.ModifiedBy).HasMaxLength(100);
+                entity.Property(e => e.ModifiedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
 
@@ -168,8 +138,6 @@ namespace EasySurvey.Repositories.Sql
 
             modelBuilder.Entity<Owner>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.AddressLine1).HasMaxLength(1024);
 
                 entity.Property(e => e.AddressLine2).HasMaxLength(1024);
@@ -180,11 +148,11 @@ namespace EasySurvey.Repositories.Sql
 
                 entity.Property(e => e.Country).HasMaxLength(50);
 
-                entity.Property(e => e.CreatedBy).HasMaxLength(100);
+                entity.Property(e => e.CreatedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
-                entity.Property(e => e.ModifiedBy).HasMaxLength(100);
+                entity.Property(e => e.ModifiedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
 
@@ -195,13 +163,11 @@ namespace EasySurvey.Repositories.Sql
 
             modelBuilder.Entity<Question>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedBy).HasMaxLength(100);
+                entity.Property(e => e.CreatedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
-                entity.Property(e => e.ModifiedBy).HasMaxLength(100);
+                entity.Property(e => e.ModifiedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
 
@@ -214,43 +180,39 @@ namespace EasySurvey.Repositories.Sql
 
             modelBuilder.Entity<QuestionType>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedBy).HasMaxLength(100);
+                entity.Property(e => e.CreatedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
-                entity.Property(e => e.ModifiedBy).HasMaxLength(100);
+                entity.Property(e => e.ModifiedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasMaxLength(50)
+                    .HasMaxLength(1024)
                     .HasColumnType("varchar");
             });
 
             modelBuilder.Entity<Section>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedBy).HasMaxLength(100);
+                entity.Property(e => e.CreatedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
-                entity.Property(e => e.ModifiedBy).HasMaxLength(100);
+                entity.Property(e => e.ModifiedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
 
-                entity.Property(e => e.Title).HasMaxLength(1024);
+                entity.Property(e => e.Title)
+                    .IsRequired()
+                    .HasMaxLength(1024);
 
                 entity.HasOne(d => d.SectionGroup).WithMany(p => p.Section).HasForeignKey(d => d.SectionGroupId).OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<SectionGroup>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.CreatedBy).HasMaxLength(100);
 
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
@@ -259,20 +221,20 @@ namespace EasySurvey.Repositories.Sql
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
 
-                entity.Property(e => e.Title).HasMaxLength(50);
+                entity.Property(e => e.Title)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
-                entity.HasOne(d => d.SurveyTemplate).WithMany(p => p.SectionGroup).HasForeignKey(d => d.SurveyTemplateId);
+                entity.HasOne(d => d.SurveyTemplate).WithMany(p => p.SectionGroup).HasForeignKey(d => d.SurveyTemplateId).OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Survey>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedBy).HasMaxLength(100);
+                entity.Property(e => e.CreatedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
-                entity.Property(e => e.ModifiedBy).HasMaxLength(100);
+                entity.Property(e => e.ModifiedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
 
@@ -289,32 +251,32 @@ namespace EasySurvey.Repositories.Sql
 
             modelBuilder.Entity<SurveyState>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedBy).HasMaxLength(100);
+                entity.Property(e => e.CreatedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
-                entity.Property(e => e.ModifiedBy).HasMaxLength(100);
+                entity.Property(e => e.ModifiedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
 
-                entity.Property(e => e.Name).HasMaxLength(1024);
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(1024);
             });
 
             modelBuilder.Entity<SurveyTemplate>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedBy).HasMaxLength(100);
+                entity.Property(e => e.CreatedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
-                entity.Property(e => e.ModifiedBy).HasMaxLength(100);
+                entity.Property(e => e.ModifiedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
 
-                entity.Property(e => e.Title).HasMaxLength(1024);
+                entity.Property(e => e.Title)
+                    .IsRequired()
+                    .HasMaxLength(1024);
 
                 entity.HasOne(d => d.Owner).WithMany(p => p.SurveyTemplate).HasForeignKey(d => d.OwnerId).OnDelete(DeleteBehavior.Restrict);
 
@@ -323,24 +285,17 @@ namespace EasySurvey.Repositories.Sql
 
             modelBuilder.Entity<SurveyType>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedBy).HasMaxLength(100);
+                entity.Property(e => e.CreatedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
-                entity.Property(e => e.ModifiedBy).HasMaxLength(100);
+                entity.Property(e => e.ModifiedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
 
-                entity.Property(e => e.Name).HasMaxLength(1024);
-            });
-
-            modelBuilder.Entity<__RefactorLog>(entity =>
-            {
-                entity.HasKey(e => e.OperationKey);
-
-                entity.Property(e => e.OperationKey).ValueGeneratedNever();
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(1024);
             });
         }
 
@@ -360,6 +315,5 @@ namespace EasySurvey.Repositories.Sql
         public virtual DbSet<SurveyState> SurveyState { get; set; }
         public virtual DbSet<SurveyTemplate> SurveyTemplate { get; set; }
         public virtual DbSet<SurveyType> SurveyType { get; set; }
-        public virtual DbSet<__RefactorLog> __RefactorLog { get; set; }
     }
 }

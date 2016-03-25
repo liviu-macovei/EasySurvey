@@ -1,10 +1,10 @@
 ﻿CREATE TABLE [dbo].[QuestionType] (
-    [Id]         INT            NOT NULL,
-    [Name]       VARCHAR (50)   NOT NULL,
-    [CreatedOn]  DATETIME       NULL,
-    [CreatedBy]  NVARCHAR (100) NULL,
-    [ModifiedOn] DATETIME       NULL,
-    [ModifiedBy] NVARCHAR (100) NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC)
+    [Id]         INT IDENTITY (1, 1)	NOT NULL,
+    [Name]       VARCHAR (1024)			NOT NULL,
+    [CreatedOn]  DATETIME				NULL,
+    [CreatedBy]  NVARCHAR (1024)		NULL,
+    [ModifiedOn] DATETIME				NULL,
+    [ModifiedBy] NVARCHAR (1024)		NULL,
+    CONSTRAINT [PK_QuestionType] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 

@@ -12,7 +12,7 @@
                 @{
                     @Html.HiddenFor(model => model.IsMandatory)
 
-                    if (Model.IsMandatory != null && Model.IsMandatory.Value)
+                    if (Model.IsMandatory)
                     {
                         @Html.LabelFor(m => m.IsMandatory, " *", new {@class = "red"})
                     }

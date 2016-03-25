@@ -15,7 +15,7 @@ namespace EasySurvey.Services.Mock
                 Id = id,
                 IsMandatory = MockRandom.Random().NextDouble() > 0.5,
                 AnswerLabel = "Answer Me!!",
-                Comments = "Should this be updated after the answer?",
+                DefaultComments = "Should this be updated after the answer?",
                 HelpText = "This is the easiest question ever",
                 QuestionText = "How much is " +  MockRandom.Random().Next(10) + " + " +  MockRandom.Random().Next(10),
                 SectionId = MockRandom.Random().Next(100),

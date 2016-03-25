@@ -94,6 +94,10 @@
     <PostDeploy Include="Scripts\DefaultData\00.PostDeployment.Main.sql" />
     <None Include="Scripts\DefaultData\01.PostDeployment.SurveyTypes.sql" />
     <None Include="Scripts\DefaultData\02.PostDeployment.SurveyStates.sql" />
+    <None Include="Scripts\DefaultData\03.PostDeployment.DefaultOwner.sql" />
+    <None Include="Scripts\DefaultData\06.PostDeployment.SurveyTemplate.sql" />
+    <None Include="Scripts\DefaultData\05.PostDeployment.OptionGroups.sql" />
+    <None Include="Scripts\DefaultData\04.PostDeployment.QuestionTypes.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="EasySurvey.Database.refactorlog" />

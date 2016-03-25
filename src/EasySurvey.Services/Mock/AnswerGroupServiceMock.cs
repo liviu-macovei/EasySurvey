@@ -20,12 +20,12 @@ namespace EasySurvey.Services.Mock
 
         public AnswerGroup GetById(int id)
         {
-            return new AnswerGroup {Id = id, SurveyId = new int?(), SectionGroupId = MockRandom.Random().Next(100)};
+            return new AnswerGroup {Id = id, SurveyId = new int(), SectionGroupId = MockRandom.Random().Next(100)};
         }
 
         public AnswerGroup GetBySectionGroupId(int id)
         {
-            return new AnswerGroup {Id = MockRandom.Random().Next(100), SurveyId = new int?(), SectionGroupId = id};
+            return new AnswerGroup {Id = MockRandom.Random().Next(100), SurveyId = new int(), SectionGroupId = id};
         }
 
         public ICollection<AnswerGroup> GetBySurveyId(int id)

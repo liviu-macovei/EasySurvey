@@ -7,31 +7,31 @@ namespace EasySurvey.Repositories.Sql
 {
     public class SqlBaseRepository <T> 
     {
-        private EasySurveyStore_DevContext db = new EasySurveyStore_DevContext();
+        //private EasySurveyStore_DevContext db = new EasySurveyStore_DevContext();
 
-        protected object GetById(int id)
-        {
-            return db.Survey;
-        }
+        //protected object GetById(int id)
+        //{
+        //    return db.Survey;
+        //}
 
-        protected List<T> GetAll()
-        {
-            return null;
-        }
+        //protected List<T> GetAll()
+        //{
+        //    return null;
+        //}
 
-        protected bool Save(T element)
-        {
-            return true;
-        }
+        //protected bool Save(T element)
+        //{
+        //    return true;
+        //}
 
-        protected bool Delete(T element)
-        {
-            return true;
-        }
+        //protected bool Delete(T element)
+        //{
+        //    return true;
+        //}
 
-        protected bool DeleteById(int id)
-        {
-            return true;
-        }
+        //protected bool DeleteById(int id)
+        //{
+        //    return true;
+        //}
     }
 }

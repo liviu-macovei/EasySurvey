@@ -15,11 +15,11 @@ namespace EasySurvey.Common.Models
         public int Id { get; set; }
         public string AnswerLabel { get; set; }
         public string AnswerValidationExpression { get; set; }
-        public string Comments { get; set; }
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }
+        public string DefaultComments { get; set; }
         public string HelpText { get; set; }
-        public bool? IsMandatory { get; set; }
+        public bool IsMandatory { get; set; }
         public string ModifiedBy { get; set; }
         public DateTime? ModifiedOn { get; set; }
         public int? OptionGroupId { get; set; }
