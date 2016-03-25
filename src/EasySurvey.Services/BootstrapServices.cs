@@ -20,7 +20,6 @@ namespace EasySurvey.Services
             services.AddTransient<ISurveyService, SurveyServiceMock>();
             services.AddTransient<ISurveyTypeService, SurveyTypeServiceMock>();
             services.AddTransient<ISurveyStateService, SurveyStateServiceMock>();
-            services.AddTransient<ISurveyTemplateService, SurveyTemplateServiceMock>();
             services.AddTransient<ISectionService, SectionServiceMock>();
             services.AddTransient<ISectionGroupService, SectionGroupServiceMock>();
             services.AddTransient<IQuestionService, QuestionServiceMock>();
@@ -29,10 +28,12 @@ namespace EasySurvey.Services
             services.AddTransient<IOptionService, OptionServiceMock>();
             services.AddTransient<IOptionGroupService, OptionGroupServiceMock>();
             services.AddTransient<INextQuestionService, NextQuestionServiceMock>();
-            services.AddTransient<ICustomerService, Impl.CustomerService>();
             services.AddTransient<ICommentService, CommentServiceMock>();
             services.AddTransient<IAnswerService, AnswerServiceMock>();
             services.AddTransient<IAnswerGroupService, AnswerGroupServiceMock>();
+
+            services.AddTransient<ICustomerService, Impl.CustomerService>();
+            services.AddTransient<ISurveyTemplateService, Impl.SurveyTemplateService>();
         }
     }
 }

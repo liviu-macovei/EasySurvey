@@ -6,29 +6,90 @@
     }
     <div id="@titlecssId" class="title_bar_question panel-heading">
         <h4 class="panel-title">
-            <a data-toggle="collapse" data-target="#@insidecssId" >
+            <a data-toggle="collapse" data-target="#@insidecssId">
                 @{
                     if (Model.IsMandatory)
                     {
-                        @Html.LabelFor(m => m.IsMandatory, " *", new {@class = "red"})
+                        @Html.LabelFor(m => m.IsMandatory, " *", new { @class = "red" })
                     }
-                    @Html.LabelFor(model => model.QuestionText, Model.QuestionText, new {Class = "QuestionText left", title = Model.HelpText})
+                    @Html.LabelFor(model => model.QuestionText, Model.QuestionText, new { Class = "QuestionText left", title = Model.HelpText })
                 }
             </a>
-        </h4>       
+        </h4>
     </div>
     <div id="@insidecssId" class="inside_question panel-collapse collapse in section_description">
-        <div>
-            @Html.LabelFor(model => model.AnswerLabel, Model.AnswerLabel)
-        </div>
-        <div >            
-            <p>Answer in the future here</p>
-        </div>
-        <div>
-            @Html.LabelFor(model => model.DefaultComments)
-        </div>
-        <div>
-            @Html.DisplayTextFor(model => model.DefaultComments)
-        </div>
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.IsMandatory)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.IsMandatory)
+            </dd>
+            
+            <dt>
+                @Html.DisplayNameFor(model => model.SortOrder)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.SortOrder)
+            </dd>
+            
+            @if (Model != null && Model.QuestionType != null && !String.IsNullOrEmpty(Model.QuestionType.Name))
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.QuestionType.Name)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.QuestionType.Name)
+                </dd>
+            }
+
+            @if (Model != null && Model.OptionGroup != null && !String.IsNullOrEmpty(Model.OptionGroup.Name))
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.OptionGroup.Name)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.OptionGroup.Name)
+                </dd>
+            }
+
+            @if (Model != null && !String.IsNullOrEmpty(Model.DefaultComments))
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.DefaultComments)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DefaultComments)
+                </dd>
+            }
+            @if (Model != null && !String.IsNullOrEmpty(Model.HelpText))
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.HelpText)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.HelpText)
+                </dd>
+            }
+            @if (Model != null && !String.IsNullOrEmpty(Model.AnswerLabel))
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.AnswerLabel)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.AnswerLabel)
+                </dd>
+            }
+            @if (Model != null && !String.IsNullOrEmpty(Model.AnswerValidationExpression))
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.AnswerValidationExpression)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.AnswerValidationExpression)
+                </dd>
+            }
+        </dl>
     </div>
 </div>

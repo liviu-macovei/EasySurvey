@@ -9,25 +9,25 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Title)
-        </dd>
-          <dt>
-            @Html.DisplayNameFor(model => model.TaskDetails)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.TaskDetails)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CreatedBy)
-        </dd>
+        </dd>       
         <dt>
             @Html.DisplayNameFor(model => model.Description)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Description)
         </dd>  
+        <dt>
+            @Html.DisplayNameFor(model => model.TaskDetails)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TaskDetails)
+        </dd>
+        @*<dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>*@
     </dl>
     <div class="sectionGroupForm">
     <hr />
@@ -42,6 +42,6 @@
 </div>
 </div>
 <p>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> | 
+    @*<a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |*@ 
     <a asp-action="Index">Back to List</a>
 </p>

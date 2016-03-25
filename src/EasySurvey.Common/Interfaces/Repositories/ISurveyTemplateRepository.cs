@@ -1,7 +1,9 @@
-﻿namespace EasySurvey.Common.Interfaces.Repositories
+﻿using System.Collections.Generic;
+namespace EasySurvey.Common.Interfaces.Repositories
 {
-    interface ISurveyTemplateRepository
+    public interface ISurveyTemplateRepository
     {
-        Models.SurveyTemplate Find(string key);
+        ICollection<Models.SurveyTemplate> GetAll();
+        Models.SurveyTemplate GetById(int surveyTemplateId);
     }
 }

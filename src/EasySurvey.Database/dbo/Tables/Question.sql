@@ -9,6 +9,7 @@
     [AnswerLabel]                NVARCHAR (MAX)			NULL,
     [AnswerValidationExpression] NVARCHAR (MAX)			NULL,
     [IsMandatory]                BIT					NOT NULL,
+	[SortOrder]                  INT					NOT NULL,
     [CreatedOn]                  DATETIME				NULL,
     [CreatedBy]                  NVARCHAR (1024)		NULL,
     [ModifiedOn]                 DATETIME				NULL,

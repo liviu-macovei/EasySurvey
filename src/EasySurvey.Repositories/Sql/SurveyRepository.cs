@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Data.Entity;
 using EasySurvey.Common.Interfaces.Repositories;
 using EasySurvey.Common.Models;
 
@@ -15,11 +16,6 @@ namespace EasySurvey.Repositories.Sql
         public SurveyRepository(EasySurveyStore_DevContext context)
         {
             _context = context;
-        }
-
-        public SurveyRepository()
-        {
-            _context = new EasySurveyStore_DevContext();
         }
 
         public ICollection<Survey> GetAll()

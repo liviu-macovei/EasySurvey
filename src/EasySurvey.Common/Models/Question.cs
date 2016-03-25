@@ -26,6 +26,7 @@ namespace EasySurvey.Common.Models
         public string QuestionText { get; set; }
         public int QuestionTypeId { get; set; }
         public int SectionId { get; set; }
+        public int SortOrder { get; set; }
 
         public virtual ICollection<Answer> Answer { get; set; }
         public virtual ICollection<NextQuestion> NextQuestion { get; set; }
