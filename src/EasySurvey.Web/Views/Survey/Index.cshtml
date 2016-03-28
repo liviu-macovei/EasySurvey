@@ -1,4 +1,4 @@
-@model IEnumerable<SurveyListView>
+@model IEnumerable<EasySurvey.Web.ViewModels.Survey.ListSurveyViewModel>
 
 @{
     ViewData["Title"] = "Survey";
@@ -17,51 +17,34 @@
 </p>
 <table class="table">
     <tr>
-        @*<th>
-            @Html.DisplayNameFor(model => model.SurveyTemplateId)
-        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Customer)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.SurveyState)
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.CustomerId)
-        </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.CustomerName)
+            @Html.DisplayNameFor(model => model.SurveyTemplate)
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.UserId)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
-        <th>Actions</th>
+        <th></th>
     </tr>
     
 @foreach (var item in Model) {
     <tr>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.SurveyTemplateId)
-        </td>*@
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.SurveyState)
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.CustomerId)
-        </td>*@
         <td>
-            @Html.DisplayFor(modelItem => item.CustomerName)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.UserId)
-        </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
+            @Html.DisplayFor(modelItem => item.SurveyTemplate)
         </td>
         <td>
-            @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |*@
+            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
             <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-            @*<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
         </td>
     </tr>
 }

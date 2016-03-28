@@ -21,17 +21,22 @@ namespace EasySurvey.Services.Impl
 
         public bool Save(Customer element)
         {
+            if(element.Id == 0)
+                element = _customerRepo.Add(element);
+            else
+                element = _customerRepo.Update(element);
+
             return true;
         }
 
         public bool Delete(Customer element)
         {
-            return true;
+            return _customerRepo.Delete(element);
         }
 
         public bool DeleteById(int value)
         {
-            return true;
+            return _customerRepo.DeleteById(value);
         }
 
         public Customer GetById(int id)

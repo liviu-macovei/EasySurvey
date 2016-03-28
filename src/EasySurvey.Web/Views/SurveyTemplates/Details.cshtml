@@ -33,7 +33,7 @@
     <hr />
     <h4>Section Groups</h4>    
     @{
-        foreach (var sectionGroup in Model.SectionGroup)
+        foreach (var sectionGroup in Model.SectionGroup.OrderBy(item => item.SortOrder))
         {
             await Html.RenderPartialAsync("~/views/sectionGroups/_ViewSectionGroup.cshtml", sectionGroup, ViewData);
         }

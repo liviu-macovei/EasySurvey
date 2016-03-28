@@ -66,6 +66,8 @@ namespace EasySurvey.Repositories.Sql
 
             modelBuilder.Entity<Customer>(entity =>
             {
+                entity.Property(e => e.AccountNumber).HasMaxLength(1024);
+
                 entity.Property(e => e.CreatedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
@@ -73,6 +75,8 @@ namespace EasySurvey.Repositories.Sql
                 entity.Property(e => e.CVR)
                     .HasMaxLength(10)
                     .HasColumnType("nchar");
+
+                entity.Property(e => e.Email).HasMaxLength(1024);
 
                 entity.Property(e => e.HomePage).HasMaxLength(1024);
 
@@ -84,7 +88,13 @@ namespace EasySurvey.Repositories.Sql
                     .IsRequired()
                     .HasMaxLength(1024);
 
-                entity.Property(e => e.Owner).HasMaxLength(1024);
+                entity.Property(e => e.RegistrationNumber).HasMaxLength(1024);
+
+                entity.Property(e => e.Responsible).HasMaxLength(1024);
+
+                entity.Property(e => e.ResponsibleEmail).HasMaxLength(1024);
+
+                entity.Property(e => e.ResponsibleTelephone).HasMaxLength(1024);
 
                 entity.Property(e => e.Telephone).HasMaxLength(1024);
             });

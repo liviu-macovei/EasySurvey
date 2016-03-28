@@ -18,6 +18,7 @@ namespace EasySurvey.Repositories
                     options.UseSqlServer(configuration["Data:RepositoryConnection:ConnectionString"]));
 
             services.AddTransient<Common.Interfaces.Repositories.ICustomerRepository, Sql.CustomerRepository>();
+            services.AddTransient<Common.Interfaces.Repositories.ISurveyRepository, Sql.SurveyRepository>();
             services.AddTransient<Common.Interfaces.Repositories.ISurveyTemplateRepository, Sql.SurveyTemplateRepository>();
         }
     }

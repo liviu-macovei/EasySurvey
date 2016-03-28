@@ -1,11 +1,10 @@
-﻿{
+{
   "version": "1.0.0-*",
   "description": "EasySurvey.Common Class Library",
   "authors": [ "lma" ],
   "tags": [ "" ],
   "projectUrl": "",
   "licenseUrl": "",
-
   "frameworks": {
     "net451": {
       "dependencies": { "System.Runtime": "4.0.0.0" },
@@ -22,5 +21,8 @@
         "System.Threading": "4.0.11-beta-23516"
       }
     }
+  },
+  "dependencies": {
+    "System.ComponentModel.Annotations": "4.0.11-beta-23516"
   }
 }

@@ -23,7 +23,7 @@
 
     </div>      
     <div id="@insideCssId" class="inside_section_group panel-collapse collapse in">        
-        @foreach (var section in Model.Section)
+        @foreach (var section in Model.Section.OrderBy(item => item.SortOrder))
         {
             await Html.RenderPartialAsync("~/views/Sections/_ViewSection.cshtml", section, ViewData);
         }

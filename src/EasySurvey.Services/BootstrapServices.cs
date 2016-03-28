@@ -17,7 +17,7 @@ namespace EasySurvey.Services
             bootstrapService.ConfigureServices(configuration, services);
 
             //Register external services.//TODO SEE IF THIS CAN BE DONE IN SERVICES PROJECT
-            services.AddTransient<ISurveyService, SurveyServiceMock>();
+            
             services.AddTransient<ISurveyTypeService, SurveyTypeServiceMock>();
             services.AddTransient<ISurveyStateService, SurveyStateServiceMock>();
             services.AddTransient<ISectionService, SectionServiceMock>();
@@ -34,6 +34,7 @@ namespace EasySurvey.Services
 
             services.AddTransient<ICustomerService, Impl.CustomerService>();
             services.AddTransient<ISurveyTemplateService, Impl.SurveyTemplateService>();
+            services.AddTransient<ISurveyService, Impl.SurveyService>();
         }
     }
 }
