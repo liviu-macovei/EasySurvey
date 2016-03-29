@@ -18,7 +18,7 @@ namespace EasySurvey.Services.Mock
             };
         }
 
-        public ICollection<Comment> GetByAnalysisId(int id)
+        public ICollection<Comment> GetBySurveyId(int id)
         {
             return new List<Comment>
             {

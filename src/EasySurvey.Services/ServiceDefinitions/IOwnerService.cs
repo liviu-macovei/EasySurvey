@@ -6,7 +6,7 @@ namespace EasySurvey.Services.ServiceDefinitions
 {
     public interface IOwnerService:IProcessOperations<Owner>
     {
-        Owner GetById(int id);
+        //Owner GetById(int id);
         Owner GetOwnerForSurveyId(int id);
     }
 }

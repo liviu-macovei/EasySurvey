@@ -4,7 +4,7 @@ using EasySurvey.Common.Models;
 
 namespace EasySurvey.Services.ServiceDefinitions
 {
-    public interface ISurveyTypeService:IProcessOperations<SurveyType>
+    public interface ISurveyTypeService : IProcessOperations<SurveyType>
     {
         IEnumerable GetAll();
     }

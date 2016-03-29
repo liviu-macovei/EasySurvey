@@ -9,7 +9,7 @@ namespace EasySurvey.Services.ServiceDefinitions
     public interface ISectionGroupService:IProcessOperations<SectionGroup>
     {
         ICollection<SectionGroup> GetBySurveyTemplateId(int id);
-        SectionGroup GetById(int id);       
+        //SectionGroup GetById(int id);       
         bool Exists(int? id);       
     }
 }

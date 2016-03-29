@@ -8,6 +8,6 @@ namespace EasySurvey.Services.ServiceDefinitions
     public interface ISurveyService : IProcessOperations<Survey>
     {
         List<Survey> GetByUserId(string userId);
-        Survey GetById(int id);
+        //Survey GetById(int id);
     }
 }

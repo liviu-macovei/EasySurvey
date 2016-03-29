@@ -7,8 +7,8 @@ namespace EasySurvey.Services.ServiceDefinitions
 {
     public interface ICommentService:IProcessOperations<Comment>
     {
-        ICollection<Comment> GetByAnalysisId(int id);
-        Comment GetById(int id);
+        ICollection<Comment> GetBySurveyId(int id);
+        //Comment GetById(int id);
         ICollection<Comment> GetByUserId(string id);
     }
 }
