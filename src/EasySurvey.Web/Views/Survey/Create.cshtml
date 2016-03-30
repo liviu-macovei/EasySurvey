@@ -10,17 +10,19 @@
     <div class="form-horizontal">
         <h4>CreateSurveyViewModel</h4>
         <hr />
-        <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+        @*<div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>*@
 
-        @{
-            await Html.RenderPartialAsync("~/views/Customers/_SelectCustomer.cshtml", Model.Customers, ViewData);
-        }
+        @*@{
+                await Html.RenderPartialAsync("~/views/Customers/_SelectCustomer.cshtml", Model.Customers, ViewData);
+            }*@
 
         <div class="form-group">
-            @*@Html.DropDownListFor(m => m.CustomerId, Model.Customers, "Select Customer")*@
             <label asp-for="CustomerId" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="CustomerId" class="form-control" />
+                <select asp-for="CustomerId" class="form-control"
+                        asp-items="@(new SelectList(Model.Customers,"Id","Name"))">
+                    <option>Please select one</option>
+                </select>
                 <span asp-validation-for="CustomerId" class="text-danger" />
             </div>
         </div>
@@ -29,6 +31,14 @@
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
+
+        @{
+            if (Model.CustomerId > 0)
+            {
+                var customer = Model.Customers.Select(item => item.Id == Model.CustomerId);
+                await Html.RenderPartialAsync("~/views/Customers/_ViewCustomer.cshtml", customer, ViewData);
+            }
+        }
     </div>
 </form>
 

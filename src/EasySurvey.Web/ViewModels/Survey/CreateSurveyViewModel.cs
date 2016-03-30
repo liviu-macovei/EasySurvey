@@ -1,4 +1,5 @@
 ﻿using EasySurvey.Web.ViewModels.Customer;
+using Microsoft.AspNet.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace EasySurvey.Web.ViewModels.Survey
 
         public int CustomerId { get; set; }
 
-        public List<SelectCustomerViewModel> Customers { get; set; }
+        public IEnumerable<Common.Models.Customer> Customers { get; set; }
+
+        //public IEnumerable<SelectListItem> Customers { get; set; }
     }
 }

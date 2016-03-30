@@ -6,6 +6,7 @@ using Microsoft.AspNet.Mvc;
 using EasySurvey.Common.Models;
 using EasySurvey.Web.ViewModels.Survey;
 using EasySurvey.Web.ViewModels.Customer;
+using Microsoft.AspNet.Mvc.Rendering;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -64,25 +65,8 @@ namespace EasySurvey.Web.Controllers
 
         public IActionResult Create()
         {
-            CreateSurveyViewModel createSurveyViewMode = new CreateSurveyViewModel();
-            ICollection<Customer> customers = customerService.GetAll();
-            List<SelectCustomerViewModel> listCustomerViewModels = new List<SelectCustomerViewModel>();            
-            customers.ToList()
-                .ForEach(x => listCustomerViewModels.Add(new SelectCustomerViewModel()
-                {
-                    Id = x.Id
-                    ,
-                    Name = x.Name
-                    ,
-                    Address = x.Address
-                    ,
-                    CVR = x.CVR
-                    ,
-                    Responsible = x.Responsible
-                    ,
-                    Telephone = x.Telephone
-                }));
-            createSurveyViewMode.Customers = listCustomerViewModels;
+            CreateSurveyViewModel createSurveyViewMode = new CreateSurveyViewModel() { CustomerId = 0 };
+            createSurveyViewMode.Customers = customerService.GetAll();
             return View(createSurveyViewMode);
         }
 
