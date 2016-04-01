@@ -17,6 +17,7 @@ namespace EasySurvey.Repositories.Sql
 
         public SurveyTemplate GetById(int surveyTemplateId)
         {
+            //TODO add cacheing
             var query = from surveyTemplate in _context.SurveyTemplate
                         .Include(x => x.SectionGroup).ThenInclude(s => s.Section).ThenInclude(q => q.Question).ThenInclude(q => q.QuestionType)
                         .Include(x => x.SectionGroup).ThenInclude(s => s.Section).ThenInclude(q => q.Question).ThenInclude(og => og.OptionGroup)
