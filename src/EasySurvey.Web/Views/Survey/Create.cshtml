@@ -4,29 +4,53 @@
     ViewData["Title"] = "Create";
 }
 
-<h2>Create</h2>
+<h2>Create Survey</h2>
 
 <form asp-action="Create">
     <div class="form-horizontal">
-        <h4>CreateSurveyViewModel</h4>
-        <hr />
+        @Html.HiddenFor(m=>m.Id)
         <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
 
-        @{
-            await Html.RenderPartialAsync("~/views/Customers/_SelectCustomer.cshtml", Model.Customers, ViewData);
-        }
-
+        @*    @{
+                await Html.RenderPartialAsync("~/views/Customers/_SelectCustomer.cshtml", Model.Customers, ViewData);
+            } 
+        *@
         <div class="form-group">
             @*@Html.DropDownListFor(m => m.CustomerId, Model.Customers, "Select Customer")*@
-            <label asp-for="CustomerId" class="col-md-2 control-label"></label>
+            <label asp-for="CustomerId" class="col-md-2 control-label">Customer</label>
+            @{
+                var customers = new SelectList(Model.Customers, "Id", "Name");
+            }
             <div class="col-md-10">
-                <input asp-for="CustomerId" class="form-control" />
-                <span asp-validation-for="CustomerId" class="text-danger" />
+                @*  <input asp-for="CustomerId" class="form-control" />*@
+                <select asp-for="CustomerId" asp-items="customers" class="form-control"></select>
+                <span asp-validation-for="CustomerId" class="text-danger"></span>
+                @*TODO add ajax support*@
+                <a asp-action="Create" asp-controller="Customers" target="_blank">Create new Customer</a>
+                @*   <a href="@Url.RouteUrl("CoreApi", new { area = "Core", controller = "PostalAddress", action = actionName, id = Model })" class="hidden" data-ajax="true" data-ajax-mode="replace" data-ajax-failure="showError" data-ajax-update="#post_addr_form" id="pa_load_form"></a>*@
             </div>
+            @{
+               for(int i=0;i<Model.SectionGroups.Count;i++)
+                {
+                    @Html.HiddenFor(s=>s.SectionGroups.ElementAt(i).Id)
+
+                    @Html.LabelFor(s=>s.SectionGroups.ElementAt(i).Title)
+                    @Html.DisplayTextFor(s=>s.SectionGroups.ElementAt(i).Title)
+
+                    @Html.LabelFor(s=>s.SectionGroups.ElementAt(i).IsMandatory)
+                    @Html.DisplayTextFor(s=>s.SectionGroups.ElementAt(i).IsMandatory)
+                    if (!Model.SectionGroups.ElementAt(i).IsMandatory)
+                    {
+                         <label>Choose</label>
+                    @Html.CheckBoxFor(s=>s.SectionGroups.ElementAt(i).IsSelected)
+                    }
+                   
+                }
+            }
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default"/>
             </div>
         </div>
     </div>
