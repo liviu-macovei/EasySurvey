@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using EasySurvey.Services.ServiceDefinitions;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace EasySurvey.Services.Providers
 {
-    public class BusinessServiceProvider:IServiceProvider
+    public class BusinessServiceProvider : IServiceProvider
     {
         public ISectionGroupService GetSectionGroupService()
         {
@@ -91,7 +87,7 @@ namespace EasySurvey.Services.Providers
         }
 
         public IServiceCollection GetAllServices()
-        {            
+        {
             return null;
         }
     }

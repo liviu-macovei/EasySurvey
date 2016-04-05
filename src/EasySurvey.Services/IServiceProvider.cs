@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using EasySurvey.Services.ServiceDefinitions;
+﻿using EasySurvey.Services.ServiceDefinitions;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace EasySurvey.Services
 {
     /// <summary>
-    /// NOT USED YET
+    ///     NOT USED YET
     /// </summary>
     public interface IServiceProvider
     {

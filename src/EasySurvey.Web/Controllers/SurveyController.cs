@@ -94,13 +94,13 @@ namespace EasySurvey.Web.Controllers
                 var sectionGroups = sectionGroupService.GetBySurveyTemplateId(surveyTemplate.Id);
                 if (sectionGroups != null)
                 {
-                    List<SelectSectionGroupViewModel> selectSectionList=new List<SelectSectionGroupViewModel>();
+                    var selectSectionList = new List<SectionGroupViewModel>();
                     foreach (var sectionGroup in sectionGroups)
                     {
-                        selectSectionList.Add(new SelectSectionGroupViewModel(sectionGroup));
+                        selectSectionList.Add(new SectionGroupViewModel(sectionGroup));
                     }
                     surveyViewModel.SectionGroups = selectSectionList;
-                }                
+                }
             }
 
             surveyViewModel.Customers = customers.ToList();
@@ -117,26 +117,29 @@ namespace EasySurvey.Web.Controllers
             {
                 survey.SurveyTemplateId = 1;
                 survey.SurveyStateId = 1;
-                survey.CustomerId = 1;
-                survey.UserId = User.ToString();
-                surveyService.Save(survey);
+                survey.CustomerId = createSurveyViewModel.CustomerId;
+                survey.UserId = User.Identity.Name.ToString();
+               
                 //TODO: remove hard coded ids
                 var surveyTemplate = surveyTemplateService.GetById(1);
                 var sectionGroups = sectionGroupService.GetBySurveyTemplateId(1);
 
-
-                //TODO Save the ids of the answers that are created succesfully,
-                //if save fails for any of the answers then delete all of them
-                //this should behave like a transaction
                 foreach (var sectionGroup in createSurveyViewModel.SectionGroups)
                 {
                     if (sectionGroup.IsSelected)
-                        answerGroupService.Save(new AnswerGroup
+                        /*   answerGroupService.Save(new AnswerGroup
+                           {
+                               SectionGroupId = sectionGroup.Id,
+                               SurveyId = survey.Id
+                           });*/
+                        survey.AnswerGroup.Add(new AnswerGroup
                         {
                             SectionGroupId = sectionGroup.Id,
                             SurveyId = survey.Id
                         });
                 }
+                surveyService.Save(survey);
+
                 return RedirectToAction("Index");
             }
             return View(survey);

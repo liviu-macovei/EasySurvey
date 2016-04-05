@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using EasySurvey.Common.Models;
 using EasySurvey.Common.Interfaces.Repositories;
+using EasySurvey.Common.Models;
 
-namespace EasySurvey.Services.Impl
+namespace EasySurvey.Services.Implementation
 {
     public class SurveyService : ServiceDefinitions.ISurveyService
     {

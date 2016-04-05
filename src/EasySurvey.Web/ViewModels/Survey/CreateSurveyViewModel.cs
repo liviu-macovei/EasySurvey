@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using EasySurvey.Common.Models;
-using EasySurvey.Web.ViewModels.SectionGroup;
 
 namespace EasySurvey.Web.ViewModels.Survey
 {
@@ -11,6 +9,6 @@ namespace EasySurvey.Web.ViewModels.Survey
         public int CustomerId { get; set; }
 
         public List<Common.Models.Customer> Customers { get; set; }
-        public ICollection<SelectSectionGroupViewModel> SectionGroups { get; set; }
+        public ICollection<SectionGroupViewModel> SectionGroups { get; set; }
     }
 }

@@ -1,16 +1,16 @@
-﻿using EasySurvey.Services.ServiceDefinitions;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using EasySurvey.Common.Interfaces.Repositories;
 using EasySurvey.Common.Models;
+using EasySurvey.Services.ServiceDefinitions;
 
-namespace EasySurvey.Services.Impl
+namespace EasySurvey.Services.Implementation
 {
     public class SurveyTemplateService : ISurveyTemplateService
     {
-        EasySurvey.Common.Interfaces.Repositories.ISurveyTemplateRepository _surveyTemplateRepo;
-        public SurveyTemplateService(EasySurvey.Common.Interfaces.Repositories.ISurveyTemplateRepository surveyTemplateRepo)
+        private readonly ISurveyTemplateRepository _surveyTemplateRepo;
+
+        public SurveyTemplateService(ISurveyTemplateRepository surveyTemplateRepo)
         {
             _surveyTemplateRepo = surveyTemplateRepo;
         }
