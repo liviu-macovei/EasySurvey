@@ -1,64 +1,81 @@
-@model IEnumerable<EasySurvey.Common.Models.AnswerGroup>
-
-@{
-    Layout = null;
-}
-
+@model IEnumerable<EasySurvey.Web.ViewModels.AnswerGroups.AnswerGroupViewModel>
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>Answer Groups Update</title>
 </head>
 <body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedOn)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsUsed)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ModifiedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ModifiedOn)
-        </th>
-        <th></th>
-    </tr>
-    
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedOn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsUsed)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ModifiedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ModifiedOn)
-        </td>
-        <td>
-            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-        </td>
-    </tr>
-}
-</table>
+    <h3>Update Answer Groups</h3>
+
+    <ul class="nav nav-tabs">
+        @{
+            for (int i = 0; i < Model.Count(); i++)
+            {
+                var answerGroup = Model.ElementAt(i);
+                if (i == 0)
+                {
+                    <li class="active"><a data-toggle="tab" href="#@(answerGroup.Id)_AnswerGroup">@answerGroup.SectionGroupTitle</a></li>
+                }
+                else
+                {
+                    <li><a data-toggle="tab" href="#@(answerGroup.Id)_AnswerGroup">@answerGroup.SectionGroupTitle</a></li>
+                }
+            }
+        }
+    </ul>
+
+    <div class="tab-content">
+        @{
+            for (int i = 0; i < Model.Count(); i++)
+            {
+                var answerGroup = Model.ElementAt(i);
+                if (i == 0)
+                {
+                    <div id="@(answerGroup.Id)_AnswerGroup" class="tab-pane fade in active">
+                        <div class="form-group">
+                            @{
+                                if (!answerGroup.IsMandatory)
+                                {
+                                    <label asp-for="@answerGroup.IsUsed" class="control-label col-sm-2">Wish to fill this area:</label>
+                                    <div class="col-md-4">
+                                        @Html.CheckBoxFor(s => s.ElementAt(i).IsUsed)
+                                    </div>
+                                }
+                            }
+                        </div>
+                        <div class="form-group">
+                            @{ 
+                                await Html.RenderPartialAsync("~/views/SectionGroups/_EditSectionGroup.cshtml", answerGroup.SectionGroup, ViewData);
+                            }
+                                
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div id="@(answerGroup.Id)_AnswerGroup" class="tab-pane fade">
+                        <div class="form-group">
+                            @{
+                                if (!answerGroup.IsMandatory)
+                                {
+                                    <label asp-for="@answerGroup.IsUsed" class="control-label col-sm-2">Wish to fill this area:</label>
+                                    <div class="col-md-4">
+                                        @Html.CheckBoxFor(s => s.ElementAt(i).IsUsed)
+                                    </div>
+                                }
+                            }
+                        </div>
+                        <div class="form-group">
+                            @{
+                                await Html.RenderPartialAsync("~/views/SectionGroups/_EditSectionGroup.cshtml", answerGroup.SectionGroup, ViewData);
+                            }
+                        </div>
+                    </div>
+                }
+            }
+        }
+    </div>
 </body>
 </html>

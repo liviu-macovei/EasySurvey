@@ -1,0 +1,14 @@
+@model EasySurvey.Common.Models.SectionGroup
+
+
+<div class="section_group row panel panel-default">
+    @{
+        var titleCssId = "title_bar_section_group" + Model.Id;
+        var insideCssId = "inside_section_group" + Model.Id;
+    }
+
+    @foreach (var section in Model.Section.OrderBy(item => item.SortOrder))
+    {
+        await Html.RenderPartialAsync("~/views/Sections/_EditSection.cshtml", section, ViewData);
+    }
+</div>

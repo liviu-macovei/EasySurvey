@@ -8,52 +8,66 @@
 
 <form asp-action="Create">
     <div class="form-horizontal">
-        @Html.HiddenFor(m=>m.Id)
+        @Html.HiddenFor(m => m.Id)
         <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
 
         @*    @{
                 await Html.RenderPartialAsync("~/views/Customers/_SelectCustomer.cshtml", Model.Customers, ViewData);
-            } 
-        *@
-        <div class="form-group">
-            @*@Html.DropDownListFor(m => m.CustomerId, Model.Customers, "Select Customer")*@
-            <label asp-for="CustomerId" class="col-md-2 control-label">Customer</label>
-            @{
-                var customers = new SelectList(Model.Customers, "Id", "Name");
             }
-            <div class="col-md-10">
-                @*  <input asp-for="CustomerId" class="form-control" />*@
+        *@
+
+        @{
+            var customers = new SelectList(Model.Customers, "Id", "Name");
+            var surveyTemplates = new SelectList(Model.SurveyTemplates, "Id", "Title");
+        }
+
+        <div class="form-group">
+            <label asp-for="CustomerId" class="control-label col-sm-2">Customer</label>
+            <div class="col-md-4">
                 <select asp-for="CustomerId" asp-items="customers" class="form-control"></select>
                 <span asp-validation-for="CustomerId" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
                 @*TODO add ajax support*@
                 <a asp-action="Create" asp-controller="Customers" target="_blank">Create new Customer</a>
-                @*   <a href="@Url.RouteUrl("CoreApi", new { area = "Core", controller = "PostalAddress", action = actionName, id = Model })" class="hidden" data-ajax="true" data-ajax-mode="replace" data-ajax-failure="showError" data-ajax-update="#post_addr_form" id="pa_load_form"></a>*@
             </div>
-            @{
-               for(int i=0;i<Model.SectionGroups.Count;i++)
-                {
-                    @Html.HiddenFor(s=>s.SectionGroups.ElementAt(i).Id)
-
-                    @Html.LabelFor(s=>s.SectionGroups.ElementAt(i).Title)
-                    @Html.DisplayTextFor(s=>s.SectionGroups.ElementAt(i).Title)
-
-                    @Html.LabelFor(s=>s.SectionGroups.ElementAt(i).IsMandatory)
-                    @Html.DisplayTextFor(s=>s.SectionGroups.ElementAt(i).IsMandatory)
-                    if (!Model.SectionGroups.ElementAt(i).IsMandatory)
-                    {
-                         <label>Choose</label>
-                    @Html.CheckBoxFor(s=>s.SectionGroups.ElementAt(i).IsSelected)
-                    }
-                   
-                }
-            }
         </div>
         <div class="form-group">
+            <label asp-for="SurveyTemplateId" class="control-label col-sm-2">Survey Temaplate</label>
+            <div class="col-md-4">
+                <select asp-for="SurveyTemplateId" asp-items="surveyTemplates" class="form-control"></select>
+                <span asp-validation-for="SurveyTemplateId" class="text-danger"></span>
+            </div>
+        </div>
+        @*<div class="form-group">
+            <label asp-for="SectionGroups" class="col-md-2 control-label">Choose Section Groups</label>
+
+            @{
+                for (int i = 0; i < Model.SectionGroups.Count(); i++)
+                {
+                    @Html.HiddenFor(s => s.SectionGroups.ElementAt(i).Id)*@
+
+                    @*@Html.LabelFor(s => s.SectionGroups.ElementAt(i).Title)*@
+                    @*@Html.DisplayTextFor(s => s.SectionGroups.ElementAt(i).Title)*@
+
+                    @*@Html.LabelFor(s => s.SectionGroups.ElementAt(i).IsMandatory)
+                    @Html.DisplayTextFor(s => s.SectionGroups.ElementAt(i).IsMandatory)*@
+                    @*if (!Model.SectionGroups.ElementAt(i).IsMandatory)
+                    {
+                        <label>Choose</label>
+                        @Html.CheckBoxFor(s => s.SectionGroups.ElementAt(i).IsSelected)
+                    }
+
+                }
+            }
+        </div>*@
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default"/>
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
+    
 </form>
 
 <div>

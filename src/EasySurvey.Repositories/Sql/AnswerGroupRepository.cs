@@ -40,7 +40,8 @@ namespace EasySurvey.Repositories.Sql
         {
             var query = from answerGroup in _context.AnswerGroup
                 .Include(x => x.Answer)
-                where answerGroup.SurveyId == surveyId
+                .Include(x => x.SectionGroup).ThenInclude(s => s.Section).ThenInclude(q => q.Question).ThenInclude(q => q.OptionGroup).ThenInclude(q => q.Option)
+                        where answerGroup.SurveyId == surveyId
                 select answerGroup;
             return query.ToList();
         }

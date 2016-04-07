@@ -7,7 +7,10 @@ using EasySurvey.Common.Models;
 namespace EasySurvey.Web.ViewModels.AnswerGroups
 {
     public class AnswerGroupViewModel
-    {        
+    {
+        public AnswerGroupViewModel()
+        {
+        }
 
         public AnswerGroupViewModel(Common.Models.AnswerGroup answerGroup)
         {
@@ -17,6 +20,7 @@ namespace EasySurvey.Web.ViewModels.AnswerGroups
             SurveyId = answerGroup.SurveyId;
             SectionGroupTitle = answerGroup.SectionGroup.Title;
             IsMandatory = answerGroup.SectionGroup.IsMandatory;
+            SectionGroup = answerGroup.SectionGroup;
         }
 
         public int Id { get; set; }    
@@ -25,5 +29,6 @@ namespace EasySurvey.Web.ViewModels.AnswerGroups
         public int SectionGroupId { get; set; }
         public int SurveyId { get; set; }
         public string SectionGroupTitle { get; set; }
+        public SectionGroup SectionGroup { get; set; }
     }
 }

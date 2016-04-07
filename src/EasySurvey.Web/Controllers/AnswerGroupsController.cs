@@ -6,6 +6,8 @@ using EasySurvey.Common.Models;
 using EasySurvey.Web.Models;
 using EasySurvey.Web.ViewModels.AnswerGroups;
 using EasySurvey.Services.ServiceDefinitions;
+using System.Collections.Generic;
+
 namespace EasySurvey.Web.Controllers
 {
     public class AnswerGroupsController : Controller
@@ -20,10 +22,16 @@ namespace EasySurvey.Web.Controllers
         }
 
         // GET: AnswerGroups
-        public IActionResult Index()
+        public IActionResult Index(int? id)
         {
-            var applicationDbContext = _context.AnswerGroup.Include(a => a.SectionGroup).Include(a => a.Survey);
-            return View(applicationDbContext.ToList());
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            List<AnswerGroupViewModel> listModels = new List<AnswerGroupViewModel>();
+            var answerGroups = _answerGroupService.GetBySurveyId(id.Value);
+            answerGroups.ToList().ForEach(item => listModels.Add(new AnswerGroupViewModel(item)));
+            return View(listModels.ToList());
         }
 
         // GET: AnswerGroups/Details/5

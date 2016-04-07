@@ -3,35 +3,62 @@
 @model EditSurveyViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
-<h2>Create Survey</h2>
+<h2>Update Survey</h2>
 
 <form asp-action="Edit">
     <div class="form-horizontal">
         @Html.HiddenFor(m => m.Id)
         <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
 
-        <div class="col-md-10 left">
+        @*<div class="col-md-12 left">
             <label asp-for="Customer" class="col-md-2 col-md-offset-0 control-label">Customer</label>
+        </div>*@
+
+        
+
+        <div class="col-md-10 left">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Survey General Info</div>
+                <div class="panel-body">
+                    <dl class="dl-horizontal ">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.SurveyTemplate.Title)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.SurveyTemplate.Title)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.SurveyState.Name)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.SurveyState.Name)
+                        </dd>
+                    </dl>
+                </div>
+            </div>
             @{
                 await Html.RenderPartialAsync("~/views/Customers/_ViewCustomer.cshtml", Model.Customer, ViewData);
             }
-
         </div>
-        <div class="col-md-10 left">
+       
+
+        
+
+        @*<div class="col-md-12 left">
             <label class="col-md-2 col-md-offset-0 control-label">AnswerGroups</label>
         </div>
         @{
             @Html.EditorFor(m => Model.AnswerGroups)
-        }
+        }*@
 
         <br />
         <div class="form-group">
             <div class="col-md-offset-1 col-md-10">
                 <br />
-                <input type="submit" value="Create" class="btn btn-default" />
+                <a asp-action="Index" asp-controller="AnswerGroups" asp-route-id="@Model.Id">Next</a>
             </div>
         </div>
     </div>

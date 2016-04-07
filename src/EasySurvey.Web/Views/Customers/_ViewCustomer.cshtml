@@ -1,31 +1,72 @@
 @model EasySurvey.Common.Models.Customer
 <div>
-    <h4>Customer</h4>
-    <hr/>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Telephone)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Telephone)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Responsible)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Responsible)
-        </dd>
-    </dl>
+    @*<h4>Customer</h4>*@
+    @*<hr/>*@
+    <div class="panel panel-primary">
+        <div class="panel-heading">Customer Info</div>
+        <div class="panel-body">
+            <dl class="dl-horizontal ">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Address)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Address)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Telephone)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Telephone)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+                @if (!string.IsNullOrEmpty(Model.HomePage))
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => model.HomePage)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.HomePage)
+                    </dd>
+                }
+                @if (!string.IsNullOrEmpty(Model.Subsidiaries))
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Subsidiaries)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Subsidiaries)
+                    </dd>
+                }
+                @if (!string.IsNullOrEmpty(Model.IndustrialClassification))
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => model.IndustrialClassification)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.IndustrialClassification)
+                    </dd>
+                }
+                @if (!string.IsNullOrEmpty(Model.CVR))
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CVR)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CVR)
+                    </dd>
+                }
+            </dl>
+        </div>
+    </div>
 </div>

@@ -64,25 +64,28 @@ namespace EasySurvey.Web.Controllers
             return View(survey);
         }
 
-        public IActionResult Create(int? surveyTemplateId = 1)
+        public IActionResult Create(int? ownerId = 1)
         {
             var surveyViewModel = new CreateSurveyViewModel();
             var customers = customerService.GetAll();
-            var surveyTemplate = surveyTemplateService.GetById(1);
-            if (surveyTemplateId != null)
-            {
-                if (surveyTemplate.SectionGroup != null)
-                {
-                    var selectSectionList = new List<SectionGroupViewModel>();
-                    foreach (var sectionGroup in surveyTemplate.SectionGroup)
-                    {
-                        selectSectionList.Add(new SectionGroupViewModel(sectionGroup));
-                    }
-                    surveyViewModel.SectionGroups = selectSectionList;
-                }
-            }
+            var surveyTemplates = surveyTemplateService.GetAll(1);
+
+            //if (surveyTemplates != null && surveyTemplates.Count > 0)
+            //{
+            //    var surveyTemplate = surveyTemplateService.GetById(surveyTemplates.First().Id);
+            //    if (surveyTemplate.SectionGroup != null)
+            //    {
+            //        var selectSectionList = new List<SectionGroupViewModel>();
+            //        foreach (var sectionGroup in surveyTemplate.SectionGroup)
+            //        {
+            //            selectSectionList.Add(new SectionGroupViewModel(sectionGroup));
+            //        }
+            //        surveyViewModel.SectionGroups = selectSectionList;
+            //    }
+            //}
 
             surveyViewModel.Customers = customers.ToList();
+            surveyViewModel.SurveyTemplates = surveyTemplates.ToList();
             return View(surveyViewModel);
         }
 
@@ -92,21 +95,21 @@ namespace EasySurvey.Web.Controllers
         public IActionResult Create(CreateSurveyViewModel createSurveyViewModel)
         {
             var survey = new Survey();
+            var surveyTemplate = surveyTemplateService.GetById(createSurveyViewModel.SurveyTemplateId);
             if (ModelState.IsValid)
             {
-                //TODO remove hardcoded ids 
-                survey.SurveyTemplateId = 1;
+                survey.SurveyTemplateId = createSurveyViewModel.SurveyTemplateId;
                 survey.SurveyStateId = 1;
                 survey.CustomerId = createSurveyViewModel.CustomerId;
                 survey.UserId = User.Identity.Name;
 
-                foreach (var sectionGroup in createSurveyViewModel.SectionGroups)
+                foreach (var sectionGroup in surveyTemplate.SectionGroup)
                 {
                     survey.AnswerGroup.Add(new AnswerGroup
                     {
                         SectionGroupId = sectionGroup.Id,
                         SurveyId = survey.Id,
-                        IsUsed = sectionGroup.IsSelected
+                        IsUsed = false
                     });
                 }
                 surveyService.Save(survey);
