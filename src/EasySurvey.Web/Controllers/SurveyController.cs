@@ -5,7 +5,7 @@ using EasySurvey.Services.ServiceDefinitions;
 using EasySurvey.Web.ViewModels.Survey;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
-using EasySurvey.Web.ViewModels.AnswerGroup;
+using EasySurvey.Web.ViewModels.AnswerGroups;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,21 +14,17 @@ namespace EasySurvey.Web.Controllers
     [Authorize]
     public class SurveyController : Controller
     {
-        private readonly IAnswerGroupService answerGroupService;
         private readonly ICustomerService customerService;
-        private readonly ISectionGroupService sectionGroupService;
         private readonly ISurveyService surveyService;
         private readonly ISurveyTemplateService surveyTemplateService;
 
-        public SurveyController(ISurveyService surveyService, ISurveyTemplateService surveyTemplateService,
-            ICustomerService customerService, ISectionGroupService sectionGroupService,
-            IAnswerGroupService answerGroupService)
+        public SurveyController(ISurveyService surveyService
+            , ISurveyTemplateService surveyTemplateService
+            , ICustomerService customerService)
         {
             this.surveyService = surveyService;
             this.surveyTemplateService = surveyTemplateService;
             this.customerService = customerService;
-            this.sectionGroupService = sectionGroupService;
-            this.answerGroupService = answerGroupService;
         }
 
         // GET: /<controller>/
@@ -122,7 +118,6 @@ namespace EasySurvey.Web.Controllers
 
         public IActionResult Edit(int? id = 1)
         {
-
             var survey = surveyService.GetById(id.Value);           
             var surveyViewModel = new EditSurveyViewModel(survey);
             
@@ -137,10 +132,9 @@ namespace EasySurvey.Web.Controllers
                     {
                         answerGroupList.Add(new AnswerGroupViewModel(answerGroup));
                     }
-                    surveyViewModel.AnswerGroups = answerGroupList;
+                    surveyViewModel.AnswerGroups = answerGroupList.AsEnumerable();
                 }
             }
-
             surveyViewModel.Customer = customer;
             return View(surveyViewModel);
         }

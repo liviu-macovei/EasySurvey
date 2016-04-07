@@ -4,26 +4,27 @@ using System.Linq;
 using System.Threading.Tasks;
 using EasySurvey.Common.Models;
 
-namespace EasySurvey.Web.ViewModels.AnswerGroup
+namespace EasySurvey.Web.ViewModels.AnswerGroups
 {
-    public class AnswerGroupViewModel
-    {        
-
-        public AnswerGroupViewModel(Common.Models.AnswerGroup answerGroup)
+    public class EditAnswerGroupViewModel 
+    {
+        public EditAnswerGroupViewModel(Common.Models.AnswerGroup answerGroup)
         {
             Id = answerGroup.Id;
+            Title = answerGroup.SectionGroup.Title;
             IsUsed = answerGroup.IsUsed;
-            SectionGroupId = answerGroup.SectionGroupId;
             SurveyId = answerGroup.SurveyId;
-            SectionGroupTitle = answerGroup.SectionGroup.Title;
             IsMandatory = answerGroup.SectionGroup.IsMandatory;
+            SectionGroupId = answerGroup.SectionGroupId;
+            SectionGroup = answerGroup.SectionGroup;
         }
 
-        public int Id { get; set; }    
+        public int Id { get; set; }
+        public string Title { get; set; }
         public bool IsUsed { get; set; }
         public bool IsMandatory { get; set; }
         public int SectionGroupId { get; set; }
         public int SurveyId { get; set; }
-        public string SectionGroupTitle { get; set; }
+        public SectionGroup SectionGroup { get; set; }
     }
 }

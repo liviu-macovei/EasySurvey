@@ -4,54 +4,31 @@
     Layout = null;
 }
 
-<!DOCTYPE html>
+<<div class="section_group row panel panel-default">
+    @{
+        var titleCssId = "title_bar_section_group" + Model.Id;
+        var insideCssId = "inside_section_group" + Model.Id;
+    }
+    <div id="@titleCssId" class="title_bar_section_group panel-heading">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" data-target="#@insideCssId">
+                @{
+                    @Html.HiddenFor(model => model.SectionGroup.IsMandatory)
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
-<body>
+                    if (Model.SectionGroup.IsMandatory)
+                    {
+                        @Html.LabelFor(m => m.SectionGroup.IsMandatory, " *", new { @class = "red" })
+                    }
+                    @Html.LabelFor(model => model.SectionGroup.Title, Model.SectionGroup.Title, new { Class = "left" })
+                }
+            </a>
+        </h4>
 
-<div>
-    <h4>AnswerGroup</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CreatedBy)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedOn)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CreatedOn)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.IsUsed)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.IsUsed)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedBy)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedBy)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedOn)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedOn)
-        </dd>
-    </dl>
+    </div>
+    <div id="@insideCssId" class="inside_section_group panel-collapse collapse in">
+        @foreach (var section in Model.SectionGroup.Section.OrderBy(item => item.SortOrder))
+        {
+            await Html.RenderPartialAsync("~/views/Sections/_ViewSection.cshtml", section, ViewData);
+        }
+    </div>
 </div>
-<p>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</p>
-</body>
-</html>

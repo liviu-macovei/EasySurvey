@@ -29,7 +29,9 @@ namespace EasySurvey.Repositories.Sql
         {
             var query = from answerGroup in _context.AnswerGroup
                 .Include(x => x.Answer)
-                where answerGroup.Id == id
+                //.Include(x => x.SectionGroup).ThenInclude(s => s.Section).ThenInclude(q => q.Question).ThenInclude(q => q.QuestionType)
+                .Include(x => x.SectionGroup).ThenInclude(s => s.Section).ThenInclude(q => q.Question).ThenInclude(q => q.OptionGroup).ThenInclude(q => q.Option)
+                        where answerGroup.Id == id
                 select answerGroup;
             return query.FirstOrDefault();
         }

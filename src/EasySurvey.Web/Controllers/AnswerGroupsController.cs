@@ -4,16 +4,19 @@ using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Data.Entity;
 using EasySurvey.Common.Models;
 using EasySurvey.Web.Models;
-
+using EasySurvey.Web.ViewModels.AnswerGroups;
+using EasySurvey.Services.ServiceDefinitions;
 namespace EasySurvey.Web.Controllers
 {
     public class AnswerGroupsController : Controller
     {
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
+        private readonly IAnswerGroupService _answerGroupService;
 
-        public AnswerGroupsController(ApplicationDbContext context)
+        public AnswerGroupsController(ApplicationDbContext context, IAnswerGroupService answerGroupService)
         {
-            _context = context;    
+            _context = context;
+            _answerGroupService = answerGroupService;
         }
 
         // GET: AnswerGroups
@@ -72,14 +75,13 @@ namespace EasySurvey.Web.Controllers
                 return HttpNotFound();
             }
 
-            AnswerGroup answerGroup = _context.AnswerGroup.Single(m => m.Id == id);
+            var answerGroup = _answerGroupService.GetById(id.Value);
             if (answerGroup == null)
             {
                 return HttpNotFound();
             }
-            ViewData["SectionGroupId"] = new SelectList(_context.SectionGroup, "Id", "SectionGroup", answerGroup.SectionGroupId);
-            ViewData["SurveyId"] = new SelectList(_context.Survey, "Id", "Survey", answerGroup.SurveyId);
-            return View(answerGroup);
+            EditAnswerGroupViewModel editAnswerGroupViewModel = new EditAnswerGroupViewModel(answerGroup);
+            return View(editAnswerGroupViewModel);
         }
 
         // POST: AnswerGroups/Edit/5

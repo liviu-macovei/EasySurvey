@@ -90,3 +90,22 @@ $red: red;
     margin-right: 0;
     padding-left: 0;
 }
+
+.col-fixed-240{
+    width:240px;
+    background:red;
+    position:fixed;
+    height:100%;
+}
+
+.col-fixed-160{
+    margin-left:240px;
+    width:160px;
+    background:blue;
+    position:fixed;
+    height:100%;
+}
+
+.col-offset-400{
+    padding-left:415px;
+}
