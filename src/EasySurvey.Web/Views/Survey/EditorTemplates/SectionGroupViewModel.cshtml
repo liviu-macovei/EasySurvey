@@ -1,0 +1,15 @@
+@model EasySurvey.Web.ViewModels.Survey.SectionGroupViewModel
+
+<div class="col-md-10 left">
+    @Html.HiddenFor(s => s.Id)
+    @Html.HiddenFor(s => s.Title)
+    @Html.HiddenFor(s => s.IsMandatory)
+    <label class="col-md-2 col-md-offset-1 control-label">
+        @Model.Title
+    </label>
+    @if (!Model.IsMandatory)
+    {
+        <label class="col-md-2 col-md-offset-0 leftLabel">Choose @Html.CheckBoxFor(s => s.IsSelected, new {@class = ""})</label>
+        
+    }
+</div>

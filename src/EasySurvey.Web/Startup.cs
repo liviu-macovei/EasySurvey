@@ -52,7 +52,7 @@ namespace EasySurvey.Web
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
 
-            //Register external services.//TODO SEE IF THIS CAN BE DONE IN SERVICES PROJECT
+            //Register external services.
             EasySurvey.Services.BootstrapServices bootstrapService = new EasySurvey.Services.BootstrapServices();
             bootstrapService.ConfigureServices(Configuration, services);
         }

@@ -60,6 +60,10 @@ namespace EasySurvey.Services.Mock
         {
             throw new NotImplementedException();
         }
-      
+
+        public ICollection<Comment> GetByAnalysisId(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

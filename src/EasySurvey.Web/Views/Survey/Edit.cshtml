@@ -1,78 +1,42 @@
-@model EasySurvey.Common.Models.Survey
+@using System.Threading.Tasks
+@using EasySurvey.Web.ViewModels.Survey
+@model EditSurveyViewModel
 
-<p>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</p>
-<form asp-action="View">
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create Survey</h2>
+
+<form asp-action="Edit">
     <div class="form-horizontal">
-        <h4>Survey</h4>
-        <hr />
+        @Html.HiddenFor(m => m.Id)
         <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="Id" />
-        <div class="form-group">
-            <label asp-for="CreatedBy" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="CreatedBy" class="form-control" />
-                <span asp-validation-for="CreatedBy" class="text-danger" />
-            </div>
+
+        <div class="col-md-10 left">
+            <label asp-for="Customer" class="col-md-2 col-md-offset-0 control-label">Customer</label>
+            @{
+                await Html.RenderPartialAsync("~/views/Customers/_ViewCustomer.cshtml", Model.Customer, ViewData);
+            }
+
         </div>
-        <div class="form-group">
-            <label asp-for="CreatedOn" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="CreatedOn" class="form-control" />
-                <span asp-validation-for="CreatedOn" class="text-danger" />
-            </div>
+        <div class="col-md-10 left">
+            <label class="col-md-2 col-md-offset-0 control-label">AnswerGroups</label>
         </div>
+        @{
+            @Html.EditorFor(m => Model.AnswerGroups)
+        }
+
+        <br />
         <div class="form-group">
-            <label asp-for="CustomerId" class="control-label col-md-2">CustomerId</label>
-            <div class="col-md-10">
-                <select asp-for="CustomerId" class="form-control" />
-                <span asp-validation-for="CustomerId" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="ModifiedBy" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="ModifiedBy" class="form-control" />
-                <span asp-validation-for="ModifiedBy" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="ModifiedOn" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="ModifiedOn" class="form-control" />
-                <span asp-validation-for="ModifiedOn" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="SurveyStateId" class="control-label col-md-2">SurveyStateId</label>
-            <div class="col-md-10">
-                <select asp-for="SurveyStateId" class="form-control" />
-                <span asp-validation-for="SurveyStateId" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="SurveyTemplateId" class="control-label col-md-2">SurveyTemplateId</label>
-            <div class="col-md-10">
-                <select asp-for="SurveyTemplateId" class="form-control" />
-                <span asp-validation-for="SurveyTemplateId" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="UserId" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="UserId" class="form-control" />
-                <span asp-validation-for="UserId" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <div class="col-md-offset-1 col-md-10">
+                <br />
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
 </form>
+
 
 <div>
     <a asp-action="Index">Back to List</a>

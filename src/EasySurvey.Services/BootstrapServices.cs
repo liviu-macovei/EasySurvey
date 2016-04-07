@@ -1,11 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using EasySurvey.Repositories;
+using EasySurvey.Services.Implementation;
 using EasySurvey.Services.Mock;
 using EasySurvey.Services.ServiceDefinitions;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace EasySurvey.Services
 {
@@ -13,11 +11,10 @@ namespace EasySurvey.Services
     {
         public void ConfigureServices(IConfigurationRoot configuration, IServiceCollection services)
         {
-            Repositories.BootstrapRepositories bootstrapService = new Repositories.BootstrapRepositories();
-            bootstrapService.ConfigureServices(configuration, services);
+            var bootstrapService = new BootstrapRepositories();
+            bootstrapService.ConfigureServices(configuration, services);           
 
-            //Register external services.//TODO SEE IF THIS CAN BE DONE IN SERVICES PROJECT
-            
+            //Mock
             services.AddTransient<ISurveyTypeService, SurveyTypeServiceMock>();
             services.AddTransient<ISurveyStateService, SurveyStateServiceMock>();
             services.AddTransient<ISectionService, SectionServiceMock>();
@@ -30,11 +27,12 @@ namespace EasySurvey.Services
             services.AddTransient<INextQuestionService, NextQuestionServiceMock>();
             services.AddTransient<ICommentService, CommentServiceMock>();
             services.AddTransient<IAnswerService, AnswerServiceMock>();
-            services.AddTransient<IAnswerGroupService, AnswerGroupServiceMock>();
 
-            services.AddTransient<ICustomerService, Impl.CustomerService>();
-            services.AddTransient<ISurveyTemplateService, Impl.SurveyTemplateService>();
-            services.AddTransient<ISurveyService, Impl.SurveyService>();
+            //Real
+            services.AddTransient<IAnswerGroupService, AnswerGroupService>();
+            services.AddTransient<ICustomerService, CustomerService>();
+            services.AddTransient<ISurveyTemplateService, SurveyTemplateService>();
+            services.AddTransient<ISurveyService, SurveyService>();
         }
     }
 }

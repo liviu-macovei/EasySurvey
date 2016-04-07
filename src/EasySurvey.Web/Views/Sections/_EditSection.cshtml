@@ -1,0 +1,28 @@
+@model EasySurvey.Common.Models.Section
+<div class="section row panel panel-default">
+    @{
+        var titleCssId = "title_bar_section" + Model.Id;
+        var insideCssId = "inside_section" + Model.Id;
+    }
+    <div id="@titleCssId" class="title_bar_section panel-heading">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" data-target="#@insideCssId">
+                @Html.LabelFor(model => model.Title, Model.Title, new {Class = "left"})
+            </a>
+        </h4>
+    </div>
+    <div id="@insideCssId" class="inside_section panel-group  panel-collapse collapse in">
+        <div class="section_description">
+            <div class="label_description">@Html.LabelFor(model => model.Description) </div>
+            <div class="display_description">@Html.DisplayFor(model => model.Description) </div>
+        </div>
+        <div class="panel-group" id="accordion">
+            <div class="container">
+                @foreach (var question in Model.Question.OrderBy(item => item.SortOrder))
+            {
+                await Html.RenderPartialAsync("~/views/Question/_EditQuestion.cshtml", question, ViewData);
+            }
+            </div>
+        </div>
+    </div>
+</div>

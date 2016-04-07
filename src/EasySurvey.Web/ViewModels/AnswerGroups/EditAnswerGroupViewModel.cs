@@ -1,0 +1,30 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using EasySurvey.Common.Models;
+
+namespace EasySurvey.Web.ViewModels.AnswerGroups
+{
+    public class EditAnswerGroupViewModel 
+    {
+        public EditAnswerGroupViewModel(Common.Models.AnswerGroup answerGroup)
+        {
+            Id = answerGroup.Id;
+            Title = answerGroup.SectionGroup.Title;
+            IsUsed = answerGroup.IsUsed;
+            SurveyId = answerGroup.SurveyId;
+            IsMandatory = answerGroup.SectionGroup.IsMandatory;
+            SectionGroupId = answerGroup.SectionGroupId;
+            SectionGroup = answerGroup.SectionGroup;
+        }
+
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public bool IsUsed { get; set; }
+        public bool IsMandatory { get; set; }
+        public int SectionGroupId { get; set; }
+        public int SurveyId { get; set; }
+        public SectionGroup SectionGroup { get; set; }
+    }
+}

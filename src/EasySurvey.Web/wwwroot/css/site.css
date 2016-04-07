@@ -28,6 +28,13 @@ textarea {
 p {
   margin: 0; }
 
+footer {
+  display: block;
+  bottom: 0;
+  position: fixed;
+  height: 30px;
+  width: 100%; }
+
 .panel-group {
   float: left;
   width: 100%; }
@@ -97,7 +104,16 @@ p {
   width: 90%;
   float: left; }
 
+.leftLabel {
+  padding-top: 7px;
+  margin-bottom: 0;
+  text-align: left; }
+
+.floatleft {
+  float: left; }
+
 .row {
   margin-left: 25px;
   margin-right: 0;
   padding-left: 0; }
+

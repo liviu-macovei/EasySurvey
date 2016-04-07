@@ -1,4 +1,4 @@
-﻿namespace EasySurvey.Web.ViewModels.SectionGroup
+﻿namespace EasySurvey.Web.ViewModels.SectionGroups
 {
     public class SelectSectionGroupViewModel : Common.Models.SectionGroup
     {

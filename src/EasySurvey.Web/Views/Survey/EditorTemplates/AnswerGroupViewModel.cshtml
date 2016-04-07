@@ -1,0 +1,40 @@
+@model EasySurvey.Web.ViewModels.AnswerGroups.AnswerGroupViewModel
+
+<div class="col-md-10 left">
+    @Html.HiddenFor(s => s.Id)
+    @Html.HiddenFor(s => s.SectionGroupTitle)
+    @Html.HiddenFor(s => s.IsUsed)
+    
+    <label class="col-md-2 col-md-offset-1 control-label">
+        @Model.SectionGroupTitle
+    </label>
+
+    @if (!Model.IsMandatory)
+    {
+        <label class="col-md-2 col-md-offset-0 leftLabel">Choose @Html.CheckBoxFor(s => s.IsUsed, new { @class = "", @id = "checkbox" })</label>
+    }
+    @if (!Model.IsMandatory)
+    {
+        @*<a asp-action="Edit" asp-route-id="@Model.Id" class="col-md-2 col-md-offset-0 leftLabel" id="EditButton">Edit</a>*@
+
+        <a asp-action="Edit" asp-controller="AnswerGroups" asp-route-id="@Model.Id" class="col-md-2 col-md-offset-0 leftLabel" id="EditButton">Edit</a>
+    }
+    else
+    {
+        @*<a asp-action="Edit" asp-route-id="@Model.Id" class="col-md-2 col-md-offset-0 leftLabel" id="EditButton" style="visibility:hidden">Edit</a>*@
+        <a asp-action="Edit" asp-controller="AnswerGroups" asp-route-id="@Model.Id" class="col-md-2 col-md-offset-0 leftLabel" id="EditButton" style="visibility:hidden">Edit</a>
+    }
+</div>
+
+<script>
+    var box = document.getElementById('EditButton');
+    var checked = document.getElementById('checkbox');
+    checked.addEventListener('change', function () {
+        if (!checked.checked) {
+            document.getElementById("EditButton").style.visibility = "hidden";
+        }
+        else {
+            document.getElementById("EditButton").style.visibility = "visible";
+        }
+    });
+</script>
