@@ -9,7 +9,7 @@ namespace EasySurvey.Common.Interfaces.Repositories
         ICollection<AnswerGroup> GetAll();
         AnswerGroup Find(int id);
         AnswerGroup Add(AnswerGroup answerGroup);
-        AnswerGroup AddFromSurvey(AnswerGroup answerGroup, DbTransaction dbContextTransaction);
+        AnswerGroup AddFromSurvey(AnswerGroup answerGroup);
         AnswerGroup Update(AnswerGroup answerGroup);
         bool Delete(AnswerGroup answerGroup);
         bool DeleteById(int id);

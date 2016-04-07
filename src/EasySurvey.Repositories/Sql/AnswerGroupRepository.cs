@@ -37,9 +37,9 @@ namespace EasySurvey.Repositories.Sql
         public ICollection<AnswerGroup> FindAllBySurveyId(int surveyId)
         {
             var query = from answerGroup in _context.AnswerGroup
-               .Include(x => x.Answer)
-                        where answerGroup.SurveyId == surveyId
-                        select answerGroup;
+                .Include(x => x.Answer)
+                where answerGroup.SurveyId == surveyId
+                select answerGroup;
             return query.ToList();
         }
 
@@ -47,8 +47,8 @@ namespace EasySurvey.Repositories.Sql
         {
             var query = from answerGroup in _context.AnswerGroup
                 .Include(x => x.Answer)
-                        where answerGroup.SectionGroupId == sectionGroupId
-                        select answerGroup;
+                where answerGroup.SectionGroupId == sectionGroupId
+                select answerGroup;
             return query.FirstOrDefault();
         }
 
@@ -64,7 +64,7 @@ namespace EasySurvey.Repositories.Sql
                     dbContextTransaction.Commit();
                     //todo get the id
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     dbContextTransaction.Rollback();
                 }
@@ -73,23 +73,12 @@ namespace EasySurvey.Repositories.Sql
         }
 
 
-        public AnswerGroup AddFromSurvey(AnswerGroup answerGroup, DbTransaction dbContextTransaction)
-        {
-            using (_context.Database.UseTransaction(dbContextTransaction))
-            {
-                try
-                {
-                    _context.AnswerGroup.Add(answerGroup);
-                    _context.SaveChanges();
-                    dbContextTransaction.Commit();
-                    //todo get the id
-                }
-                catch (Exception)
-                {
-                    dbContextTransaction.Rollback();
-                }
-                return answerGroup;
-            }
+        public AnswerGroup AddFromSurvey(AnswerGroup answerGroup)
+        {            
+          _context.AnswerGroup.Add(answerGroup);
+            _context.SaveChanges();
+            //todo get the id
+            return answerGroup;
         }
 
         public AnswerGroup Update(AnswerGroup answerGroup)

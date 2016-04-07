@@ -1,20 +1,13 @@
 @model IEnumerable<EasySurvey.Web.ViewModels.Survey.ListSurveyViewModel>
 
 @{
-    ViewData["Title"] = "Survey";
+    ViewData["Title"] = "Surveys";
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<h2>Surveys</h2>
+<br/>
+<a asp-action="Create" class="btn btn-default">Create New</a>
+<br/>
+<br/>
 <table class="table">
     <tr>
         <th>
@@ -28,26 +21,24 @@
         </th>
         <th></th>
     </tr>
-    
-@foreach (var item in Model) {
-    <tr>
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.Customer)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SurveyState)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SurveyTemplate)
-        </td>
-        <td>
-            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-        </td>
-    </tr>
-}
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SurveyState)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SurveyTemplate)
+            </td>
+            <td> 
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+    }
 </table>
-</body>
-</html>

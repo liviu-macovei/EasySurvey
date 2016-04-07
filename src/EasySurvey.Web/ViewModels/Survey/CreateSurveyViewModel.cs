@@ -9,6 +9,6 @@ namespace EasySurvey.Web.ViewModels.Survey
         public int CustomerId { get; set; }
 
         public List<Common.Models.Customer> Customers { get; set; }
-        public ICollection<SectionGroupViewModel> SectionGroups { get; set; }
+        public IEnumerable<SectionGroupViewModel> SectionGroups { get; set; }
     }
 }

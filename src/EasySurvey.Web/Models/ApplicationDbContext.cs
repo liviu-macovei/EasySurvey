@@ -24,5 +24,6 @@ namespace EasySurvey.Web.Models
         public DbSet<CreateCustomerViewModel> CreateCustomerViewModel { get; set; }
         public DbSet<CreateSurveyViewModel> CreateSurveyViewModel { get; set; }
         public DbSet<ListCustomerViewModel> ListCustomerViewModel { get; set; }
+        public DbSet<AnswerGroup> AnswerGroup { get; set; }
     }
 }

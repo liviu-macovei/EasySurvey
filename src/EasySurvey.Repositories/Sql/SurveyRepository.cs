@@ -32,6 +32,7 @@ namespace EasySurvey.Repositories.Sql
                 .Include(x => x.Customer)
                 .Include(x => x.SurveyState)
                 .Include(x => x.SurveyTemplate)
+                .Include(x => x.AnswerGroup).ThenInclude(x => x.SectionGroup)
                 where survey.Id == surveyId
                 select survey;
             return query.FirstOrDefault();
@@ -43,23 +44,18 @@ namespace EasySurvey.Repositories.Sql
             {
                 try
                 {
-                    var answerGroupRepository = new AnswerGroupRepository(_context);
-                    ICollection<AnswerGroup> newAnswerGroups = new List<AnswerGroup>();
-                    foreach (var answerGroup in survey.AnswerGroup)
-                    {
-                        newAnswerGroups.Add(answerGroupRepository.AddFromSurvey(answerGroup,
-                            dbContextTransaction.Instance));
-                    }
-
                     _context.Survey.Add(survey);
+                    var answerGroupRepository = new AnswerGroupRepository(_context);
                     _context.SaveChanges();
+
                     dbContextTransaction.Commit();
                     //todo get the id
                     //possibly add newAnswerGroups to the survey
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     dbContextTransaction.Rollback();
+                    throw;
                 }
                 return survey;
             }
@@ -92,8 +88,7 @@ namespace EasySurvey.Repositories.Sql
                     _context.Survey.Remove(survey);
                     _context.SaveChanges();
                 }
-                catch
-                    (Exception)
+                catch(Exception ex)
                 {
                     dbContextTransaction.Rollback();
                     throw;
@@ -117,8 +112,7 @@ namespace EasySurvey.Repositories.Sql
                         _context.Survey.Remove(query.First());
                         _context.SaveChanges();
                     }
-                    catch
-                        (Exception)
+                    catch(Exception ex)
                     {
                         dbContextTransaction.Rollback();
                         throw;

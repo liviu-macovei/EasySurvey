@@ -8,45 +8,34 @@
 
 <h2>Create Survey</h2>
 
-<form asp-action="Create"> 
+<form asp-action="Create">
     <div class="form-horizontal">
         @Html.HiddenFor(m => m.Id)
         <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
 
-        @*    @{
-                await Html.RenderPartialAsync("~/views/Customers/_SelectCustomer.cshtml", Model.Customers, ViewData);
-            }
-        *@
-        <div class="form-group">
-            @*@Html.DropDownListFor(m => m.CustomerId, Model.Customers, "Select Customer")*@
-            <label asp-for="CustomerId" class="col-md-2 control-label">Customer</label>
+        <div class="col-md-10 left">
+            <label asp-for="CustomerId" class="col-md-2 col-md-offset-0 control-label">Customer</label>
             @{
                 var customers = new SelectList(Model.Customers, "Id", "Name");
             }
-            <div class="col-md-10 ">
-                @*  <input asp-for="CustomerId" class="form-control" />*@
-                <select asp-for="CustomerId" asp-items="customers" class="form-control"></select>
-                <span asp-validation-for="CustomerId" class="text-danger"></span>                  
-                @*TODO add ajax support*@
-                <a asp-action="Create" asp-controller="Customers" target="_blank">Create new Customer</a>
-                @*   <a href="@Url.RouteUrl("CoreApi", new { area = "Core", controller = "PostalAddress", action = actionName, id = Model })" class="hidden" data-ajax="true" data-ajax-mode="replace" data-ajax-failure="showError" data-ajax-update="#post_addr_form" id="pa_load_form"></a>*@
-            </div>
-            @{
-                foreach (var sectionGroup in Model.SectionGroups)
-                {
-/*                    var sectionGroupViewModel=new SectionGroupViewModel(sectionGroup);*/
-                      @Html.DisplayFor(m => sectionGroup)
-                }
-               @* for (var i = 0; i < Model.SectionGroups.Count; i++)
-                {                   
-                    //TODO add a displayTemplate
-                  //  @Html.DisplayForModel(new SectionGroupViewModel(Model.SectionGroups.ElementAt(i)))
-                    @Html.DisplayFor(new SectionGroupViewModel(Model.SectionGroups.ElementAt(i)),"SectionGroupViewModel","",null)
-                }*@
-            }
+            <select asp-for="CustomerId" asp-items="customers" class="form-control col-md-1 col-md-offset-0"></select>
+            <span asp-validation-for="CustomerId" class="text-danger"></span>
+            @*TODO add ajax support*@
+            <a asp-action="Create" asp-controller="Customers" target="_blank" class=" col-md-2 col-md-offset-0 ">Create new Customer</a>
+            @*   <a href="@Url.RouteUrl("CoreApi", new { area = "Core", controller = "PostalAddress", action = actionName, id = Model })" class="hidden" data-ajax="true" data-ajax-mode="replace" data-ajax-failure="showError" data-ajax-update="#post_addr_form" id="pa_load_form"></a>*@
+
         </div>
+        <div class="col-md-10 left">
+            <label class="col-md-2 col-md-offset-0 control-label">SectionGroups</label>
+        </div>
+        @{
+            @Html.EditorFor(m => Model.SectionGroups)
+        }
+
+         <br/>
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-md-offset-1 col-md-10">
+                <br/>
                 <input type="submit" value="Create" class="btn btn-default"/>
             </div>
         </div>

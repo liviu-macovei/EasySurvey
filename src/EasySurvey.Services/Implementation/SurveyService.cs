@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using EasySurvey.Common.Interfaces.Repositories;
 using EasySurvey.Common.Models;
@@ -19,7 +20,15 @@ namespace EasySurvey.Services.Implementation
 
         public bool Delete(Survey element)
         {
-            return _surveyRepo.Delete(element);
+            try
+            {
+                return _surveyRepo.Delete(element);
+            }
+            catch (Exception ex)
+            {
+                //Maybe log
+                return false;
+            }
         }
 
         public bool DeleteById(int value)
