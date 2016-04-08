@@ -10,6 +10,8 @@ namespace EasySurvey.Services.Mock
 
         public Question GetById(int id)
         {
+            var questionType = MockRandom.Random().Next(3);
+            var optionGroup = new OptionGroupServiceMock().GetById(questionType);
             return new Question
             {
                 Id = id,
@@ -21,7 +23,8 @@ namespace EasySurvey.Services.Mock
                 SectionId = MockRandom.Random().Next(100),
                 AnswerValidationExpression = "42 the answer of everything",
                 OptionGroupId = new OptionGroupServiceMock().GetById( MockRandom.Random().Next(3)).Id,
-                QuestionTypeId = new QuestionTypeServiceMock().GetById( MockRandom.Random().Next(3)).Id
+                OptionGroup = optionGroup,
+                QuestionTypeId = questionType
             };
         }
 

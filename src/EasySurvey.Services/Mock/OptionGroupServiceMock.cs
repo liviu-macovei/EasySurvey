@@ -13,23 +13,50 @@ namespace EasySurvey.Services.Mock
             switch (id)
             {
                 case 1:
-                    return new OptionGroup
                     {
-                        Id = id,
-                        Name = "MultiSelect" + id
-                    };
+                        var options = new List<Option>()
+                        {
+                            new Option() { Id = 1, OptionGroupId = id, Name = "MultiSelectOption1"  }
+                            , new Option() { Id = 2, OptionGroupId = id, Name = "MultiSelectOption2"  }
+                            , new Option() { Id = 3, OptionGroupId = id, Name = "MultiSelectOption3"  }
+                        };
+                        return new OptionGroup
+                        {
+                            Id = id,
+                            Name = "MultiSelect" + id,
+                            Option = options
+                        };
+                    }
                 case 2:
-                    return new OptionGroup
                     {
-                        Id = id,
-                        Name = "SingleSelection" + id
-                    };
+                        var options = new List<Option>()
+                        {
+                            new Option() { Id = 4, OptionGroupId = id, Name = "SingleSelectionOption1"  }
+                            , new Option() { Id = 5, OptionGroupId = id, Name = "SingleSelectionOption2"  }
+                            , new Option() { Id = 6, OptionGroupId = id, Name = "SingleSelectionOption3"  }
+                        };
+                        return new OptionGroup
+                        {
+                            Id = id,
+                            Name = "SingleSelection" + id,
+                            Option = options
+                        };
+                    }
                 default:
-                    return new OptionGroup
                     {
-                        Id = id,
-                        Name = "Yes/No" + id
-                    };
+                        var options = new List<Option>()
+                        {
+                            new Option() { Id = 7, OptionGroupId = id, Name = "Yes"  }
+                            , new Option() { Id = 8, OptionGroupId = id, Name = "No"  }
+                        };
+                        return new OptionGroup
+                        {
+                            Id = id,
+                            Name = "Yes/No" + id,
+                            Option = options
+                        };
+
+                    }
             }
         }
 

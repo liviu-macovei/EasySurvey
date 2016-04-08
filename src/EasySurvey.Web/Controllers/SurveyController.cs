@@ -114,7 +114,7 @@ namespace EasySurvey.Web.Controllers
                 }
                 surveyService.Save(survey);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "AnswerGroups", new { id = survey.Id });
             }
             return View(survey);
         }

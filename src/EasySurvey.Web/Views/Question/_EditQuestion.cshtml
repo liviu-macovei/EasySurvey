@@ -1,29 +1,36 @@
 @model EasySurvey.Common.Models.Question
-<div class="row">
-    <fieldset class="form-inline">
-        <div class="form-group ">
-            @Html.LabelFor(model => model.QuestionText, Model.QuestionText, new { Class = "col-lg-12 form-control-label", title = Model.HelpText })    
-        </div>
-        <div class="form-group" >
-            @if (Model != null && Model.QuestionTypeId == 1)
+
+<tr>
+    <th scope="row" width="50%">@Html.LabelFor(model => model.QuestionText, Model.QuestionText, new { Class = "col-lg-12 form-control-label", title = Model.HelpText })    </th>
+    <td>
+        @if (Model != null && Model.QuestionTypeId == 1)
             {
-                <input type="text" class="form-control" id="exampleInputName2" placeholder="@Model.DefaultComments">
-            }
-            else if (Model != null && Model.QuestionTypeId == 2)
-            {
-                @foreach (var option in Model.OptionGroup.Option.OrderBy(item => item.Name))
+        <input type="text" class="form-control" id="exampleInputName2" placeholder="@Model.DefaultComments">
+    }
+    else if (Model != null && Model.QuestionTypeId == 2)
+    {
+        @foreach (var option in Model.OptionGroup.Option.OrderBy(item => item.Name))
                 {
-                    <div class="radio-inline">
-                        <label>
-                            <input type="radio" value="@option.Id"> @option.Name
-                        </label>
-                    </div>
-                }
+            <div class="radio-inline">
+                <label>
+                    <input type="radio" value="@option.Id"> @option.Name
+                </label>
+            </div>
+        }
+        }
+        else /*if (Model != null && Model.QuestionTypeId == 3)*/
+        {
+            @foreach (var option in Model.OptionGroup.Option.OrderBy(item => item.Name))
+                {
+                <div class="radio-inline">
+                    <label>
+                        <input type="checkbox" value="@option.Id"> @option.Name
+                    </label>
+                </div>
             }
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control" id="exampleInputName2" placeholder="@Model.DefaultComments">
-        </div>
-</fieldset>
-</div>
+        }
+</td>
+<td><input type="text" class="form-control" id="exampleInputName2" placeholder="@Model.DefaultComments"></td>
+</tr>
+
 

@@ -56,22 +56,32 @@
                 else
                 {
                     <div id="@(answerGroup.Id)_AnswerGroup" class="tab-pane fade">
-                        <div class="form-group">
-                            @{
-                                if (!answerGroup.IsMandatory)
-                                {
-                                    <label asp-for="@answerGroup.IsUsed" class="control-label col-sm-2">Wish to fill this area:</label>
-                                    <div class="col-md-4">
-                                        @Html.CheckBoxFor(s => s.ElementAt(i).IsUsed)
-                                    </div>
-                                }
-                            }
-                        </div>
-                        <div class="form-group">
-                            @{
-                                await Html.RenderPartialAsync("~/views/SectionGroups/_EditSectionGroup.cshtml", answerGroup.SectionGroup, ViewData);
-                            }
-                        </div>
+                        <table class="table">
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th>
+                                        @{
+                                            if (!answerGroup.IsMandatory)
+                                            {
+                                                <label asp-for="@answerGroup.IsUsed" class="control-label col-sm-2">Wish to fill this area:</label>
+                                                <div class="col-md-4">
+                                                    @Html.CheckBoxFor(s => s.ElementAt(i).IsUsed)
+                                                </div>
+                                            }
+                                        }
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @{
+                                            await Html.RenderPartialAsync("~/views/SectionGroups/_EditSectionGroup.cshtml", answerGroup.SectionGroup, ViewData);
+                                        }
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 }
             }

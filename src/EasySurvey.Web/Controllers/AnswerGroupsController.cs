@@ -14,11 +14,13 @@ namespace EasySurvey.Web.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IAnswerGroupService _answerGroupService;
+        private readonly ISectionGroupService _sectionGroupService;
 
-        public AnswerGroupsController(ApplicationDbContext context, IAnswerGroupService answerGroupService)
+        public AnswerGroupsController(ApplicationDbContext context, IAnswerGroupService answerGroupService, ISectionGroupService sectionGroupService)
         {
             _context = context;
             _answerGroupService = answerGroupService;
+            _sectionGroupService = sectionGroupService;
         }
 
         // GET: AnswerGroups
@@ -31,6 +33,10 @@ namespace EasySurvey.Web.Controllers
             List<AnswerGroupViewModel> listModels = new List<AnswerGroupViewModel>();
             var answerGroups = _answerGroupService.GetBySurveyId(id.Value);
             answerGroups.ToList().ForEach(item => listModels.Add(new AnswerGroupViewModel(item)));
+
+
+            var sectionGroup =_sectionGroupService.GetById(50);
+            listModels.Add(new AnswerGroupViewModel() { Id = 50, SectionGroupTitle = @"Loesoere", SectionGroupId = 50, SectionGroup = sectionGroup });
             return View(listModels.ToList());
         }
 

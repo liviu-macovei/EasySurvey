@@ -7,22 +7,25 @@
     <div id="@titleCssId" class="title_bar_section panel-heading">
         <h4 class="panel-title">
             <a data-toggle="collapse" data-target="#@insideCssId">
-                @Html.LabelFor(model => model.Title, Model.Title, new {Class = "left"})
+                @Html.LabelFor(model => model.Title, Model.Title, new { Class = "left" })
             </a>
         </h4>
-    </div>
-    <div id="@insideCssId" class="inside_section panel-group  panel-collapse collapse in">
-        <div class="section_description">
-            <div class="label_description">@Html.LabelFor(model => model.Description) </div>
-            <div class="display_description">@Html.DisplayFor(model => model.Description) </div>
-        </div>
-        <div class="panel-group" id="accordion">
-            <div class="container">
-                @foreach (var question in Model.Question.OrderBy(item => item.SortOrder))
-            {
-                await Html.RenderPartialAsync("~/views/Question/_EditQuestion.cshtml", question, ViewData);
-            }
-            </div>
+    
+        <div id="@insideCssId" class="inside_section panel-group  panel-collapse collapse in">
+            <table class="table">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>@Html.LabelFor(model => model.Description)</th>
+                        <th colspan="2">@Html.DisplayFor(model => model.Description) </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var question in Model.Question.OrderBy(item => item.SortOrder))
+                    {
+                        await Html.RenderPartialAsync("~/views/Question/_EditQuestion.cshtml", question, ViewData);
+                    }
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
