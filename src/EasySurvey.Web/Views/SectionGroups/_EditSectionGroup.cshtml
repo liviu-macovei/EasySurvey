@@ -6,9 +6,13 @@
         var titleCssId = "title_bar_section_group" + Model.Id;
         var insideCssId = "inside_section_group" + Model.Id;
     }
+    <table class="table">
+        @foreach (var section in Model.Section.OrderBy(item => item.SortOrder))
+        {
+            await Html.RenderPartialAsync("~/views/Sections/_EditSection.cshtml", section, ViewData);
+        }
+    </table>
 
-    @foreach (var section in Model.Section.OrderBy(item => item.SortOrder))
-    {
-        await Html.RenderPartialAsync("~/views/Sections/_EditSection.cshtml", section, ViewData);
-    }
+
+    
 </div>

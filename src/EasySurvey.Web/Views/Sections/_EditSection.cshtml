@@ -1,5 +1,5 @@
 @model EasySurvey.Common.Models.Section
-<div class="section row panel panel-default">
+@*<div class="section row panel panel-default">
     @{
         var titleCssId = "title_bar_section" + Model.Id;
         var insideCssId = "inside_section" + Model.Id;
@@ -12,20 +12,21 @@
         </h4>
     
         <div id="@insideCssId" class="inside_section panel-group  panel-collapse collapse in">
-            <table class="table">
-                <thead class="thead-inverse">
-                    <tr>
-                        <th>@Html.LabelFor(model => model.Description)</th>
-                        <th colspan="2">@Html.DisplayFor(model => model.Description) </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var question in Model.Question.OrderBy(item => item.SortOrder))
-                    {
-                        await Html.RenderPartialAsync("~/views/Question/_EditQuestion.cshtml", question, ViewData);
-                    }
-                </tbody>
-            </table>
+            
         </div>
     </div>
-</div>
+</div>*@
+
+
+    <thead class="thead-inverse" style="background-color:silver">
+        <tr>
+            <th>@Html.DisplayFor(model => model.Title)</th>
+            <th colspan="2">@Html.DisplayFor(model => model.Description) </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var question in Model.Question.OrderBy(item => item.SortOrder))
+        {
+            await Html.RenderPartialAsync("~/views/Question/_EditQuestion.cshtml", question, ViewData);
+        }
+    </tbody>
