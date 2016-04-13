@@ -16,13 +16,17 @@
             <span asp-validation-for="OptionGroupId" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <a asp-action="Create" asp-controller="OptionGroups" target="_blank" class="btn btn-primary">Create new OptionGroup</a>
+            <a class="btn btn-primary" data-toggle="modal" data-target="#myModal">Create new OptionGroup</a>
         </div>
-        <br />
-        <br />
+        <br /><br />
+        <h3>Options</h3>
+        <div class="form-group">
+            <a class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add New Option</a>
+        </div>
+        <br /><br />
         <div class="col-md-4  left" id="partialViewDiv"></div>
     </div>
-    <div class="col-md-4  left">
+    @*<div class="col-md-4  left">
         <h4> Add Option</h4>
         <div class="form-inline">
             <div class="form-group">
@@ -35,28 +39,52 @@
             </div>
             <a id="submit1" name="submit1" href="#" class="btn btn-primary">Add Option</a>
         </div>
+    </div>*@
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Add Option</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label id="optionName" class="control-label">Name*</label>
+                        <input type="text" id="optionNameText" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" id="optionDesciption">Description</label>
+                        <input class="form-control" type="text" id="optionDescriptionText">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <a id="submit1" name="submit1" href="#" class="btn btn-primary">Add Option</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-    <script src="~/js/OptionGroups/dropdownUpdateAjax.js" asp-append-version="true"></script>
-    <script src="~/js/OptionGroups/deleteOptionAjax.js" asp-append-version="true"></script>
-    <script src="~/js/OptionGroups/addOptionAjax.js" asp-append-version="true"></script>
-    <script type="text/javascript">
-        // put the script section somewhere appropriate in the page
-        $(document)
-            .ready(function () {
-                //update options based on dropdown selection
-                var dropDown = $('#OptionGroupId'); // assuming the ID of this element is 'TypeId'
-                dropDown.change(function () {
-                    window.dropdownUpdate().populateView(dropDown);
-                });
+<script src="~/js/OptionGroups/dropdownUpdateAjax.js" asp-append-version="true"></script>
+<script src="~/js/OptionGroups/deleteOptionAjax.js" asp-append-version="true"></script>
+<script src="~/js/OptionGroups/addOptionAjax.js" asp-append-version="true"></script>
+<script type="text/javascript">
+    // put the script section somewhere appropriate in the page
+    $(document)
+        .ready(function () {
+            //update options based on dropdown selection
+            var dropDown = $('#OptionGroupId'); // assuming the ID of this element is 'TypeId'
+            dropDown.change(function () {
                 window.dropdownUpdate().populateView(dropDown);
-                //add
-                $('a[name="submit1"]')
-                    .click(function (event) {
-                        var name = $('#optionNameText');
-                        var description = $('#optionDescriptionText');
-                        window.addOption().save(name, description, dropDown);
-                    });
-                //delete
             });
-    </script>
+            window.dropdownUpdate().populateView(dropDown);
+            //add
+            $('a[name="submit1"]')
+                .click(function (event) {
+                    var name = $('#optionNameText');
+                    var description = $('#optionDescriptionText');
+                    window.addOption().save(name, description, dropDown);
+                });
+            //delete
+        });
+</script>
