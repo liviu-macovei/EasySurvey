@@ -1,18 +1,16 @@
 @model List<EasySurvey.Common.Models.Option>
 
- 
 <table class="table">
     <tr>
-        <th>Name</th>
-        <th>Description</th>
+        <th style="width: 40%;">Name</th>
+        <th style="width: 40%;">Description</th>
         <th>Delete</th>
     </tr>
     @foreach (var m in Model)
     {
-        var titleCssId = "option" + m.Id;        
-    
+        var titleCssId = "option" + m.Id;            
         <tr>
-            <td>
+            <td >
                 @m.Name
             </td>
             <td>

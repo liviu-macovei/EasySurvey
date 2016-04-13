@@ -1,60 +1,62 @@
 @model EasySurvey.Web.ViewModels.OptionGroups.ListOptionGroupsViewModel
-
-<h2>Option Groups</h2>
-<br/>
 @{
-    var optionGroups = Model.OptionGroups;
+    ViewData["Title"] = "Option Groups";
 }
-<div class="form-group">
-    <div class="col-md-4">
-        <select asp-for="OptionGroupId" asp-items="optionGroups" class="form-control" id="OptionGroupId"></select>
-        <span asp-validation-for="OptionGroupId" class="text-danger"></span>
+
+<div class="row">
+    <h2>Option Groups</h2>
+    <hr />
+    <div class="form-inline">
+        @{
+            var optionGroups = Model.OptionGroups;
+        }
+        <div class="form-group">
+            <label id="optionGroupName" class="control-label">Option Group</label>
+            <select asp-for="OptionGroupId" asp-items="optionGroups" class="form-control" id="OptionGroupId"></select>
+            <span asp-validation-for="OptionGroupId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <a asp-action="Create" asp-controller="OptionGroups" target="_blank" class="btn btn-primary">Create new OptionGroup</a>
+        </div>
+        <br />
+        <br />
+        <div class="col-md-4  left" id="partialViewDiv"></div>
     </div>
-
-    <div class="col-md-4">
-        @*TODO add ajax support*@
-        <a asp-action="Create" asp-controller="OptionGroups" target="_blank">Create new OptionGroup</a>
+    <div class="col-md-4  left">
+        <h4> Add Option</h4>
+        <div class="form-inline">
+            <div class="form-group">
+                <label id="optionName" class="control-label">Name*</label>
+                <input type="text" id="optionNameText" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label" id="optionDesciption">Description</label>
+                <input class="form-control" type="text" id="optionDescriptionText">
+            </div>
+            <a id="submit1" name="submit1" href="#" class="btn btn-primary">Add Option</a>
+        </div>
     </div>
-    <br/><br/>
-
 </div>
-
-
-<div class="col-md-4  left" id="partialViewDiv"></div>
-
-<div class="col-md-4  left">
-    <h4> Add Option</h4>
-    <br/>
-    <label id="optionName">Name*</label>
-     <input type="text" id="optionNameText">
-    <label id="optionDesciption">Description</label>
-    <input type="text" id="optionDescriptionText">
-    <br/>
-    <a id="submit1" name="submit1" href="#">Add Option</a>
-</div>
-
-
-<script src="~/js/OptionGroups/dropdownUpdateAjax.js" asp-append-version="true"></script>
-<script src="~/js/OptionGroups/deleteOptionAjax.js" asp-append-version="true"></script>
-<script src="~/js/OptionGroups/addOptionAjax.js" asp-append-version="true"></script>
-
-<script type="text/javascript">
-    // put the script section somewhere appropriate in the page
-    $(document)
-        .ready(function () {
-            //update options based on dropdown selection
-            var dropDown = $('#OptionGroupId'); // assuming the ID of this element is 'TypeId'
-            dropDown.change(function() {
-                window.dropdownUpdate().populateView(dropDown);
-            });
-           window.dropdownUpdate().populateView(dropDown);
-            //add
-            $('a[name="submit1"]')
-                .click(function(event) {
-                    var name = $('#optionNameText');
-                    var description = $('#optionDescriptionText');                  
-                    window.addOption().save(name, description, dropDown);                     
+    <script src="~/js/OptionGroups/dropdownUpdateAjax.js" asp-append-version="true"></script>
+    <script src="~/js/OptionGroups/deleteOptionAjax.js" asp-append-version="true"></script>
+    <script src="~/js/OptionGroups/addOptionAjax.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        // put the script section somewhere appropriate in the page
+        $(document)
+            .ready(function () {
+                //update options based on dropdown selection
+                var dropDown = $('#OptionGroupId'); // assuming the ID of this element is 'TypeId'
+                dropDown.change(function () {
+                    window.dropdownUpdate().populateView(dropDown);
                 });
-            //delete          
-        });
-</script>
+                window.dropdownUpdate().populateView(dropDown);
+                //add
+                $('a[name="submit1"]')
+                    .click(function (event) {
+                        var name = $('#optionNameText');
+                        var description = $('#optionDescriptionText');
+                        window.addOption().save(name, description, dropDown);
+                    });
+                //delete
+            });
+    </script>
