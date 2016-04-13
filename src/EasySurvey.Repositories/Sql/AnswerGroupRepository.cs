@@ -64,8 +64,7 @@ namespace EasySurvey.Repositories.Sql
                 {
                     _context.AnswerGroup.Add(answerGroup);
                     _context.SaveChanges();
-                    dbContextTransaction.Commit();
-                    //todo get the id
+                    dbContextTransaction.Commit();                 
                 }
                 catch (Exception ex)
                 {
@@ -79,8 +78,7 @@ namespace EasySurvey.Repositories.Sql
         public AnswerGroup AddFromSurvey(AnswerGroup answerGroup)
         {            
           _context.AnswerGroup.Add(answerGroup);
-            _context.SaveChanges();
-            //todo get the id
+            _context.SaveChanges();            
             return answerGroup;
         }
 

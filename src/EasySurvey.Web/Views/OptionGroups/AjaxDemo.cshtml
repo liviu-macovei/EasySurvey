@@ -1,0 +1,60 @@
+@model EasySurvey.Web.ViewModels.OptionGroups.ListOptionGroupsViewModel
+
+<h2>Option Groups</h2>
+<br/>
+@{
+    var optionGroups = Model.OptionGroups;
+}
+<div class="form-group">
+    <div class="col-md-4">
+        <select asp-for="OptionGroupId" asp-items="optionGroups" class="form-control" id="OptionGroupId"></select>
+        <span asp-validation-for="OptionGroupId" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-4">
+        @*TODO add ajax support*@
+        <a asp-action="Create" asp-controller="OptionGroups" target="_blank">Create new OptionGroup</a>
+    </div>
+    <br/><br/>
+
+</div>
+
+
+<div class="col-md-4  left" id="partialViewDiv"></div>
+
+<div class="col-md-4  left">
+    <h4> Add Option</h4>
+    <br/>
+    <label id="optionName">Name*</label>
+     <input type="text" id="optionNameText">
+    <label id="optionDesciption">Description</label>
+    <input type="text" id="optionDescriptionText">
+    <br/>
+    <a id="submit1" name="submit1" href="#">Add Option</a>
+</div>
+
+
+<script src="~/js/OptionGroups/dropdownUpdateAjax.js" asp-append-version="true"></script>
+<script src="~/js/OptionGroups/deleteOptionAjax.js" asp-append-version="true"></script>
+<script src="~/js/OptionGroups/addOptionAjax.js" asp-append-version="true"></script>
+
+<script type="text/javascript">
+    // put the script section somewhere appropriate in the page
+    $(document)
+        .ready(function () {
+            //update options based on dropdown selection
+            var dropDown = $('#OptionGroupId'); // assuming the ID of this element is 'TypeId'
+            dropDown.change(function() {
+                window.dropdownUpdate().populateView(dropDown);
+            });
+           window.dropdownUpdate().populateView(dropDown);
+            //add
+            $('a[name="submit1"]')
+                .click(function(event) {
+                    var name = $('#optionNameText');
+                    var description = $('#optionDescriptionText');                  
+                    window.addOption().save(name, description, dropDown);                     
+                });
+            //delete          
+        });
+</script>

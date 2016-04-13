@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace EasySurvey.Web.ViewModels.Customer
+namespace EasySurvey.Web.ViewModels.Customers
 {
     public class ListCustomerViewModel
     {

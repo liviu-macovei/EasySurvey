@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
 using EasySurvey.Common.Models;
-using EasySurvey.Web.ViewModels.Customer;
+using EasySurvey.Web.ViewModels.Customers;
 using EasySurvey.Web.ViewModels.Survey;
 
 namespace EasySurvey.Web.Models
@@ -25,5 +25,7 @@ namespace EasySurvey.Web.Models
         public DbSet<CreateSurveyViewModel> CreateSurveyViewModel { get; set; }
         public DbSet<ListCustomerViewModel> ListCustomerViewModel { get; set; }
         public DbSet<AnswerGroup> AnswerGroup { get; set; }
+        public DbSet<OptionGroup> OptionGroup { get; set; }
+        public DbSet<Option> Option { get; set; }
     }
 }

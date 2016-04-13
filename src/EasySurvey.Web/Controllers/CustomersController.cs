@@ -2,8 +2,8 @@ using System.Linq;
 using EasySurvey.Common.Models;
 using EasySurvey.Services.ServiceDefinitions;
 using Microsoft.AspNet.Mvc;
-using EasySurvey.Web.ViewModels.Customer;
 using System.Collections.Generic;
+using EasySurvey.Web.ViewModels.Customers;
 
 namespace EasySurvey.Web.Controllers
 {

@@ -7,7 +7,7 @@ namespace EasySurvey.Common.Interfaces.Repositories
     {
         ICollection<Models.Survey> GetAll();
         Models.Survey Find(int surveyId);
-        Common.Models.Survey Add(Common.Models.Survey survey);
+        Models.Survey Add(Models.Survey survey);
         Common.Models.Survey Update(Common.Models.Survey survey);
         bool Delete(Common.Models.Survey survey);
         bool DeleteById(int surveyId);

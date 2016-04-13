@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace EasySurvey.Web.ViewModels.Customer
+namespace EasySurvey.Web.ViewModels.Customers
 {
     public class CreateCustomerViewModel : IValidatableObject
     {

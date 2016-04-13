@@ -7,7 +7,7 @@ namespace EasySurvey.Services.Mock
 {
     public class OptionServiceMock : IOptionService
     {
-        public List<Option> GetOptionsByOptionGroupId(int id)
+        public ICollection<Option> GetOptionsByOptionGroupId(int id)
         {
             // synchronize
             return new List<Option>

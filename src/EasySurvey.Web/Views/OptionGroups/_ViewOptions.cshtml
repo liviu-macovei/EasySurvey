@@ -1,0 +1,26 @@
+@model List<EasySurvey.Common.Models.Option>
+
+ 
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Delete</th>
+    </tr>
+    @foreach (var m in Model)
+    {
+        var titleCssId = "option" + m.Id;        
+    
+        <tr>
+            <td>
+                @m.Name
+            </td>
+            <td>
+                @m.Description
+            </td>
+            <td>
+                <a id=@titleCssId name="submit1" class="delete glyphicon glyphicon-remove" value=@m.Id href="#"></a>
+            </td>
+        </tr>
+    }
+</table>

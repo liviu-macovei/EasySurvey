@@ -6,6 +6,6 @@ namespace EasySurvey.Services.ServiceDefinitions
 {
     public interface IOptionService:IProcessOperations<Option>
     {
-        List<Option> GetOptionsByOptionGroupId(int id);
+        ICollection<Option> GetOptionsByOptionGroupId(int id);
     }
 }
