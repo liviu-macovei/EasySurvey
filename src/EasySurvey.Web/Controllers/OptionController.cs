@@ -53,7 +53,7 @@ namespace EasySurvey.Web.Controllers
         // POST: Option/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Option option)
+        public IActionResult Create([FromBody]Option option)
         {
             if (ModelState.IsValid)
             {

@@ -91,7 +91,7 @@ namespace EasySurvey.Web.Controllers
             {
                 optionGroup.Id = new int();
                 optionGroupService.Save(optionGroup);
-                return RedirectToAction("Index");
+                return RedirectToAction("AjaxDemo");
             }
             return View(optionGroup);
         }

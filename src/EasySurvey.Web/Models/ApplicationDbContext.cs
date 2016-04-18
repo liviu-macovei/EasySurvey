@@ -27,5 +27,6 @@ namespace EasySurvey.Web.Models
         public DbSet<AnswerGroup> AnswerGroup { get; set; }
         public DbSet<OptionGroup> OptionGroup { get; set; }
         public DbSet<Option> Option { get; set; }
+        public DbSet<QuestionType> QuestionType { get; set; }
     }
 }

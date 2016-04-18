@@ -21,6 +21,7 @@ namespace EasySurvey.Repositories
             services.AddTransient<IAnswerGroupRepository, AnswerGroupRepository>();
             services.AddTransient<IOptionGroupRepository, OptionGroupRepository>();
             services.AddTransient<IOptionRepository, OptionRepository>();
+            services.AddTransient<IQuestionTypeRepository, QuestionTypeRepository>();
         }
     }
 }

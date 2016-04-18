@@ -51,10 +51,11 @@
                         <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                         <li><a asp-controller="Survey" asp-action="Index">Surveys</a></li>
                         <li><a asp-controller="OptionGroups" asp-action="AjaxDemo">AjaxDemo</a></li>
+                        <li><a asp-controller="QuestionTypes" asp-action="Index">QuestionTypes</a></li>
                         <li><a asp-controller="SurveyTemplates" asp-action="Index">Survey Templates</a></li>
                         <li><a asp-controller="Customers" asp-action="Index">Customers</a></li>
-                        <li><a asp-controller="Home" asp-action="About">About</a></li>
-                        <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
+                        @*<li><a asp-controller="Home" asp-action="About">About</a></li>
+                        <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>*@
                     </ul>
                     @await Html.PartialAsync("_LoginPartial")
                 </div>
