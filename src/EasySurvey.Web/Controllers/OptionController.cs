@@ -64,16 +64,16 @@ namespace EasySurvey.Web.Controllers
             return View(option);
         }
 
-        public IActionResult AddAjax(string name, string description, int id)
+        public IActionResult AddAjax([FromBody]Option option)
         {
           /*  int oGroupId = 0;
             Int32.TryParse(optionGroupId, out oGroupId);*/
-            if (ModelState.IsValid && (name != null && id > 0))
+            if (ModelState.IsValid && (option.Name != null && option.OptionGroupId > 0))
             {
-                var option = new Option { Name = name, Description = description, OptionGroupId = id };
+               /* var option = new Option { Name = name, Description = description, OptionGroupId = id };*/
                 optionService.Save(option);
             }            
-            var model = optionService.GetOptionsByOptionGroupId(id);
+            var model = optionService.GetOptionsByOptionGroupId(option.OptionGroupId);
             return PartialView(@"../OptionGroups/_ViewOptions", (List<Option>)model);
         }
         // POST: Option/DeleteAjax/5                

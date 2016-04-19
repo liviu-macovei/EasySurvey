@@ -11,21 +11,27 @@
                         if (nameValue != null && description && description.length) {
                             descValue = description.val();
                         }
+                        var data = {
+                            Name: nameValue,
+                            Description: descValue,
+                            OptionGroupId: idValue
+                        };
                         $.ajax({
-                                method: "GET",
-                                cache: false,
+                                method: "POST",                              
                                 url: "/Option/AddAjax",
-                                dataType: "HTML",
-                                data: { name: nameValue, description: descValue, id: idValue }
+                                dataType: "html",
+                                contentType: "application/json; charset=utf-8",
+                                data: JSON.stringify(data)
                             })
-                            .done(function(response) {
+                            .success(function(response) {
                                 var div = $("#partialViewDiv");
                                 div.html("");
                                 div.html(response);
-                                $(".delete").unbind()
-                                .click(function() {
-                                    window.deleteOption().delete($(this), id);
-                                });
+                                $(".delete")
+                                    .unbind()
+                                    .click(function() {
+                                        window.deleteOption().delete($(this), id);
+                                    });
                             });
                     }
                 }
