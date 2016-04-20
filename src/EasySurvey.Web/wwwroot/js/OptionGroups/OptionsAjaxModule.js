@@ -84,20 +84,8 @@
     };
 
     return {
-        //Revealing module pattern
         addOption: addOptionAjax,
         deleteOption: deleteOptionById,
         populateView: populatePartial
-
-        //This could also be done like this:
-        /*addOption: function(name, description, id) {
-            addOptionAjax(name, description, id);
-        },
-        deleteOption: function(id, optionGroupId) {
-            deleteOptionById(id, optionGroupId);
-        },
-        populateView: function(dropdown) {
-            populatePartial(dropdown);
-        }*/
     };
 })();

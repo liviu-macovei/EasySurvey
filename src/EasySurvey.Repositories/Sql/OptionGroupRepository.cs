@@ -10,7 +10,6 @@ namespace EasySurvey.Repositories.Sql
 {
     public class OptionGroupRepository : IOptionGroupRepository
     {
-
         private readonly EasySurveyStore_DevContext _context;
 
         public OptionGroupRepository(EasySurveyStore_DevContext context)
@@ -44,6 +43,7 @@ namespace EasySurvey.Repositories.Sql
                 {
                     _context.OptionGroup.Remove(optionGroup);
                     _context.SaveChanges();
+                    dbContextTransaction.Commit();
                 }
                 catch
                     (Exception)
@@ -69,6 +69,7 @@ namespace EasySurvey.Repositories.Sql
                     {
                         _context.OptionGroup.Remove(query.First());
                         _context.SaveChanges();
+                        dbContextTransaction.Commit();
                     }
                     catch
                         (Exception)
@@ -107,6 +108,7 @@ namespace EasySurvey.Repositories.Sql
                 {
                     _context.OptionGroup.Update(optionGroup);
                     _context.SaveChanges();
+                    dbContextTransaction.Commit();
                 }
                 catch (Exception)
                 {

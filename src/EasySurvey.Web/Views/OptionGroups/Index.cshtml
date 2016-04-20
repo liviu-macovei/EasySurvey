@@ -5,54 +5,55 @@
 
 <div class="row">
     <h2>Option Groups</h2>
-    <hr/>
-    <div class="form-inline">
-        @{
-            var optionGroups = Model.OptionGroups;
-        }
-        <div class="form-group">
-            <label id="optionGroupName" class="control-label">Option Group</label>
-            <select asp-for="OptionGroupId" asp-items="optionGroups" class="form-control" id="OptionGroupId"></select>
-            <span asp-validation-for="OptionGroupId" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            @*<a class="btn btn-primary" data-toggle="modal" data-target="#optionGroupModal">Create new OptionGroup</a>*@
-            <a class="btn btn-primary" asp-action="Create">Create New</a>
-        </div>
-        <br/><br/>
-        <h3>Options</h3>
-        <div class="form-group">
-            <a class="btn btn-primary" data-toggle="modal" data-target="#optionModal">Add New Option</a>
-        </div>
-        <br/><br/>
-        <div class="col-md-4  left" id="partialViewDiv"></div>
+    <hr />
+    <div class="form-group">
+        <a class="btn btn-primary" asp-action="Create">Create New Option Group</a>
     </div>
-    @*<div class="col-md-4  left">
-        <h4> Add Option</h4>
-        <div class="form-inline">
-            <div class="form-group">
-                <label id="optionName" class="control-label">Name*</label>
-                <input type="text" id="optionNameText" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label class="control-label" id="optionDesciption">Description</label>
-                <input class="form-control" type="text" id="optionDescriptionText">
-            </div>
-            <a id="submit1" name="submit1" href="#" class="btn btn-primary">Add Option</a>
-        </div>
-    </div>*@
+    <table class="table" id="tblOptionGroups">
+        <tr>
+            <th style="width: 80%;">
+                @Html.DisplayNameFor(model => model.OptionGroups)
+            </th>
+            <th style="width: 10%;">Edit</th>
+            <th style="width: 10%;">Delete</th>
+        </tr>
+        @foreach (var item in Model.OptionGroups)
+        {
+            <tr class="clickable-row" id="@item.Value">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Value" class="glyphicon glyphicon-pencil"></a>
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.Value" class="delete glyphicon glyphicon-remove"></a>
+                </td>
+            </tr>
+        }
+    </table>
+
+    <h2>Options</h2>
+    <hr />
+    <div class="form-group">
+        <a class="btn btn-primary" data-toggle="modal" data-target="#optionModal">Add New Option</a>
+    </div>
+    <br /><br />
+    <div id="partialViewDiv"></div>
+
     <div class="modal fade" id="optionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span></button>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                     <h4 class="modal-title" id="myModalLabel">Add Option</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
                         <label id="optionName" class="control-label">Name*</label>
-                        <input type="text" id="optionNameText" class="form-control"/>
+                        <input type="text" id="optionNameText" class="form-control" />
                     </div>
                     <div class="form-group">
                         <label class="control-label" id="optionDesciption">Description</label>
@@ -69,26 +70,26 @@
 </div>
 <script src="~/js/OptionGroups/optionsAjaxModule.js" asp-append-version="true"></script>
 <script type="text/javascript">
-    // put the script section somewhere appropriate in the page
     $(document)
-        .ready(function() {
-            //update options based on dropdown selection
-            var dropDown = $('#OptionGroupId'); // assuming the ID of this element is 'TypeId'
-            var optionGroupId = dropDown.val();
-            dropDown.change(function() {
+        .ready(function () {
+            $('#tblOptionGroups').on('click', '.clickable-row', function (event) {
+                if ($(this).hasClass('active')) {
+                    $(this).removeClass('active');
+                } else {
+                    $(this).addClass('active').siblings().removeClass('active');
+                }
+                var optionGroupId = $(this).attr('id');
                 OptionsAjax.populateView(optionGroupId);
             });
-
+            
+            var optionGroupId = $(".clickable-row").first().attr('id');
             OptionsAjax.populateView(optionGroupId);
-            //add
             $('a[name="submit1"]')
-                .click(function(event) {
+                .click(function (event) {
                     var name = $('#optionNameText');
                     var description = $('#optionDescriptionText');
-
                     OptionsAjax.addOption(name, description, optionGroupId);
                     $('#optionModal').modal('toggle');
                 });
-            //delete
         });
 </script>

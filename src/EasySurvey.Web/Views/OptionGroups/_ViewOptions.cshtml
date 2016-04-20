@@ -1,9 +1,9 @@
 @model List<EasySurvey.Common.Models.Option>
 <table class="table">
     <tr>
-        <th style="width: 40%;">Name</th>
-        <th style="width: 40%;">Description</th>
-        <th>Delete</th>
+        <th style="width: 90%;">Options</th>
+        @*<th style="width: 40%;">Description</th>*@
+        <th style="width: 10%;">Delete</th>
     </tr>
     @foreach (var m in Model)
     {
@@ -12,9 +12,9 @@
             <td >
                 @m.Name
             </td>
-            <td>
+            @*<td>
                 @m.Description
-            </td>
+            </td>*@
             <td>
                 <a id=@titleCssId name="submit1" class="delete glyphicon glyphicon-remove" value=@m.Id href="#"></a>
             </td>
