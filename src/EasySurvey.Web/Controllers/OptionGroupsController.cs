@@ -17,16 +17,10 @@ namespace EasySurvey.Web.Controllers
             this.optionGroupService = optionGroupService;
             this.optionService = optionService;
         }
+      
 
         // GET: OptionGroups
         public IActionResult Index()
-        {
-            var optionGroups = optionGroupService.GetAll();
-            return View(optionGroups);
-        }
-
-        // GET: OptionGroups
-        public IActionResult AjaxDemo()
         {
             var optionGroups = optionGroupService.GetAll();
             var model = new ListOptionGroupsViewModel {OptionGroups = new SelectList(optionGroups, "Id", "Name")};
@@ -36,25 +30,7 @@ namespace EasySurvey.Web.Controllers
         [HttpGet]
         public ActionResult Options(int selectedValue) // could use an enum for the selectable values
         {
-            var model = optionService.GetOptionsByOptionGroupId(selectedValue);
-
-            //string partialViewName = null;
-            // populate with data appropriate to the partial views
-            //switch (selectedValue)
-            //{
-            //    case 0:
-            //        partialViewName = "partial view name for item 0";
-            //        // populate "model" with the appropriate data
-            //        break;
-            //    case 1:
-            //        partialViewName = "partial view name for item 1";
-            //        // populate "model" with the appropriate data
-            //        break;
-            //    // and so on...
-            //    default:
-            //        throw new ArgumentException("unknown selected value", "selectedValue");
-            //        break;
-            //}
+            var model = optionService.GetOptionsByOptionGroupId(selectedValue);          
 
             return PartialView(@"_ViewOptions", (List<Option>) model);
         }
@@ -91,7 +67,7 @@ namespace EasySurvey.Web.Controllers
             {
                 optionGroup.Id = new int();
                 optionGroupService.Save(optionGroup);
-                return RedirectToAction("AjaxDemo");
+                return RedirectToAction("Index");
             }
             return View(optionGroup);
         }

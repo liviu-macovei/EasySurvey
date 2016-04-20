@@ -76,7 +76,8 @@ namespace EasySurvey.Web.Controllers
             var model = optionService.GetOptionsByOptionGroupId(option.OptionGroupId);
             return PartialView(@"../OptionGroups/_ViewOptions", (List<Option>)model);
         }
-        // POST: Option/DeleteAjax/5                
+        // POST: Option/DeleteAjax/5       
+         [HttpDelete]        
         public IActionResult DeleteAjax(int id,int optionGroupId)
         {
             var deleted = optionService.DeleteById(id);
@@ -84,6 +85,7 @@ namespace EasySurvey.Web.Controllers
             var model = optionService.GetOptionsByOptionGroupId(optionGroupId);
             return PartialView(@"../OptionGroups/_ViewOptions", (List<Option>)model);
         }
+      
         /*  // GET: Option/Edit/5
           public IActionResult Edit(int? id)
           {
