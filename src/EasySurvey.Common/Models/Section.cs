@@ -19,6 +19,7 @@ namespace EasySurvey.Common.Models
         public int SectionGroupId { get; set; }
         public int SortOrder { get; set; }
         public string Title { get; set; }
+        public bool IsRepeatable { get; set; }
 
         public virtual ICollection<Question> Question { get; set; }
         public virtual SectionGroup SectionGroup { get; set; }

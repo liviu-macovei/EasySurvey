@@ -9,7 +9,10 @@
     <table class="table">
         @foreach (var section in Model.Section.OrderBy(item => item.SortOrder))
         {
+            //if (!section.IsRepeatable)
+            //{
             await Html.RenderPartialAsync("~/views/Sections/_EditSection.cshtml", section, ViewData);
+            //}
         }
     </table>
 

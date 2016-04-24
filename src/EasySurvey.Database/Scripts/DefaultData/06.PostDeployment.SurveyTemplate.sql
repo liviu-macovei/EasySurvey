@@ -148,3 +148,31 @@ INSERT [dbo].[Question] ([Id],[SectionId], [QuestionTypeId], [OptionGroupId], [Q
 				 VALUES (39, 2, 2, 2, N'Er der flere bygninger der skal forsikres', N'Hvis Ja, skal tilsvarende dokument fremkomme og gerne med kopi af de udfyldte dækninger.', N'Help text...', null, null, 0, 390, CAST(0x0000A36C009DF4CA AS DateTime), N'bah', CAST(0x0000A36C009DF4CA AS DateTime), N'bah')
 
 SET IDENTITY_INSERT [dbo].[Question] OFF
+
+
+SET IDENTITY_INSERT [dbo].[Section] ON
+
+INSERT [dbo].[Section] ([Id], [SectionGroupId], [Title], [Description], [SortOrder], [CreatedOn], [CreatedBy], [ModifiedOn], [ModifiedBy]) 
+				VALUES (3, 1, N'Generelle spørgsmål', N'This section contains the general question mandatory to the group.', 5, CAST(0x0000A36C009DF4CA AS DateTime), N'bah', CAST(0x0000A36C009DF4CA AS DateTime), N'bah')
+
+SET IDENTITY_INSERT [dbo].[Section] OFF
+
+
+SET IDENTITY_INSERT [dbo].[Question] ON
+
+INSERT [dbo].[Question] ([Id],[SectionId], [QuestionTypeId], [OptionGroupId], [QuestionText], [DefaultComments], [HelpText], [AnswerLabel], [AnswerValidationExpression], [IsMandatory], [SortOrder],[CreatedOn], [CreatedBy], [ModifiedOn], [ModifiedBy] ) 
+				 VALUES (40, 3, 1, null, N'Forsikringstager/Ejer ( skal udfyldes) ', N'Blot X', N'Help text...', null, null, 0, 10, CAST(0x0000A36C009DF4CA AS DateTime), N'bah', CAST(0x0000A36C009DF4CA AS DateTime), N'bah')
+INSERT [dbo].[Question] ([Id],[SectionId], [QuestionTypeId], [OptionGroupId], [QuestionText], [DefaultComments], [HelpText], [AnswerLabel], [AnswerValidationExpression], [IsMandatory], [SortOrder],[CreatedOn], [CreatedBy], [ModifiedOn], [ModifiedBy] ) 
+				 VALUES (41, 3, 1, null, N'Forsikringssted: ( skal udfyldes)', N'Hvis Ja' + CHAR(13) + N'Sum:', N'Help text...', null, null, 0, 20, CAST(0x0000A36C009DF4CA AS DateTime), N'bah', CAST(0x0000A36C009DF4CA AS DateTime), N'bah')
+INSERT [dbo].[Question] ([Id],[SectionId], [QuestionTypeId], [OptionGroupId], [QuestionText], [DefaultComments], [HelpText], [AnswerLabel], [AnswerValidationExpression], [IsMandatory], [SortOrder],[CreatedOn], [CreatedBy], [ModifiedOn], [ModifiedBy] ) 
+				 VALUES (42, 3, 1, null, N'Anvendelse: ( skal udfyldes)', N'Blot X', N'Help text...', null, null, 0, 30, CAST(0x0000A36C009DF4CA AS DateTime), N'bah', CAST(0x0000A36C009DF4CA AS DateTime), N'bah')
+INSERT [dbo].[Question] ([Id],[SectionId], [QuestionTypeId], [OptionGroupId], [QuestionText], [DefaultComments], [HelpText], [AnswerLabel], [AnswerValidationExpression], [IsMandatory], [SortOrder],[CreatedOn], [CreatedBy], [ModifiedOn], [ModifiedBy] ) 
+				 VALUES (43, 3, 1, null, N'Kvm: ( skal udfyldes)', N'Blot X', N'Help text...', null, null, 0, 40, CAST(0x0000A36C009DF4CA AS DateTime), N'bah', CAST(0x0000A36C009DF4CA AS DateTime), N'bah')
+
+SET IDENTITY_INSERT [dbo].[Question] OFF
+
+
+
+
+
+

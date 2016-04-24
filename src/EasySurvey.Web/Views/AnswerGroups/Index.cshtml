@@ -16,11 +16,11 @@
                 var answerGroup = Model.ElementAt(i);
                 if (i == 0)
                 {
-                    <li class="active"><a data-toggle="tab" href="#@(answerGroup.Id)_AnswerGroup">@answerGroup.SectionGroupTitle</a></li>
+                    <li class="active"><a data-toggle="tab" href="#@(answerGroup.Id)" name="@(answerGroup.Id)">@answerGroup.SectionGroupTitle</a></li>
                 }
                 else
                 {
-                    <li><a data-toggle="tab" href="#@(answerGroup.Id)_AnswerGroup">@answerGroup.SectionGroupTitle</a></li>
+                    <li><a data-toggle="tab" href="#@(answerGroup.Id)" name="@(answerGroup.Id)" >@answerGroup.SectionGroupTitle</a></li>
                 }
             }
         }
@@ -33,61 +33,107 @@
                 var answerGroup = Model.ElementAt(i);
                 if (i == 0)
                 {
-                    <div id="@(answerGroup.Id)_AnswerGroup" class="tab-pane fade in active">
-                        <div class="row">
+                    <div id="@(answerGroup.Id)" class="tab-pane fade in active">
+                        <div id="partialViewAnswerGroup_@(answerGroup.Id)" class="partial"></div>
+                    </div>
+                }
+                else
+                {
+                    <div id="@(answerGroup.Id)" class="tab-pane fade">
+                        <div id="partialViewAnswerGroup_@(answerGroup.Id)" class="partial"></div>
+                    </div>
+                }
+
+                @*if (i == 0)
+                    {
+                        <div id="@(answerGroup.Id)_AnswerGroup" class="tab-pane fade in active">
+                            <div class="row">
+                                <br />
+                                <div class="form-group">
+                                    @{
+                                        if (!answerGroup.IsMandatory)
+                                        {
+                                            <label asp-for="@answerGroup.IsUsed" class="control-label col-sm-2">Wish to fill this area:</label>
+                                            <input type="checkbox" id="chkIsUsed" name="IsUsed" value="@answerGroup.IsUsed" />
+                                        }
+                                    }
+                                </div>
+                                <br />
+                            </div>
                             <div class="form-group">
                                 @{
-                                    if (!answerGroup.IsMandatory)
-                                    {
-                                        <label asp-for="@answerGroup.IsUsed" class="control-label col-sm-2">Wish to fill this area:</label>
-                                        <div class="col-md-4">
-                                            @Html.CheckBoxFor(s => s.ElementAt(i).IsUsed)
-                                        </div>
-                                    }
+                                    await Html.RenderPartialAsync("~/views/SectionGroups/_EditSectionGroup.cshtml", answerGroup.SectionGroup, ViewData);
                                 }
                             </div>
                         </div>
-                        <div class="form-group">
-                            @{
-                                await Html.RenderPartialAsync("~/views/SectionGroups/_EditSectionGroup.cshtml", answerGroup.SectionGroup, ViewData);
-                            }
-
-                        </div>
-                    </div>
-                                }
-                                else
-                                {
-                    <div id="@(answerGroup.Id)_AnswerGroup" class="tab-pane fade">
-                        <table class="table">
-                            <thead class="thead-inverse">
-                                <tr>
-                                    <th>
-                                        @{
-                                            if (!answerGroup.IsMandatory)
-                                            {
-                                                <label asp-for="@answerGroup.IsUsed" class="control-label col-sm-2">Wish to fill this area:</label>
-                                                <div class="col-md-4">
-                                                    @Html.CheckBoxFor(s => s.ElementAt(i).IsUsed)
-                                                </div>
+                    }
+                    else
+                    {
+                        <div id="@(answerGroup.Id)_AnswerGroup" class="tab-pane fade">
+                            <table class="table">
+                                <thead class="thead-inverse">
+                                    <tr>
+                                        <th>
+                                            @{
+                                                if (!answerGroup.IsMandatory)
+                                                {
+                                                    <label asp-for="@answerGroup.IsUsed" class="control-label col-sm-2">Wish to fill this area:</label>
+                                                    <div class="col-md-4">
+                                                        @Html.CheckBoxFor(s => s.ElementAt(i).IsUsed)
+                                                    </div>
+                                                }
                                             }
-                                        }
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        @{
-                                            await Html.RenderPartialAsync("~/views/SectionGroups/_EditSectionGroup.cshtml", answerGroup.SectionGroup, ViewData);
-                                        }
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                }
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            @{
+                                                await Html.RenderPartialAsync("~/views/SectionGroups/_EditSectionGroup.cshtml", answerGroup.SectionGroup, ViewData);
+                                            }
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    }*@
             }
         }
     </div>
 </body>
 </html>
+
+<script src="~/js/AnswerGroups/AnswerGroupsAjaxModule.js" asp-append-version="true"></script>
+<script type="text/javascript">
+    $(document)
+        .ready(function () {
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                var target = $(e.target).attr("href");
+                var id = $(e.target).attr("name");
+                AnswerGroupAjax.populateView(id);
+            });
+
+            
+
+            //$('#chkIsUsed').on('click', '.clickable-row', function (event) {
+            //    if ($(this).hasClass('active')) {
+            //        $(this).removeClass('active');
+            //    } else {
+            //        $(this).addClass('active').siblings().removeClass('active');
+            //    }
+            //    var optionGroupId = $(this).attr('id');
+            //    OptionsAjax.populateView(optionGroupId);
+            //});
+
+            //var optionGroupId = $(".clickable-row").first().attr('id');
+            //OptionsAjax.populateView(optionGroupId);
+            //$('a[name="submit1"]')
+            //    .click(function (event) {
+            //        var name = $('#optionNameText');
+            //        var description = $('#optionDescriptionText');
+            //        OptionsAjax.addOption(name, description, optionGroupId);
+            //        $('#optionModal').modal('toggle');
+            //    });
+        });
+</script>

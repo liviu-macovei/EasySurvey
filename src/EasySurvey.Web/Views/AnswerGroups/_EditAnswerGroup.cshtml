@@ -1,0 +1,60 @@
+@model EasySurvey.Web.ViewModels.AnswerGroups.EditAnswerGroupViewModel
+
+<form asp-action="_EditAnswerGroup">
+    @*<label>@Html.LabelFor(model => model.SectionGroup.Title, Model.SectionGroup.Title)</label>*@
+    <table class="table">
+        <thead class="thead-inverse">
+            <tr>
+                <th>
+                    <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="SectionGroupId" />
+                    <input type="hidden" asp-for="SurveyId" />
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @{
+                        if (!Model.IsMandatory)
+                        {
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <div class="checkbox">
+                                        <input asp-for="IsUsed" />
+                                        <label asp-for="IsUsed"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="form-group">
+                        @{
+                            await Html.RenderPartialAsync("~/views/SectionGroups/_EditSectionGroup.cshtml", Model.SectionGroup, ViewData);
+                        }
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-default" />
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</form>
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

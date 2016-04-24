@@ -98,10 +98,45 @@ namespace EasySurvey.Web.Controllers
             return View(editAnswerGroupViewModel);
         }
 
+        [HttpGet]
+        public IActionResult EditAjax(int id)
+        {
+            var answerGroup = _answerGroupService.GetById(id);
+            if (answerGroup == null)
+            {
+                EditAnswerGroupViewModel error = new EditAnswerGroupViewModel();
+                error.Id = id;
+                error.IsMandatory = false;
+                error.IsUsed = true;
+                return PartialView(@"_EditAnswerGroup", error);
+                //return HttpNotFound();
+            }
+            EditAnswerGroupViewModel editAnswerGroupViewModel = new EditAnswerGroupViewModel(answerGroup);
+            editAnswerGroupViewModel.IsMandatory = false;
+            editAnswerGroupViewModel.IsUsed = true;
+            return PartialView(@"_EditAnswerGroup", editAnswerGroupViewModel);
+        }
+
         // POST: AnswerGroups/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(AnswerGroup answerGroup)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Update(answerGroup);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewData["SectionGroupId"] = new SelectList(_context.SectionGroup, "Id", "SectionGroup", answerGroup.SectionGroupId);
+            ViewData["SurveyId"] = new SelectList(_context.Survey, "Id", "Survey", answerGroup.SurveyId);
+            return View(answerGroup);
+        }
+
+        // POST: AnswerGroups/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditAjax(AnswerGroup answerGroup)
         {
             if (ModelState.IsValid)
             {

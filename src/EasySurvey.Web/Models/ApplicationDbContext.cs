@@ -3,6 +3,7 @@ using Microsoft.Data.Entity;
 using EasySurvey.Common.Models;
 using EasySurvey.Web.ViewModels.Customers;
 using EasySurvey.Web.ViewModels.Survey;
+using EasySurvey.Web.ViewModels.AnswerGroups;
 
 namespace EasySurvey.Web.Models
 {
@@ -28,5 +29,6 @@ namespace EasySurvey.Web.Models
         public DbSet<OptionGroup> OptionGroup { get; set; }
         public DbSet<Option> Option { get; set; }
         public DbSet<QuestionType> QuestionType { get; set; }
+        public DbSet<AnswerGroupViewModel> AnswerGroupViewModel { get; set; }
     }
 }

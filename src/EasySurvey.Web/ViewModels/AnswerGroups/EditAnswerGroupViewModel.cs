@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EasySurvey.Common.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace EasySurvey.Web.ViewModels.AnswerGroups
 {
     public class EditAnswerGroupViewModel 
     {
+        public EditAnswerGroupViewModel()
+        {
+        }
+
         public EditAnswerGroupViewModel(Common.Models.AnswerGroup answerGroup)
         {
             Id = answerGroup.Id;
@@ -21,6 +26,9 @@ namespace EasySurvey.Web.ViewModels.AnswerGroups
 
         public int Id { get; set; }
         public string Title { get; set; }
+
+        
+        [Display(Name = "Wish to fill this area")]
         public bool IsUsed { get; set; }
         public bool IsMandatory { get; set; }
         public int SectionGroupId { get; set; }
