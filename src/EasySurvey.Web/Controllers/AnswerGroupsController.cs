@@ -33,10 +33,6 @@ namespace EasySurvey.Web.Controllers
             List<AnswerGroupViewModel> listModels = new List<AnswerGroupViewModel>();
             var answerGroups = _answerGroupService.GetBySurveyId(id.Value);
             answerGroups.ToList().ForEach(item => listModels.Add(new AnswerGroupViewModel(item)));
-
-
-            var sectionGroup =_sectionGroupService.GetById(50);
-            listModels.Add(new AnswerGroupViewModel() { Id = 50, SectionGroupTitle = @"Loesoere", SectionGroupId = 50, SectionGroup = sectionGroup });
             return View(listModels.ToList());
         }
 
@@ -104,16 +100,14 @@ namespace EasySurvey.Web.Controllers
             var answerGroup = _answerGroupService.GetById(id);
             if (answerGroup == null)
             {
-                EditAnswerGroupViewModel error = new EditAnswerGroupViewModel();
-                error.Id = id;
-                error.IsMandatory = false;
-                error.IsUsed = true;
-                return PartialView(@"_EditAnswerGroup", error);
-                //return HttpNotFound();
+                //EditAnswerGroupViewModel error = new EditAnswerGroupViewModel();
+                //error.Id = id;
+                //error.IsMandatory = false;
+                //error.IsUsed = true;
+                //return PartialView(@"_EditAnswerGroup", error);
+                return HttpNotFound();
             }
             EditAnswerGroupViewModel editAnswerGroupViewModel = new EditAnswerGroupViewModel(answerGroup);
-            editAnswerGroupViewModel.IsMandatory = false;
-            editAnswerGroupViewModel.IsUsed = true;
             return PartialView(@"_EditAnswerGroup", editAnswerGroupViewModel);
         }
 

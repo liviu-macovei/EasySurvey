@@ -8,9 +8,11 @@ namespace EasySurvey.Common.Models
         public AnswerGroup()
         {
             Answer = new HashSet<Answer>();
+            AnswerSection = new HashSet<AnswerSection>();
         }
 
         public int Id { get; set; }
+        public int? AddressId { get; set; }
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }
         public bool IsUsed { get; set; }
@@ -20,6 +22,8 @@ namespace EasySurvey.Common.Models
         public int SurveyId { get; set; }
 
         public virtual ICollection<Answer> Answer { get; set; }
+        public virtual ICollection<AnswerSection> AnswerSection { get; set; }
+        public virtual Address Address { get; set; }
         public virtual SectionGroup SectionGroup { get; set; }
         public virtual Survey Survey { get; set; }
     }

@@ -7,7 +7,6 @@ namespace EasySurvey.Common.Models
     {
         public Survey()
         {
-            Answer = new HashSet<Answer>();
             AnswerGroup = new HashSet<AnswerGroup>();
             Comment = new HashSet<Comment>();
         }
@@ -22,7 +21,6 @@ namespace EasySurvey.Common.Models
         public int SurveyTemplateId { get; set; }
         public string UserId { get; set; }
 
-        public virtual ICollection<Answer> Answer { get; set; }
         public virtual ICollection<AnswerGroup> AnswerGroup { get; set; }
         public virtual ICollection<Comment> Comment { get; set; }
         public virtual Customer Customer { get; set; }

@@ -45,8 +45,6 @@
                 data: { id: answerGroupId }
             })
             .done(function (response) {
-                alert("done " + answerGroupId);
-                
                 $('.partial').each(function (i, obj) {
                     $(this).html("");
                 });

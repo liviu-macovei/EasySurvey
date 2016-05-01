@@ -68,6 +68,7 @@
     <Folder Include="Data" />
     <Folder Include="Scripts" />
     <Folder Include="Scripts\DefaultData" />
+    <Folder Include="Snapshots" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\QuestionType.sql" />
@@ -86,9 +87,12 @@
     <Build Include="dbo\Tables\Question.sql" />
     <Build Include="dbo\Tables\Answer.sql" />
     <Build Include="dbo\Tables\NextQuestion.sql" />
+    <Build Include="dbo\Tables\AnswerSection.sql" />
+    <Build Include="dbo\Tables\Address.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="EasySurvey.Database.publish.xml" />
+    <None Include="Snapshots\EasySurvey.Database_20160429_21-54-18.dacpac" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\DefaultData\00.PostDeployment.Main.sql" />

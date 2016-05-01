@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+
 namespace EasySurvey.Common.Models
 {
     public partial class Customer

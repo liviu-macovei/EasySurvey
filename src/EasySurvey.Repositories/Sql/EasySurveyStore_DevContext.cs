@@ -13,6 +13,33 @@ namespace EasySurvey.Repositories.Sql
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Address>(entity =>
+            {
+                entity.Property(e => e.AddressLine1).HasMaxLength(1024);
+
+                entity.Property(e => e.AddressLine2).HasMaxLength(1024);
+
+                entity.Property(e => e.AddressLine3).HasMaxLength(1024);
+
+                entity.Property(e => e.CareOf).HasMaxLength(1024);
+
+                entity.Property(e => e.City).HasMaxLength(1024);
+
+                entity.Property(e => e.Country).HasMaxLength(1024);
+
+                entity.Property(e => e.CreatedBy).HasMaxLength(1024);
+
+                entity.Property(e => e.CreatedOn).HasColumnType("datetime");
+
+                entity.Property(e => e.ModifiedBy).HasMaxLength(1024);
+
+                entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
+
+                entity.Property(e => e.PostalCode).HasMaxLength(1024);
+
+                entity.Property(e => e.Recipient).HasMaxLength(1024);
+            });
+
             modelBuilder.Entity<Answer>(entity =>
             {
                 entity.Property(e => e.CreatedBy).HasMaxLength(1024);
@@ -25,9 +52,9 @@ namespace EasySurvey.Repositories.Sql
 
                 entity.HasOne(d => d.AnswerGroup).WithMany(p => p.Answer).HasForeignKey(d => d.AnswerGroupId).OnDelete(DeleteBehavior.Restrict);
 
-                entity.HasOne(d => d.Question).WithMany(p => p.Answer).HasForeignKey(d => d.QuestionId).OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(d => d.AnswerSection).WithMany(p => p.Answer).HasForeignKey(d => d.AnswerSectionId).OnDelete(DeleteBehavior.Restrict);
 
-                entity.HasOne(d => d.Survey).WithMany(p => p.Answer).HasForeignKey(d => d.SurveyId).OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(d => d.Question).WithMany(p => p.Answer).HasForeignKey(d => d.QuestionId).OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.Option).WithMany(p => p.Answer).HasForeignKey(d => new { d.OptionId, d.OptionGroupId });
             });
@@ -42,9 +69,26 @@ namespace EasySurvey.Repositories.Sql
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
 
+                entity.HasOne(d => d.Address).WithMany(p => p.AnswerGroup).HasForeignKey(d => d.AddressId).OnDelete(DeleteBehavior.Restrict);
+
                 entity.HasOne(d => d.SectionGroup).WithMany(p => p.AnswerGroup).HasForeignKey(d => d.SectionGroupId).OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.Survey).WithMany(p => p.AnswerGroup).HasForeignKey(d => d.SurveyId).OnDelete(DeleteBehavior.Restrict);
+            });
+
+            modelBuilder.Entity<AnswerSection>(entity =>
+            {
+                entity.Property(e => e.CreatedBy).HasMaxLength(1024);
+
+                entity.Property(e => e.CreatedOn).HasColumnType("datetime");
+
+                entity.Property(e => e.ModifiedBy).HasMaxLength(1024);
+
+                entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
+
+                entity.HasOne(d => d.AnswerGroup).WithMany(p => p.AnswerSection).HasForeignKey(d => d.AnswerGroupId).OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(d => d.Section).WithMany(p => p.AnswerSection).HasForeignKey(d => d.SectionId).OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Comment>(entity =>
@@ -210,6 +254,8 @@ namespace EasySurvey.Repositories.Sql
 
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
+                entity.Property(e => e.IsRepeatable).HasDefaultValue(true);
+
                 entity.Property(e => e.ModifiedBy).HasMaxLength(1024);
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
@@ -309,8 +355,10 @@ namespace EasySurvey.Repositories.Sql
             });
         }
 
+        public virtual DbSet<Address> Address { get; set; }
         public virtual DbSet<Answer> Answer { get; set; }
         public virtual DbSet<AnswerGroup> AnswerGroup { get; set; }
+        public virtual DbSet<AnswerSection> AnswerSection { get; set; }
         public virtual DbSet<Comment> Comment { get; set; }
         public virtual DbSet<Customer> Customer { get; set; }
         public virtual DbSet<NextQuestion> NextQuestion { get; set; }

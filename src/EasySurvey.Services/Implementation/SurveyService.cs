@@ -49,7 +49,20 @@ namespace EasySurvey.Services.Implementation
         public bool Save(Survey element)
         {
             if (element.Id == 0)
+            {
+                var surveyTemplate = _surveyTemplateRepo.GetById(element.SurveyTemplateId);
+                foreach (var sectionGroup in surveyTemplate.SectionGroup)
+                {
+                    element.AnswerGroup.Add(new AnswerGroup
+                    {
+                        SectionGroupId = sectionGroup.Id,
+                        SurveyId = element.Id,
+                        IsUsed = false
+                    });
+                }
+
                 element = _surveyRepo.Add(element);
+            } 
             else
                 element = _surveyRepo.Update(element);
 

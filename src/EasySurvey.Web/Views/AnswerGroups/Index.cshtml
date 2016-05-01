@@ -114,7 +114,8 @@
                 AnswerGroupAjax.populateView(id);
             });
 
-            
+            var id = $('.nav-tabs .active').children().first().attr("name")
+            AnswerGroupAjax.populateView(id);
 
             //$('#chkIsUsed').on('click', '.clickable-row', function (event) {
             //    if ($(this).hasClass('active')) {

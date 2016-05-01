@@ -69,21 +69,6 @@ namespace EasySurvey.Web.Controllers
             var surveyViewModel = new CreateSurveyViewModel();
             var customers = customerService.GetAll();
             var surveyTemplates = surveyTemplateService.GetAll(1);
-
-            //if (surveyTemplates != null && surveyTemplates.Count > 0)
-            //{
-            //    var surveyTemplate = surveyTemplateService.GetById(surveyTemplates.First().Id);
-            //    if (surveyTemplate.SectionGroup != null)
-            //    {
-            //        var selectSectionList = new List<SectionGroupViewModel>();
-            //        foreach (var sectionGroup in surveyTemplate.SectionGroup)
-            //        {
-            //            selectSectionList.Add(new SectionGroupViewModel(sectionGroup));
-            //        }
-            //        surveyViewModel.SectionGroups = selectSectionList;
-            //    }
-            //}
-
             surveyViewModel.Customers = customers.ToList();
             surveyViewModel.SurveyTemplates = surveyTemplates.ToList();
             return View(surveyViewModel);
@@ -102,18 +87,7 @@ namespace EasySurvey.Web.Controllers
                 survey.SurveyStateId = 1;
                 survey.CustomerId = createSurveyViewModel.CustomerId;
                 survey.UserId = User.Identity.Name;
-
-                foreach (var sectionGroup in surveyTemplate.SectionGroup)
-                {
-                    survey.AnswerGroup.Add(new AnswerGroup
-                    {
-                        SectionGroupId = sectionGroup.Id,
-                        SurveyId = survey.Id,
-                        IsUsed = false
-                    });
-                }
                 surveyService.Save(survey);
-
                 return RedirectToAction("Index", "AnswerGroups", new { id = survey.Id });
             }
             return View(survey);
