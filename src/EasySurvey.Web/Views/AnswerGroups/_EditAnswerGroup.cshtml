@@ -2,10 +2,10 @@
 
 <form asp-action="_EditAnswerGroup">
     @*<label>@Html.LabelFor(model => model.SectionGroup.Title, Model.SectionGroup.Title)</label>*@
-    <table class="table">
-        <thead class="thead-inverse">
+    <table>
+        <thead>
             <tr>
-                <th>
+                <th colspan="2">
                     <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="Id" />
                     <input type="hidden" asp-for="SectionGroupId" />
@@ -20,7 +20,7 @@
                         if (!Model.IsMandatory)
                         {
                             <div class="form-group">
-                                <div class="col-md-offset-2 col-md-10">
+                                <div class="col-md-offset-1 col-md-12">
                                     <div class="checkbox">
                                         <input asp-for="IsUsed" />
                                         <label asp-for="IsUsed"></label>
@@ -30,17 +30,6 @@
                         }
                     }
                 </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="form-group">
-                        @{
-                            await Html.RenderPartialAsync("~/views/SectionGroups/_EditSectionGroup.cshtml", Model.SectionGroup, ViewData);
-                        }
-                    </div>
-                </td>
-            </tr>
-            <tr>
                 <td>
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
@@ -48,6 +37,23 @@
                         </div>
                     </div>
                 </td>
+            </tr>
+            <tr>
+                <td>
+                    @{
+                        if (Model.IsUsed)
+                        {
+                            <div class="form-group">
+                                @{
+                                    await Html.RenderPartialAsync("~/views/SectionGroups/_EditSectionGroup.cshtml", Model.SectionGroup, ViewData);
+                                }
+                            </div>
+                        }
+                    }
+                </td>
+            </tr>
+            <tr>
+               
             </tr>
         </tbody>
     </table>
@@ -58,3 +64,55 @@
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 }
+
+<script src="~/js/AnswerGroups/AnswerGroupsAjaxModule.js" asp-append-version="true"></script>
+<script type="text/javascript">
+    $(document)
+        .ready(function () {
+
+            $('input#IsUsed').change(function (e) {
+                //alert(e);
+                var answerGroupId = $('input#Id').val();
+                var sectionGroupId = $('input#SectionGroupId').val();
+                var surveyId = $('input#SurveyId').val();
+                var isUsed;
+                var id = $('.nav-tabs .active').children().first().attr("name")
+                if ($('input#IsUsed').is(':checked')) {
+                    $('input#IsUsed').addClass('checked');
+                    isUsed = true;
+                } else {
+                    if(confirm('Are you sure you want to resume use of this program?'))
+                    {
+                        $('input#IsUsed').removeClass('checked');
+                        isUsed = false;
+                    }
+                } 
+
+
+                    
+                }
+                AnswerGroupAjax.useAnswerGroup(isUsed, answerGroupId, sectionGroupId, surveyId);
+            });
+
+            //$('#chkIsUsed').on('click', '.clickable-row', function (event) {
+            //    if ($(this).hasClass('active')) {
+            //        $(this).removeClass('active');
+            //    } else {
+            //        $(this).addClass('active').siblings().removeClass('active');
+            //    }
+            //    var optionGroupId = $(this).attr('id');
+            //    OptionsAjax.populateView(optionGroupId);
+            //});
+
+            //var optionGroupId = $(".clickable-row").first().attr('id');
+            //OptionsAjax.populateView(optionGroupId);
+            //$('a[name="submit1"]')
+            //    .click(function (event) {
+            //        var name = $('#optionNameText');
+            //        var description = $('#optionDescriptionText');
+            //        OptionsAjax.addOption(name, description, optionGroupId);
+            //        $('#optionModal').modal('toggle');
+            //    });
+        });
+</script>
+

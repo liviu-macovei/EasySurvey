@@ -2,36 +2,38 @@
     // locally scoped Object
     var answerGroupAjax = {};
     // declared with `var`, must be "private"
-    var useAnswerGroup = function (name, description, optionGroupId) {
-        if (optionGroupId > 0 && name && name.length) {
-            //var nameValue = name.val();
-            //var descValue = null;
-            //if (nameValue != null && description && description.length) {
-            //    descValue = description.val();
-            //}
+    var useAnswerGroup = function (isUsed, answerGroupId, sectionGroupId, surveyId) {
+        
+        if (answerGroupId > 0 && sectionGroupId > 0 && surveyId > 0) {
             var data = {
                 Id: answerGroupId,
                 IsUsed: isUsed,
-                SectionGroupId: optionGroupId,
+                SectionGroupId: sectionGroupId,
                 SurveyId: surveyId
             };
-            $.ajax({
-                    method: "POST",
-                    url: "/AnswerGroups/EditAjax",
-                    dataType: "html",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify(data)
-                })
-                .success(function(response) {
-                    var div = $("#partialViewDiv");
-                    div.html("");
-                    div.html(response);
-                    $(".delete")
-                        .unbind()
-                        .click(function() {
-                            OptionsAjax.deleteOption($(this), optionGroupId);
-                        });
-                });
+
+            alert(isUsed);
+            alert(answerGroupId);
+            alert(sectionGroupId);
+            alert(surveyId);
+
+            //$.ajax({
+            //        method: "POST",
+            //        url: "/AnswerGroups/EditAjax",
+            //        dataType: "html",
+            //        contentType: "application/json; charset=utf-8",
+            //        data: JSON.stringify(data)
+            //    })
+            //    .success(function(response) {
+            //        var div = $("#partialViewDiv");
+            //        div.html("");
+            //        div.html(response);
+            //        $(".delete")
+            //            .unbind()
+            //            .click(function() {
+            //                OptionsAjax.deleteOption($(this), optionGroupId);
+            //            });
+            //    });
         }
 
     };
