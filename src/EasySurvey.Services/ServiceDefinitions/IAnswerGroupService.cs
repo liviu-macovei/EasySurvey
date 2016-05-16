@@ -9,5 +9,6 @@ namespace EasySurvey.Services.ServiceDefinitions
     {
         ICollection<AnswerGroup> GetBySurveyId(int id);
         AnswerGroup GetBySectionGroupId(int id);
+        bool Extend(AnswerGroup element);
     }
 }

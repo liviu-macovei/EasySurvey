@@ -1,0 +1,13 @@
+@model EasySurvey.Web.ViewModels.AnswerSections.AnswersViewModel
+@{
+    @for (int i = 0; i < Model.Count(); i++)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.EditorFor(ans => Model[i])
+                </div>
+            </div>
+        </div>
+    }
+}

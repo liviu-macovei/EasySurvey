@@ -11,31 +11,42 @@
                 SectionGroupId: sectionGroupId,
                 SurveyId: surveyId
             };
-
-            alert(isUsed);
-            alert(answerGroupId);
-            alert(sectionGroupId);
-            alert(surveyId);
-
-            //$.ajax({
-            //        method: "POST",
-            //        url: "/AnswerGroups/EditAjax",
-            //        dataType: "html",
-            //        contentType: "application/json; charset=utf-8",
-            //        data: JSON.stringify(data)
-            //    })
-            //    .success(function(response) {
-            //        var div = $("#partialViewDiv");
-            //        div.html("");
-            //        div.html(response);
-            //        $(".delete")
-            //            .unbind()
-            //            .click(function() {
-            //                OptionsAjax.deleteOption($(this), optionGroupId);
-            //            });
-            //    });
+            $.ajax({
+                method: "POST",
+                url: "/AnswerGroups/EditAjax",
+                dataType: "html",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(data)
+            })
+            .success(function (response) {
+                var div = $("#partialViewAnswerGroup_" + answerGroupId);
+                div.html("");
+                div.html(response);
+            });
         }
+    };
 
+    var extendAnswerGroup = function (answerGroupId, sectionGroupId, surveyId) {
+        if (answerGroupId > 0 && sectionGroupId > 0 && surveyId > 0) {
+            var data = {
+                Id: answerGroupId,
+                SectionGroupId: sectionGroupId,
+                SurveyId: surveyId
+            };
+            $.ajax({
+                method: "POST",
+                url: "/AnswerGroups/ExtendAjax",
+                //dataType: "html",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(data)
+            })
+            //.success(function (response) {
+            //    alert("success!");
+            //    var div = $("#partialViewAnswerGroup_" + answerGroupId);
+            //    div.html("");
+            //    div.html(response);
+            //});
+        }
     };
 
     var populatePartial = function (answerGroupId) {
@@ -47,11 +58,10 @@
                 data: { id: answerGroupId }
             })
             .done(function (response) {
-                $('.partial').each(function (i, obj) {
+                $('.partialViewAnswerGroup_' + answerGroupId).each(function (i, obj) {
                     $(this).html("");
                 });
                 var div = $("#partialViewAnswerGroup_" + answerGroupId);
-                //div.html("");
                 div.html(response);
             })
             .error(function (response) {
@@ -64,6 +74,7 @@
 
     return {
         useAnswerGroup: useAnswerGroup,
-        populateView: populatePartial
+        populateView: populatePartial,
+        extendAnswerGroup: extendAnswerGroup
     };
 })();

@@ -11,6 +11,10 @@ namespace EasySurvey.Web.ViewModels.Survey
             this.SurveyTemplate = survey.SurveyTemplate;
             this.SurveyState = survey.SurveyState;
             this.AnswerGroups = new List<AnswerGroupViewModel>();
+            foreach (var answerGroup in survey.AnswerGroup)
+            {
+                this.AnswerGroups.Add(new AnswerGroupViewModel(answerGroup));
+            }
         }
 
         public int Id { get; set; }
@@ -21,6 +25,6 @@ namespace EasySurvey.Web.ViewModels.Survey
 
         public Common.Models.SurveyState SurveyState { get; set; }
 
-        public IEnumerable<AnswerGroupViewModel> AnswerGroups { get; set; }
+        public ICollection<AnswerGroupViewModel> AnswerGroups { get; set; }
     }
 }

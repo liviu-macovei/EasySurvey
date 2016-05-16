@@ -1,0 +1,15 @@
+@model EasySurvey.Web.ViewModels.AnswerSections.AnswerSectionViewModel
+
+<div class="panel panel-primary">
+    <div class="panel-heading">@Html.DisplayFor(model => model.Title) - @Html.DisplayFor(model => model.Description)</div>
+    <div class="panel-body">
+        <br />
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="AnswerGroupId" />
+        <input type="hidden" asp-for="SectionGroupId" />
+        <input type="hidden" asp-for="IsRepeatable" />
+        <input type="hidden" asp-for="SortOrder" />
+        <input type="hidden" asp-for="Title" />
+        @Html.EditorFor(model => model.Answer)
+    </div>
+</div>

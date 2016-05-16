@@ -1,6 +1,5 @@
-@model IEnumerable<EasySurvey.Web.ViewModels.AnswerGroups.AnswerGroupViewModel>
+@model EasySurvey.Web.ViewModels.AnswerGroups.AnswerGroupListViewModel
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -8,98 +7,54 @@
 </head>
 <body>
     <h3>Update Answer Groups</h3>
-
-    <ul class="nav nav-tabs">
-        @{
-            for (int i = 0; i < Model.Count(); i++)
-            {
-                var answerGroup = Model.ElementAt(i);
-                if (i == 0)
+    <div class="col-md-10 left">
+        <ul class="pager">
+            <li><a asp-action="Index" asp-controller="Survey" class="btn pull-left">Surveys</a></li>
+            <li><a asp-action="Edit" asp-controller="Survey"  asp-route-id="@Model.SurveyId" class="btn pull-left">Previous</a></li>
+        </ul>
+    </div>
+    <div class="col-md-10 left">
+        <ul class="nav nav-tabs">
+            @{
+                for (int i = 0; i < Model.AnswerGroupViewModel.Count(); i++)
                 {
-                    <li class="active"><a data-toggle="tab" href="#@(answerGroup.Id)" name="@(answerGroup.Id)">@answerGroup.SectionGroupTitle</a></li>
-                }
-                else
-                {
-                    <li><a data-toggle="tab" href="#@(answerGroup.Id)" name="@(answerGroup.Id)" >@answerGroup.SectionGroupTitle</a></li>
+                    var answerGroup = Model.AnswerGroupViewModel.ElementAt(i);
+                    if (answerGroup.Id == Model.SelectedId)
+                    {
+                        <li class="active"><a data-toggle="tab" href="#@(answerGroup.Id)" name="@(answerGroup.Id)">@answerGroup.Title</a></li>
+                    }
+                    else
+                    {
+                        <li><a data-toggle="tab" href="#@(answerGroup.Id)" name="@(answerGroup.Id)">@answerGroup.Title</a></li>
+                    }
                 }
             }
-        }
-    </ul>
+        </ul>
 
-    <div class="tab-content">
-        @{
-            for (int i = 0; i < Model.Count(); i++)
-            {
-                var answerGroup = Model.ElementAt(i);
-                if (i == 0)
+        <div class="tab-content">
+            @{
+                for (int i = 0; i < Model.AnswerGroupViewModel.Count(); i++)
                 {
-                    <div id="@(answerGroup.Id)" class="tab-pane fade in active">
-                        <div id="partialViewAnswerGroup_@(answerGroup.Id)" class="partial"></div>
-                    </div>
-                }
-                else
-                {
-                    <div id="@(answerGroup.Id)" class="tab-pane fade">
-                        <div id="partialViewAnswerGroup_@(answerGroup.Id)" class="partial"></div>
-                    </div>
-                }
-
-                @*if (i == 0)
+                    var answerGroup = Model.AnswerGroupViewModel.ElementAt(i);
+                    if (answerGroup.Id == Model.SelectedId)
                     {
-                        <div id="@(answerGroup.Id)_AnswerGroup" class="tab-pane fade in active">
-                            <div class="row">
-                                <br />
-                                <div class="form-group">
-                                    @{
-                                        if (!answerGroup.IsMandatory)
-                                        {
-                                            <label asp-for="@answerGroup.IsUsed" class="control-label col-sm-2">Wish to fill this area:</label>
-                                            <input type="checkbox" id="chkIsUsed" name="IsUsed" value="@answerGroup.IsUsed" />
-                                        }
-                                    }
-                                </div>
-                                <br />
-                            </div>
-                            <div class="form-group">
-                                @{
-                                    await Html.RenderPartialAsync("~/views/SectionGroups/_EditSectionGroup.cshtml", answerGroup.SectionGroup, ViewData);
-                                }
-                            </div>
+                        <div id="@(answerGroup.Id)" class="tab-pane fade in active">
+                            @{
+                                await Html.RenderPartialAsync("~/views/AnswerGroups/_EditAnswerGroups.cshtml", answerGroup, ViewData);
+                            }
                         </div>
                     }
                     else
                     {
-                        <div id="@(answerGroup.Id)_AnswerGroup" class="tab-pane fade">
-                            <table class="table">
-                                <thead class="thead-inverse">
-                                    <tr>
-                                        <th>
-                                            @{
-                                                if (!answerGroup.IsMandatory)
-                                                {
-                                                    <label asp-for="@answerGroup.IsUsed" class="control-label col-sm-2">Wish to fill this area:</label>
-                                                    <div class="col-md-4">
-                                                        @Html.CheckBoxFor(s => s.ElementAt(i).IsUsed)
-                                                    </div>
-                                                }
-                                            }
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            @{
-                                                await Html.RenderPartialAsync("~/views/SectionGroups/_EditSectionGroup.cshtml", answerGroup.SectionGroup, ViewData);
-                                            }
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div id="@(answerGroup.Id)" class="tab-pane fade">
+                            @{
+                                await Html.RenderPartialAsync("~/views/AnswerGroups/_EditAnswerGroups.cshtml", answerGroup, ViewData);
+                            }
                         </div>
-                    }*@
+                    }
+                }
             }
-        }
+        </div>
     </div>
 </body>
 </html>
@@ -113,28 +68,7 @@
                 var id = $(e.target).attr("name");
                 AnswerGroupAjax.populateView(id);
             });
-
             var id = $('.nav-tabs .active').children().first().attr("name")
             AnswerGroupAjax.populateView(id);
-
-            //$('#chkIsUsed').on('click', '.clickable-row', function (event) {
-            //    if ($(this).hasClass('active')) {
-            //        $(this).removeClass('active');
-            //    } else {
-            //        $(this).addClass('active').siblings().removeClass('active');
-            //    }
-            //    var optionGroupId = $(this).attr('id');
-            //    OptionsAjax.populateView(optionGroupId);
-            //});
-
-            //var optionGroupId = $(".clickable-row").first().attr('id');
-            //OptionsAjax.populateView(optionGroupId);
-            //$('a[name="submit1"]')
-            //    .click(function (event) {
-            //        var name = $('#optionNameText');
-            //        var description = $('#optionDescriptionText');
-            //        OptionsAjax.addOption(name, description, optionGroupId);
-            //        $('#optionModal').modal('toggle');
-            //    });
         });
 </script>

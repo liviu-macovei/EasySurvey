@@ -50,8 +50,6 @@ namespace EasySurvey.Repositories.Sql
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
 
-                entity.HasOne(d => d.AnswerGroup).WithMany(p => p.Answer).HasForeignKey(d => d.AnswerGroupId).OnDelete(DeleteBehavior.Restrict);
-
                 entity.HasOne(d => d.AnswerSection).WithMany(p => p.Answer).HasForeignKey(d => d.AnswerSectionId).OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.Question).WithMany(p => p.Answer).HasForeignKey(d => d.QuestionId).OnDelete(DeleteBehavior.Restrict);

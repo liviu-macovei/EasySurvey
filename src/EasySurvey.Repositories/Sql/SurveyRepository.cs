@@ -32,6 +32,8 @@ namespace EasySurvey.Repositories.Sql
                 .Include(x => x.Customer)
                 .Include(x => x.SurveyState)
                 .Include(x => x.SurveyTemplate)
+                //.Include(x => x.AnswerGroup).ThenInclude(x => x.Address)
+                //.Include(x => x.AnswerGroup).ThenInclude(x => x.AnswerSection).ThenInclude(x => x.Answer).ThenInclude(x => x.Question).ThenInclude(x => x.OptionGroup).ThenInclude(x => x.Option)
                 .Include(x => x.AnswerGroup).ThenInclude(x => x.SectionGroup)
                 where survey.Id == surveyId
                 select survey;
@@ -44,8 +46,13 @@ namespace EasySurvey.Repositories.Sql
             {
                 try
                 {
+                    foreach (var answerGroup in survey.AnswerGroup)
+                    {
+                        _context.Address.Add(answerGroup.Address);
+                        _context.SaveChanges();
+                        answerGroup.AddressId = answerGroup.Address.Id;
+                    }
                     _context.Survey.Add(survey);
-                    var answerGroupRepository = new AnswerGroupRepository(_context);
                     _context.SaveChanges();
 
                     dbContextTransaction.Commit();

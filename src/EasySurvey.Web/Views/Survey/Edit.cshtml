@@ -5,20 +5,17 @@
 @{
     ViewData["Title"] = "Edit";
 }
-
-<h2>Update Survey</h2>
-
+<h3>Update Survey</h3>
 <form asp-action="Edit">
     <div class="form-horizontal">
         @Html.HiddenFor(m => m.Id)
         <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
-
-        @*<div class="col-md-12 left">
-            <label asp-for="Customer" class="col-md-2 col-md-offset-0 control-label">Customer</label>
-        </div>*@
-
-        
-
+        <div class="col-md-10 left">
+            <ul class="pager">
+                <li><a asp-action="Index" class="btn pull-left">Surveys</a></li>
+                <li><a asp-action="Index" asp-controller="AnswerGroups" asp-route-id="@Model.Id" class="btn pull-right">Next</a></li>
+            </ul>
+        </div>
         <div class="col-md-10 left">
             <div class="panel panel-primary">
                 <div class="panel-heading">Survey General Info</div>
@@ -43,32 +40,8 @@
                 await Html.RenderPartialAsync("~/views/Customers/_ViewCustomer.cshtml", Model.Customer, ViewData);
             }
         </div>
-       
-
-        
-
-        @*<div class="col-md-12 left">
-            <label class="col-md-2 col-md-offset-0 control-label">AnswerGroups</label>
-        </div>
-        @{
-            @Html.EditorFor(m => Model.AnswerGroups)
-        }*@
-
-        <br />
-        <div class="form-group">
-            <div class="col-md-offset-1 col-md-10">
-                <br />
-                <a asp-action="Index" asp-controller="AnswerGroups" asp-route-id="@Model.Id">Next</a>
-            </div>
-        </div>
     </div>
 </form>
-
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>

@@ -6,8 +6,7 @@ namespace EasySurvey.Common.Models
     public partial class Answer
     {
         public int Id { get; set; }
-        public int AnswerGroupId { get; set; }
-        public int AnswerSectionId { get; set; }
+        public int? AnswerSectionId { get; set; }
         public string AnswerText { get; set; }
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }
@@ -20,8 +19,6 @@ namespace EasySurvey.Common.Models
         public int? OptionGroupId { get; set; }
         public int? OptionId { get; set; }
         public int QuestionId { get; set; }
-
-        public virtual AnswerGroup AnswerGroup { get; set; }
         public virtual AnswerSection AnswerSection { get; set; }
         public virtual Question Question { get; set; }
         public virtual Option Option { get; set; }

@@ -1,0 +1,134 @@
+@model IEnumerable<EasySurvey.Web.ViewModels.Answers.AnswerViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AnswerLabel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AnswerSectionId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AnswerText)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AnswerValidationExpression)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comments)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DefaultComments)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HelpText)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InHighlighted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsFinal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsMandatory)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsValid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OptionGroupId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OptionId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuestionId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuestionText)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuestionTypeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SectionId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SortOrder)
+        </th>
+        <th></th>
+    </tr>
+    
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AnswerLabel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AnswerSectionId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AnswerText)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AnswerValidationExpression)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comments)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DefaultComments)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HelpText)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InHighlighted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsFinal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsMandatory)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsValid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OptionGroupId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OptionId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuestionId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuestionText)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuestionTypeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SectionId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SortOrder)
+        </td>
+        <td>
+            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+        </td>
+    </tr>
+}
+</table>

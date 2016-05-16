@@ -1,6 +1,6 @@
 ﻿/// <autosync enabled="true" />
 /// <reference path="../gulpfile.js" />
-/// <reference path="js/answergroups/optionsajaxmodule.js" />
+/// <reference path="js/answergroups/answergroupsajaxmodule.js" />
 /// <reference path="js/optiongroups/optionsajaxmodule.js" />
 /// <reference path="js/site.js" />
 /// <reference path="lib/bootstrap/dist/js/bootstrap.js" />

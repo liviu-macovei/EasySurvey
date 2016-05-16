@@ -16,7 +16,11 @@ namespace EasySurvey.Services.Mock
         {
             throw new NotImplementedException();
         }
-      
+
+        public bool Extend(AnswerGroup element)
+        {
+            throw new NotImplementedException();
+        }
 
         public AnswerGroup GetById(int id)
         {

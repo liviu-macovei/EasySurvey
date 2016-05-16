@@ -1,0 +1,77 @@
+@model EasySurvey.Common.Models.AnswerSection
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <h4>AnswerSection</h4>
+        <hr />
+        <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="AnswerGroupId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="AnswerGroupId" class ="form-control"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="CreatedBy" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="CreatedBy" class="form-control" />
+                <span asp-validation-for="CreatedBy" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="CreatedOn" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="CreatedOn" class="form-control" />
+                <span asp-validation-for="CreatedOn" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ModifiedBy" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ModifiedBy" class="form-control" />
+                <span asp-validation-for="ModifiedBy" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ModifiedOn" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ModifiedOn" class="form-control" />
+                <span asp-validation-for="ModifiedOn" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Order" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Order" class="form-control" />
+                <span asp-validation-for="Order" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="SectionId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="SectionId" class ="form-control"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

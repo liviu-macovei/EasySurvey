@@ -1,0 +1,51 @@
+@model EasySurvey.Web.ViewModels.AnswerSections.AnswerSectionViewModel
+@*<div class="section row panel panel-default">
+        @{
+            var titleCssId = "title_bar_section" + Model.Id;
+            var insideCssId = "inside_section" + Model.Id;
+        }
+        <div id="@titleCssId" class="title_bar_section panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-target="#@insideCssId">
+                    @Html.LabelFor(model => model.Title, Model.Title, new { Class = "left" })
+                </a>
+            </h4>
+
+            <div id="@insideCssId" class="inside_section panel-group  panel-collapse collapse in">
+
+            </div>
+        </div>
+    </div>*@
+
+<div class="panel panel-primary">
+    <div class="panel-heading">@Html.DisplayFor(model => model.Title) - @Html.DisplayFor(model => model.Description)</div>
+    <div class="panel-body">
+        <br />
+        @foreach (var answer in Model.Answer.OrderBy(item => item.SortOrder))
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @{
+                            await Html.RenderPartialAsync("~/views/Answers/_EditAnswer.cshtml", answer, ViewData);
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+@*<thead class="thead-inverse" style="background-color:silver">
+    <tr>
+        <th>@Html.DisplayFor(model => model.Title)</th>
+        <th colspan="2">@Html.DisplayFor(model => model.Description) </th>
+    </tr>
+</thead>
+<tbody>
+    @foreach (var question in Model.Question.OrderBy(item => item.SortOrder))
+    {
+        await Html.RenderPartialAsync("~/views/Question/_EditQuestion.cshtml", question, ViewData);
+    }
+</tbody>*@

@@ -1,118 +1,98 @@
-@model EasySurvey.Web.ViewModels.AnswerGroups.EditAnswerGroupViewModel
+@model EasySurvey.Web.ViewModels.AnswerGroups.AnswerGroupViewModel
 
-<form asp-action="_EditAnswerGroup">
-    @*<label>@Html.LabelFor(model => model.SectionGroup.Title, Model.SectionGroup.Title)</label>*@
-    <table>
-        <thead>
-            <tr>
-                <th colspan="2">
-                    <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="Id" />
-                    <input type="hidden" asp-for="SectionGroupId" />
-                    <input type="hidden" asp-for="SurveyId" />
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    @{
-                        if (!Model.IsMandatory)
-                        {
-                            <div class="form-group">
-                                <div class="col-md-offset-1 col-md-12">
-                                    <div class="checkbox">
-                                        <input asp-for="IsUsed" />
-                                        <label asp-for="IsUsed"></label>
+<form id="answergroup-form" asp-controller="AnswerGroups" asp-action="Edit" method="post" asp-anti-forgery="true">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="SectionGroupId" />
+    <input type="hidden" asp-for="SurveyId" />
+    <input type="hidden" asp-for="AddressId" />
+    <input type="hidden" asp-for="IsMandatory" />
+    <input type="hidden" asp-for="IsUsed" />
+    @{
+        if (Model.IsUsed)
+        {
+            <div class="btn-group">
+                <input id="btnValidate" name="command" value="Validate" type="submit" class="btn btn-primary" />
+                <input id="btnSave" name="command" value="Save" type="submit" class="btn btn-primary" />
+                <input id="btnExtend" name="command" value="Extend" type="submit" class="btn btn-primary" />
+                <input id="btnComment" type="submit" value="Comment" class="btn btn-primary" />
+            </div>
+            <table style="width:100%">
+                <thead>
+                    <tr>
+                        <th colspan="2">
+                            <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Address Info</div>
+                                <div class="panel-body">
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="Recipient"></label>
+                                                <input asp-for="Recipient" class="form-control" />
+                                                <span asp-validation-for="Recipient" class="text-danger" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="AddressLine1"></label>
+                                                <input asp-for="AddressLine1" class="form-control" />
+                                                <span asp-validation-for="AddressLine1" class="text-danger" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="PostalCode"></label>
+                                                <input asp-for="PostalCode" class="form-control" />
+                                                <span asp-validation-for="PostalCode" class="text-danger" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="City"></label>
+                                                <input asp-for="City" class="form-control" />
+                                                <span asp-validation-for="City" class="text-danger" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="Country"></label>
+                                                <input asp-for="Country" class="form-control" />
+                                                <span asp-validation-for="Country" class="text-danger" />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        }
-                    }
-                </td>
-                <td>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Save" class="btn btn-default" />
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    @{
-                        if (Model.IsUsed)
-                        {
-                            <div class="form-group">
-                                @{
-                                    await Html.RenderPartialAsync("~/views/SectionGroups/_EditSectionGroup.cshtml", Model.SectionGroup, ViewData);
-                                }
-                            </div>
-                        }
-                    }
-                </td>
-            </tr>
-            <tr>
-               
-            </tr>
-        </tbody>
-    </table>
-
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label asp-for="AnswerSection">Answer Section Count: </label> @Model.AnswerSection.Count
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.EditorFor(model => model.AnswerSection)
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        }
+    }
 </form>
 @section Scripts {
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 }
-
-<script src="~/js/AnswerGroups/AnswerGroupsAjaxModule.js" asp-append-version="true"></script>
-<script type="text/javascript">
-    $(document)
-        .ready(function () {
-
-            $('input#IsUsed').change(function (e) {
-                //alert(e);
-                var answerGroupId = $('input#Id').val();
-                var sectionGroupId = $('input#SectionGroupId').val();
-                var surveyId = $('input#SurveyId').val();
-                var isUsed;
-                var id = $('.nav-tabs .active').children().first().attr("name")
-                if ($('input#IsUsed').is(':checked')) {
-                    $('input#IsUsed').addClass('checked');
-                    isUsed = true;
-                } else {
-                    if(confirm('Are you sure you want to resume use of this program?'))
-                    {
-                        $('input#IsUsed').removeClass('checked');
-                        isUsed = false;
-                    }
-                } 
-
-
-                    
-                }
-                AnswerGroupAjax.useAnswerGroup(isUsed, answerGroupId, sectionGroupId, surveyId);
-            });
-
-            //$('#chkIsUsed').on('click', '.clickable-row', function (event) {
-            //    if ($(this).hasClass('active')) {
-            //        $(this).removeClass('active');
-            //    } else {
-            //        $(this).addClass('active').siblings().removeClass('active');
-            //    }
-            //    var optionGroupId = $(this).attr('id');
-            //    OptionsAjax.populateView(optionGroupId);
-            //});
-
-            //var optionGroupId = $(".clickable-row").first().attr('id');
-            //OptionsAjax.populateView(optionGroupId);
-            //$('a[name="submit1"]')
-            //    .click(function (event) {
-            //        var name = $('#optionNameText');
-            //        var description = $('#optionDescriptionText');
-            //        OptionsAjax.addOption(name, description, optionGroupId);
-            //        $('#optionModal').modal('toggle');
-            //    });
-        });
-</script>
-

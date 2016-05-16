@@ -4,6 +4,7 @@ using EasySurvey.Common.Models;
 using EasySurvey.Web.ViewModels.Customers;
 using EasySurvey.Web.ViewModels.Survey;
 using EasySurvey.Web.ViewModels.AnswerGroups;
+using EasySurvey.Web.ViewModels.Answers;
 
 namespace EasySurvey.Web.Models
 {
@@ -30,5 +31,7 @@ namespace EasySurvey.Web.Models
         public DbSet<Option> Option { get; set; }
         public DbSet<QuestionType> QuestionType { get; set; }
         public DbSet<AnswerGroupViewModel> AnswerGroupViewModel { get; set; }
+        public DbSet<AnswerSection> AnswerSection { get; set; }
+        public DbSet<AnswerViewModel> AnswerViewModel { get; set; }
     }
 }

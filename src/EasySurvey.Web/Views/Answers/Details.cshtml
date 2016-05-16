@@ -1,0 +1,126 @@
+@model EasySurvey.Web.ViewModels.Answers.AnswerViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AnswerViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AnswerLabel)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AnswerLabel)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AnswerSectionId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AnswerSectionId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AnswerText)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AnswerText)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AnswerValidationExpression)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AnswerValidationExpression)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Comments)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DefaultComments)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DefaultComments)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HelpText)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HelpText)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.InHighlighted)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.InHighlighted)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsFinal)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsFinal)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsMandatory)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsMandatory)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsValid)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsValid)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OptionGroupId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OptionGroupId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OptionId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OptionId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.QuestionId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.QuestionId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.QuestionText)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.QuestionText)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.QuestionTypeId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.QuestionTypeId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SectionId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SectionId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SortOrder)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SortOrder)
+        </dd>
+    </dl>
+</div>
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</p>

@@ -40,7 +40,7 @@ namespace EasySurvey.Web.Controllers
                 {
                     Id = survey.Id,
                     SurveyTemplate = survey.SurveyTemplate.Title,
-                    SurveyState = survey.SurveyState.ToString(),
+                    SurveyState = survey.SurveyState.Name,
                     Customer = survey.Customer.Name,
                     UserId = survey.UserId
                 });
@@ -88,6 +88,8 @@ namespace EasySurvey.Web.Controllers
                 survey.CustomerId = createSurveyViewModel.CustomerId;
                 survey.UserId = User.Identity.Name;
                 surveyService.Save(survey);
+
+
                 return RedirectToAction("Index", "AnswerGroups", new { id = survey.Id });
             }
             return View(survey);
@@ -98,21 +100,21 @@ namespace EasySurvey.Web.Controllers
             var survey = surveyService.GetById(id.Value);           
             var surveyViewModel = new EditSurveyViewModel(survey);
             
-            var customer = customerService.GetById(survey.CustomerId);
-            var surveyTemplate = surveyTemplateService.GetById(1);
-            if (survey.SurveyTemplateId > 0)
-            {
-                if (surveyTemplate.SectionGroup != null)
-                {
-                    var answerGroupList = new List<AnswerGroupViewModel>();
-                    foreach (var answerGroup in survey.AnswerGroup)
-                    {
-                        answerGroupList.Add(new AnswerGroupViewModel(answerGroup));
-                    }
-                    surveyViewModel.AnswerGroups = answerGroupList.AsEnumerable();
-                }
-            }
-            surveyViewModel.Customer = customer;
+            //var customer = customerService.GetById(survey.CustomerId);
+            //var surveyTemplate = surveyTemplateService.GetById(1);
+            //if (survey.SurveyTemplateId > 0)
+            //{
+            //    if (surveyTemplate.SectionGroup != null)
+            //    {
+            //        var answerGroupList = new List<AnswerGroupViewModel>();
+            //        foreach (var answerGroup in survey.AnswerGroup)
+            //        {
+            //            answerGroupList.Add(new AnswerGroupViewModel(answerGroup));
+            //        }
+            //        surveyViewModel.AnswerGroups = answerGroupList;
+            //    }
+            //}
+            //surveyViewModel.Customer = customer;
             return View(surveyViewModel);
         }
     }

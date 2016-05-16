@@ -11,6 +11,7 @@ namespace EasySurvey.Common.Interfaces.Repositories
         AnswerGroup Add(AnswerGroup answerGroup);
         AnswerGroup AddFromSurvey(AnswerGroup answerGroup);
         AnswerGroup Update(AnswerGroup answerGroup);
+        AnswerGroup Use(AnswerGroup answerGroup);
         bool Delete(AnswerGroup answerGroup);
         bool DeleteById(int id);
         ICollection<AnswerGroup> FindAllBySurveyId(int surveyId);

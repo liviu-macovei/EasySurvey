@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using EasySurvey.Common.Interfaces.Repositories;
 using EasySurvey.Common.Models;
@@ -9,10 +10,13 @@ namespace EasySurvey.Services.Implementation
     public class AnswerGroupService : IAnswerGroupService
     {
         private IAnswerGroupRepository _answerGroupRepo;
+        private ICustomerRepository _customerRepo;
 
-        public AnswerGroupService(IAnswerGroupRepository answerGroupRepo)
+        public AnswerGroupService(IAnswerGroupRepository answerGroupRepo,
+            ICustomerRepository customerRepository)
         {
             _answerGroupRepo = answerGroupRepo;
+            _customerRepo = customerRepository;
         }
 
         public ICollection<AnswerGroup> GetAll()
@@ -20,13 +24,60 @@ namespace EasySurvey.Services.Implementation
             return _answerGroupRepo.GetAll();
         }
 
-        public bool Save(AnswerGroup element)
+        public bool Save(AnswerGroup answerGroup)
         {
-            if (element.Id == 0)
-                element = _answerGroupRepo.Add(element);
+            if (answerGroup.Id == 0)
+                answerGroup = _answerGroupRepo.Add(answerGroup);
             else
-                element = _answerGroupRepo.Update(element);
+            {
+                if (answerGroup.IsUsed)
+                {
+                    if (!answerGroup.AddressId.HasValue)
+                    {
+                        if (answerGroup.Survey != null)
+                        {
+                            var customer = _customerRepo.Find(answerGroup.Survey.CustomerId);
+                            answerGroup.Address = new Address() { Recipient = customer.Name, AddressLine1 = customer.Address };
+                        }
+                        else
+                        {
+                            answerGroup.Address = new Address();
+                        }
+                    }
 
+                    if (answerGroup.AnswerSection.Count() == 0)
+                    {
+                        foreach (var section in answerGroup.SectionGroup.Section.OrderBy(item => item.SortOrder))
+                        {
+                            var answerSection = new AnswerSection()
+                            {
+                                SectionId = section.Id,
+                                Order = answerGroup.AnswerSection.Count + 1
+                            };
+
+                            foreach (var question in section.Question.OrderBy(item => item.SortOrder))
+                            {
+                                var answer = new Answer()
+                                {
+                                    OptionId = null,
+                                    InHighlighted = false,
+                                    IsFinal = false,
+                                    IsValid = false,
+                                    QuestionId = question.Id,
+                                    OptionGroupId = question.OptionGroupId
+                                };
+                                answerSection.Answer.Add(answer);
+                            }
+                            answerGroup.AnswerSection.Add(answerSection);
+                        }
+                    }
+                    answerGroup = _answerGroupRepo.Update(answerGroup);
+                }
+                else
+                {
+                    answerGroup = _answerGroupRepo.Use(answerGroup);
+                }
+            }
             return true;
         }
 
@@ -54,5 +105,41 @@ namespace EasySurvey.Services.Implementation
         {
             return _answerGroupRepo.FindBySectionGroupId(id);
         }
+
+        public bool Extend(AnswerGroup element)
+        {
+            int nextSortIndex = element.AnswerSection.Max(item => item.Order) + 1;
+            foreach (var section in element.SectionGroup.Section.OrderBy(item => item.SortOrder))
+            {
+                if (section.IsRepeatable)
+                {
+                    var answerSection = new AnswerSection()
+                    {
+                        SectionId = section.Id,
+                        Order = nextSortIndex++
+                    };
+
+                    foreach (var question in section.Question.OrderBy(item => item.SortOrder))
+                    {
+                        var answer = new Answer()
+                        {
+                            OptionId = null,
+                            InHighlighted = false,
+                            IsFinal = false,
+                            IsValid = false,
+                            QuestionId = question.Id,
+                            OptionGroupId = question.OptionGroupId
+                        };
+                        answerSection.Answer.Add(answer);
+                    }
+                    element.AnswerSection.Add(answerSection);
+                }
+            }
+            element = _answerGroupRepo.Update(element);
+            return true;
+        }
     }
 }
+
+
+

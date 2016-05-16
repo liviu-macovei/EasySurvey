@@ -1,0 +1,160 @@
+@model EasySurvey.Web.ViewModels.Answers.AnswerViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <h4>AnswerViewModel</h4>
+        <hr />
+        <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="AnswerLabel" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="AnswerLabel" class="form-control" />
+                <span asp-validation-for="AnswerLabel" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="AnswerSectionId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="AnswerSectionId" class="form-control" />
+                <span asp-validation-for="AnswerSectionId" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="AnswerText" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="AnswerText" class="form-control" />
+                <span asp-validation-for="AnswerText" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="AnswerValidationExpression" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="AnswerValidationExpression" class="form-control" />
+                <span asp-validation-for="AnswerValidationExpression" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Comments" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Comments" class="form-control" />
+                <span asp-validation-for="Comments" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="DefaultComments" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="DefaultComments" class="form-control" />
+                <span asp-validation-for="DefaultComments" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="HelpText" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="HelpText" class="form-control" />
+                <span asp-validation-for="HelpText" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    <input asp-for="InHighlighted" />
+                    <label asp-for="InHighlighted"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    <input asp-for="IsFinal" />
+                    <label asp-for="IsFinal"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    <input asp-for="IsMandatory" />
+                    <label asp-for="IsMandatory"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    <input asp-for="IsValid" />
+                    <label asp-for="IsValid"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="OptionGroupId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="OptionGroupId" class="form-control" />
+                <span asp-validation-for="OptionGroupId" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="OptionId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="OptionId" class="form-control" />
+                <span asp-validation-for="OptionId" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="QuestionId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="QuestionId" class="form-control" />
+                <span asp-validation-for="QuestionId" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="QuestionText" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="QuestionText" class="form-control" />
+                <span asp-validation-for="QuestionText" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="QuestionTypeId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="QuestionTypeId" class="form-control" />
+                <span asp-validation-for="QuestionTypeId" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="SectionId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="SectionId" class="form-control" />
+                <span asp-validation-for="SectionId" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="SortOrder" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="SortOrder" class="form-control" />
+                <span asp-validation-for="SortOrder" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
