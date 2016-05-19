@@ -115,37 +115,45 @@ namespace EasySurvey.Web.Controllers
         public IActionResult Edit(AnswerGroupViewModel answerGroup, string command)
         {
             var existingAnswerGroup = _answerGroupService.GetById(answerGroup.Id);
-            foreach (var answerSection in answerGroup.AnswerSection)
+            if (existingAnswerGroup != null)
             {
-                AnswerSection existingAnswerSection = existingAnswerGroup.AnswerSection.Where(item => item.Id == answerSection.Id).FirstOrDefault();
-                if (existingAnswerSection != null)  
+                existingAnswerGroup.Address.AddressLine1 = answerGroup.AddressLine1;
+                existingAnswerGroup.Address.PostalCode = answerGroup.PostalCode;
+                existingAnswerGroup.Address.City = answerGroup.City;
+                existingAnswerGroup.Address.Country = answerGroup.Country;
+
+                foreach (var answerSection in answerGroup.AnswerSection)
                 {
-                    foreach (var answer in answerSection.Answer)
+                    AnswerSection existingAnswerSection = existingAnswerGroup.AnswerSection.Where(item => item.Id == answerSection.Id).FirstOrDefault();
+                    if (existingAnswerSection != null)
                     {
-                        Answer existingAnswer = existingAnswerSection.Answer.Where(item => item.Id == answer.Id).FirstOrDefault();
-                        existingAnswer.AnswerText = answer.AnswerText;
-                        existingAnswer.DefaultComments = answer.Comments;
-                        existingAnswer.OptionId = answer.OptionId;
+                        foreach (var answer in answerSection.Answer)
+                        {
+                            Answer existingAnswer = existingAnswerSection.Answer.Where(item => item.Id == answer.Id).FirstOrDefault();
+                            existingAnswer.AnswerText = answer.AnswerText;
+                            existingAnswer.DefaultComments = answer.Comments;
+                            existingAnswer.OptionId = answer.OptionId;
+                        }
                     }
+                }
+
+                switch (command)
+                {
+                    case "Save":
+                        _answerGroupService.Save(existingAnswerGroup);
+                        break;
+                    case "Extend":
+                        _answerGroupService.Extend(existingAnswerGroup);
+                        break;
                 }
             }
 
-            switch (command)
-            {
-                case "Save":
-                    _answerGroupService.Save(existingAnswerGroup);
-                    break;
-                case "Extend":
-                    _answerGroupService.Extend(existingAnswerGroup);
-                    break; 
-            }
-            
             if (ModelState.IsValid)
             {
                 return RedirectToAction("Index", new { id = answerGroup.SurveyId, selected = answerGroup.Id });
             }
-            ViewData["SectionGroupId"] = new SelectList(_context.SectionGroup, "Id", "SectionGroup", answerGroup.SectionGroupId);
-            ViewData["SurveyId"] = new SelectList(_context.Survey, "Id", "Survey", answerGroup.SurveyId);
+            //ViewData["SectionGroupId"] = new SelectList(_context.SectionGroup, "Id", "SectionGroup", answerGroup.SectionGroupId);
+            //ViewData["SurveyId"] = new SelectList(_context.Survey, "Id", "Survey", answerGroup.SurveyId);
             return RedirectToAction("Index", new { id = answerGroup.SurveyId, selected = answerGroup.Id });
         }
 

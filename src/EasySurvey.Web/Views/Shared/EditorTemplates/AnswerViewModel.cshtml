@@ -58,31 +58,37 @@
 </div>
 <div class="col-xs-6">
     <fieldset class="form-group">
-        <label>@Html.DisplayNameFor(model => model.DefaultComments)</label>
+        
         <div class="col-xs-12">
             @if (Model != null && Model.QuestionTypeId == 1)
             {
+                <label>@Html.LabelFor(model => model.AnswerLabel, Model.AnswerLabel)</label>
                 <textarea rows="1" class="form-control input-lg col-xs-12" style="min-width: 100%" placeholder="@Model.DefaultComments" asp-for="@Model.Comments"></textarea>
             }
             else if (Model != null && Model.QuestionTypeId == 2)
             {
+                <label>@Html.LabelFor(model => model.AnswerLabel, Model.AnswerLabel)</label>
                 <input type="text" class="form-control" id="exampleInputName2" style="min-width: 100%" placeholder="@Model.DefaultComments" asp-for="@Model.Comments" />
             }
             else if (Model != null && Model.QuestionTypeId == 3)
             {
+                <label>@Html.LabelFor(model => model.AnswerLabel, Model.AnswerLabel)</label>
                 <input type="text" class="form-control" id="exampleInputName2" style="min-width: 100%" placeholder="@Model.DefaultComments" asp-for="@Model.Comments" />
             }
             else if (Model != null && Model.QuestionTypeId == 4)
             {
+                <label>@Html.LabelFor(model => model.AnswerLabel, Model.AnswerLabel)</label>
                 <textarea rows="1" class="form-control input-lg col-xs-12" style="min-width: 100%" placeholder="@Model.DefaultComments" asp-for="@Model.Comments"></textarea>
             }
             else if (Model != null && Model.QuestionTypeId == 5)
             {
+                <label>@Html.LabelFor(model => model.AnswerLabel, Model.AnswerLabel)</label>
                 <input type="number" class="form-control" id="exampleInputName2" min="0" style="min-width: 100%" placeholder="@Model.DefaultComments" asp-for="@Model.Comments" />
             }
             else if (Model != null && Model.QuestionTypeId == 6)
             {
-                @Model.Comments
+                @*<label>@Html.DisplayNameFor(model => model.DefaultComments)</label>
+                @Model.Comments*@
             }
         </div>
     </fieldset>

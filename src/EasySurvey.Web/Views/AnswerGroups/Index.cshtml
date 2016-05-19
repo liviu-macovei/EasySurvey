@@ -39,6 +39,21 @@
                     if (answerGroup.Id == Model.SelectedId)
                     {
                         <div id="@(answerGroup.Id)" class="tab-pane fade in active">
+                            <div class="form-group row">
+                                <div class="col-md-12 col-sm-offset-0">
+                                    @{
+                                        if (!answerGroup.IsMandatory)
+                                        {
+                                            <div class="checkbox">
+                                                <div class="checkbox">
+                                                    <input class="isusedck" id="@answerGroup.Id" asp-for="@answerGroup.IsUsed" />
+                                                    <label asp-for="@answerGroup.IsUsed"></label>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
                             @{
                                 await Html.RenderPartialAsync("~/views/AnswerGroups/_EditAnswerGroups.cshtml", answerGroup, ViewData);
                             }
@@ -47,6 +62,21 @@
                     else
                     {
                         <div id="@(answerGroup.Id)" class="tab-pane fade">
+                            <div class="form-group row">
+                                <div class="col-md-12 col-sm-offset-0">
+                                    @{
+                                        if (!answerGroup.IsMandatory)
+                                        {
+                                            <div class="checkbox">
+                                                <div class="checkbox">
+                                                    <input class="isusedck" id="@answerGroup.Id" asp-for="@answerGroup.IsUsed" />
+                                                    <label asp-for="@answerGroup.IsUsed"></label>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
                             @{
                                 await Html.RenderPartialAsync("~/views/AnswerGroups/_EditAnswerGroups.cshtml", answerGroup, ViewData);
                             }
@@ -68,6 +98,42 @@
                 var id = $(e.target).attr("name");
                 AnswerGroupAjax.populateView(id);
             });
+
+            $('input[class=isusedck]').change(function (e) {
+                //var answerGroupId = $('input#Id').val();
+                var answerGroupId = this.id;
+                var sectionGroupId = $('input#SectionGroupId').val();
+                var surveyId = $('input#SurveyId').val();
+                var isUsed;
+                var id = $('.nav-tabs .active').children().first().attr("name")
+                if ($(this).is(':checked')) {
+                    $(this).addClass('checked');
+                    isUsed = true;
+                    AnswerGroupAjax.useAnswerGroup(isUsed, answerGroupId, sectionGroupId, surveyId);
+
+                } else {
+                    if (confirm('This will delete all the data currently saved. Are you sure you want unuse this section?')) {
+                        $(this).removeClass('checked');
+                        isUsed = false;
+                        AnswerGroupAjax.useAnswerGroup(isUsed, answerGroupId, sectionGroupId, surveyId);
+                    }
+                }
+
+                //if ($('input#IsUsed').is(':checked'))
+                //{
+                //    $('input#IsUsed').addClass('checked');
+                //    isUsed = true;
+                //    //AnswerGroupAjax.useAnswerGroup(isUsed, answerGroupId, sectionGroupId, surveyId);
+                //} else
+                //{
+                //    if (confirm('This will delete all the data currently saved. Are you sure you want unuse this section?')) {
+                //        $('input#IsUsed').removeClass('checked');
+                //        isUsed = false;
+                //        //AnswerGroupAjax.useAnswerGroup(isUsed, answerGroupId, sectionGroupId, surveyId);
+                //    }
+                //}
+            });
+
             var id = $('.nav-tabs .active').children().first().attr("name")
             AnswerGroupAjax.populateView(id);
         });
