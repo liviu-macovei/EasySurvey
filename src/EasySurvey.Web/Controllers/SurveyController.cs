@@ -5,7 +5,9 @@ using EasySurvey.Services.ServiceDefinitions;
 using EasySurvey.Web.ViewModels.Survey;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
-using EasySurvey.Web.ViewModels.AnswerGroups;
+using Microsoft.AspNet.Http.Features;
+using Microsoft.AspNet.Http;
+using System.Security.Claims;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -17,8 +19,11 @@ namespace EasySurvey.Web.Controllers
         private readonly ICustomerService customerService;
         private readonly ISurveyService surveyService;
         private readonly ISurveyTemplateService surveyTemplateService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private ISession _session => _httpContextAccessor.HttpContext.Session;
 
-        public SurveyController(ISurveyService surveyService
+        public SurveyController(IHttpContextAccessor httpContextAccessor
+            , ISurveyService surveyService
             , ISurveyTemplateService surveyTemplateService
             , ICustomerService customerService)
         {
@@ -31,7 +36,8 @@ namespace EasySurvey.Web.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            var userId = User.Identity.Name;
+            var identityClaim = User.Claims.Where(claim => claim.Type == ClaimTypes.NameIdentifier);
+            var userId = identityClaim.FirstOrDefault().Value;
             var surveys = surveyService.GetByUserId(userId);
             var result = new List<ListSurveyViewModel>();
             foreach (var survey in surveys)
@@ -79,6 +85,9 @@ namespace EasySurvey.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(CreateSurveyViewModel createSurveyViewModel)
         {
+            var identityClaim = User.Claims.Where(claim => claim.Type == ClaimTypes.NameIdentifier);
+            var userId = identityClaim.FirstOrDefault().Value;
+
             var survey = new Survey();
             var surveyTemplate = surveyTemplateService.GetById(createSurveyViewModel.SurveyTemplateId);
             if (ModelState.IsValid)
@@ -86,10 +95,8 @@ namespace EasySurvey.Web.Controllers
                 survey.SurveyTemplateId = createSurveyViewModel.SurveyTemplateId;
                 survey.SurveyStateId = 1;
                 survey.CustomerId = createSurveyViewModel.CustomerId;
-                survey.UserId = User.Identity.Name;
+                survey.UserId = userId;
                 surveyService.Save(survey);
-
-
                 return RedirectToAction("Index", "AnswerGroups", new { id = survey.Id });
             }
             return View(survey);

@@ -1,0 +1,38 @@
+@model IEnumerable<EasySurvey.Common.Models.Comment>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th style="width: 20%;">
+                Date
+            </th>
+            <th style="width: 70%;">
+                Comment
+            </th>
+            <th style="width: 10%;"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedOn)
+                </td>
+                <td>
+                    @{
+                        var description = item.Description.Length < 70 ? item.Description : item.Description.Substring(0, 67) + "..." ;
+                    }
+                    <span title="@item.Description" >@Html.DisplayFor(modelItem => description)</span>
+                </td>
+                <td>
+                    <a class="delete glyphicon glyphicon-remove" value=@item.Id href="#"></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+

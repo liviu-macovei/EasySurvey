@@ -26,6 +26,17 @@ namespace EasySurvey.Repositories.Sql
             return query.ToList();
         }
 
+        public ICollection<Survey> GetAllByUserId(string userId)
+        {
+            var query = from survey in _context.Survey
+                .Include(x => x.Customer)
+                .Include(x => x.SurveyState)
+                .Include(x => x.SurveyTemplate)
+                where survey.UserId.Equals(userId)
+                select survey;
+            return query.ToList();
+        }
+
         public Survey Find(int surveyId)
         {
             var query = from survey in _context.Survey

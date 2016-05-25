@@ -44,7 +44,7 @@ namespace EasySurvey.Services.Implementation
 
         public List<Survey> GetByUserId(string userId)
         {
-            return _surveyRepo.GetAll().ToList();
+            return _surveyRepo.GetAllByUserId(userId).ToList();
         }
 
         public bool Save(Survey element)

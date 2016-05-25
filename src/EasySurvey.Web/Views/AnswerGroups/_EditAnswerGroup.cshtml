@@ -27,7 +27,7 @@
                         </button>
                     </div>
                     <div class="btn-group">
-                        <button id="btnComment" name="command" title="Enter and edit comments" type="button" class="btn btn-default" value="Comment">
+                        <button id="btnComment" title="Enter and edit comments" type="button" class="btn btn-default" data-toggle="modal" data-target="#commentModel">
                             <span class="glyphicon glyphicon-eye-open"></span>&nbsp; Comments
                         </button>
                     </div>
@@ -107,11 +107,51 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="modal fade" id="commentModel" tabindex="-1" role="dialog" aria-labelledby="commentModelLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="commentModelLabel">Add Comment</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-sm-offset-1">
+                                <div class="form-group">
+                                    <label id="optionName" class="control-label">Comment*</label>
+                                    <textarea type="text" id="commentText" rows="6" class="form-control input-lg col-xs-6" style="min-width: 90%"  />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <a id="submit1" name="submit1" href="#" class="btn btn-primary">Add</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         }
     }
 </form>
+
 @section Scripts {
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 }
+
+<script src="~/js/Comments/CommentsAjaxModule.js" asp-append-version="true"></script>
+
+<script type="text/javascript">
+    $(document)
+        .ready(function () {
+            $('a[name="submit1"]')
+                .click(function (event) {
+                    var name = $('#commentText').val();
+                    var surveyId = $('input#SurveyId').val();
+                    CommentsAjax.addComment(name, surveyId);
+                    $('#commentModel').modal('toggle');
+                });
+        });
+</script>

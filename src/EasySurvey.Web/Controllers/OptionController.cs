@@ -1,9 +1,6 @@
-using System;
 using EasySurvey.Common.Models;
 using EasySurvey.Services.ServiceDefinitions;
-using EasySurvey.Web.ViewModels.OptionGroups;
 using Microsoft.AspNet.Mvc;
-using Microsoft.AspNet.Mvc.Rendering;
 using System.Collections.Generic;
 
 namespace EasySurvey.Web.Controllers

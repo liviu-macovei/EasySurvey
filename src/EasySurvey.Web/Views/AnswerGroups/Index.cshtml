@@ -90,6 +90,8 @@
 </html>
 
 <script src="~/js/AnswerGroups/AnswerGroupsAjaxModule.js" asp-append-version="true"></script>
+<script src="~/js/Comments/CommentsAjaxModule.js" asp-append-version="true"></script>
+
 <script type="text/javascript">
     $(document)
         .ready(function () {
@@ -133,7 +135,6 @@
                 //    }
                 //}
             });
-
             var id = $('.nav-tabs .active').children().first().attr("name")
             AnswerGroupAjax.populateView(id);
         });

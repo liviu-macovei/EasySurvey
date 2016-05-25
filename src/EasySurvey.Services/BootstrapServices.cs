@@ -22,7 +22,6 @@ namespace EasySurvey.Services
             services.AddTransient<IQuestionService, QuestionServiceMock>();           
             services.AddTransient<IOwnerService, OwnerServiceMock>();
             services.AddTransient<INextQuestionService, NextQuestionServiceMock>();
-            services.AddTransient<ICommentService, CommentServiceMock>();
             services.AddTransient<IAnswerService, AnswerServiceMock>();
 
             //Real
@@ -33,7 +32,7 @@ namespace EasySurvey.Services
             services.AddTransient<IOptionService, OptionService>();
             services.AddTransient<IOptionGroupService, OptionGroupService>();
             services.AddTransient<IQuestionTypeService, QuestionTypeService>();
-
+            services.AddTransient<ICommentService, CommentService>();
         }
     }
 }

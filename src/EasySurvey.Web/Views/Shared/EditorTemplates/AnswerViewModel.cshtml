@@ -1,20 +1,29 @@
 @model EasySurvey.Web.ViewModels.Answers.AnswerViewModel
+<input type="hidden" asp-for="Id" />
+<input type="hidden" asp-for="OptionGroupId" />
+<input type="hidden" asp-for="QuestionTypeId" />
+<input type="hidden" asp-for="QuestionId" />
+<input type="hidden" asp-for="QuestionText" />
+
+@if (Model != null && Model.QuestionTypeId == 1)
+{
+    <div class="col-xs-12">
+        <label>@Html.LabelFor(model => model.QuestionText, Model.QuestionText, new { title = Model.HelpText })</label>
+        <textarea asp-for="@Model.AnswerText" rows="1" class="form-control input-lg " style="min-width: 100%" placeholder="@Model.DefaultComments"></textarea>
+    </div>
+}
 
 <div class="col-xs-6">
     <fieldset class="form-group">
-        <input type="hidden" asp-for="Id" />
-        <input type="hidden" asp-for="OptionGroupId" />
-        <input type="hidden" asp-for="QuestionTypeId" />
-        <input type="hidden" asp-for="QuestionId" />
-        <input type="hidden" asp-for="QuestionText" />
-        <label>@Html.LabelFor(model => model.QuestionText, Model.QuestionText, new { title = Model.HelpText })</label>
         <div class="col-xs-12">
-            @if (Model != null && Model.QuestionTypeId == 1)
+        @*@if (Model != null && Model.QuestionTypeId == 1)
             {
                 <textarea asp-for="@Model.AnswerText" rows="1" class="form-control input-lg " style="min-width: 100%" placeholder="Answer here..."></textarea>
             }
-            else if (Model != null && (Model.QuestionTypeId == 2 || Model.QuestionTypeId == 6 || Model.QuestionTypeId == 4 || Model.QuestionTypeId == 5))
+            else*@
+            @if (Model != null && (Model.QuestionTypeId == 2 || Model.QuestionTypeId == 6 || Model.QuestionTypeId == 4 || Model.QuestionTypeId == 5))
             {
+                <label>@Html.LabelFor(model => model.QuestionText, Model.QuestionText, new { title = Model.HelpText })</label>
                 <div role="form">
 
                     @{
@@ -35,61 +44,62 @@
                             else
                             {
                                 <label class="radio-inline">
-                                    <input  asp-for="@Model.OptionId" type="radio" value="@Model.Options[i].Id"> @Model.Options[i].Name
+                                    <input asp-for="@Model.OptionId" type="radio" value="@Model.Options[i].Id"> @Model.Options[i].Name
                                 </label>
                             }
                         }
                     }
                 </div>
-            }   
+            }
             else
             {
                 @*@foreach (var option in Model.Options.OrderBy(item => item.Name))
-                {
-                    <div class="radio-inline">
-                        <label>
-                            <input asp-for="@Model.OptionId" name="@Model.Id" type="checkbox" value="@option.Id"> @option.Name
-                        </label>
-                    </div>
-                }*@
+                    {
+                        <div class="radio-inline">
+                            <label>
+                                <input asp-for="@Model.OptionId" name="@Model.Id" type="checkbox" value="@option.Id"> @option.Name
+                            </label>
+                        </div>
+                    }*@
             }
         </div>
     </fieldset>
 </div>
 <div class="col-xs-6">
     <fieldset class="form-group">
-        
+
         <div class="col-xs-12">
-            @if (Model != null && Model.QuestionTypeId == 1)
+            @*@if (Model != null && Model.QuestionTypeId == 1)
+    {
+        <label>@Html.LabelFor(model => model.AnswerLabel, Model.AnswerLabel)</label>
+        <textarea rows="1" class="form-control input-lg col-xs-12" style="min-width: 100%" placeholder="@Model.DefaultComments" asp-for="@Model.Comments"></textarea>
+    }
+    else placeholder="@Model.DefaultComments" *@
+            @if (Model != null && Model.QuestionTypeId == 2)
             {
                 <label>@Html.LabelFor(model => model.AnswerLabel, Model.AnswerLabel)</label>
-                <textarea rows="1" class="form-control input-lg col-xs-12" style="min-width: 100%" placeholder="@Model.DefaultComments" asp-for="@Model.Comments"></textarea>
-            }
-            else if (Model != null && Model.QuestionTypeId == 2)
-            {
-                <label>@Html.LabelFor(model => model.AnswerLabel, Model.AnswerLabel)</label>
-                <input type="text" class="form-control" id="exampleInputName2" style="min-width: 100%" placeholder="@Model.DefaultComments" asp-for="@Model.Comments" />
+                <input type="text" class="form-control" id="exampleInputName2" style="min-width: 100%" asp-for="@Model.Comments" />
             }
             else if (Model != null && Model.QuestionTypeId == 3)
             {
                 <label>@Html.LabelFor(model => model.AnswerLabel, Model.AnswerLabel)</label>
-                <input type="text" class="form-control" id="exampleInputName2" style="min-width: 100%" placeholder="@Model.DefaultComments" asp-for="@Model.Comments" />
+                <input type="text" class="form-control" id="exampleInputName2" style="min-width: 100%"  asp-for="@Model.Comments" />
             }
             else if (Model != null && Model.QuestionTypeId == 4)
             {
                 <label>@Html.LabelFor(model => model.AnswerLabel, Model.AnswerLabel)</label>
-                <textarea rows="1" class="form-control input-lg col-xs-12" style="min-width: 100%" placeholder="@Model.DefaultComments" asp-for="@Model.Comments"></textarea>
+                <textarea rows="1" class="form-control input-lg col-xs-12" style="min-width: 100%"  asp-for="@Model.Comments"></textarea>
             }
             else if (Model != null && Model.QuestionTypeId == 5)
             {
                 <label>@Html.LabelFor(model => model.AnswerLabel, Model.AnswerLabel)</label>
-                <input type="number" class="form-control" id="exampleInputName2" min="0" style="min-width: 100%" placeholder="@Model.DefaultComments" asp-for="@Model.Comments" />
+                <input type="number" class="form-control" id="exampleInputName2" min="0" style="min-width: 100%" asp-for="@Model.Comments" />
             }
-            else if (Model != null && Model.QuestionTypeId == 6)
+            @*else if (Model != null && Model.QuestionTypeId == 6)
             {
-                @*<label>@Html.DisplayNameFor(model => model.DefaultComments)</label>
-                @Model.Comments*@
-            }
+                <label>@Html.DisplayNameFor(model => model.DefaultComments)</label>
+                    @Model.Comments
+            }*@
         </div>
     </fieldset>
 </div>

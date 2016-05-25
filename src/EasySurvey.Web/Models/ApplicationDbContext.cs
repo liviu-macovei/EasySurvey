@@ -33,5 +33,6 @@ namespace EasySurvey.Web.Models
         public DbSet<AnswerGroupViewModel> AnswerGroupViewModel { get; set; }
         public DbSet<AnswerSection> AnswerSection { get; set; }
         public DbSet<AnswerViewModel> AnswerViewModel { get; set; }
+        public DbSet<Comment> Comment { get; set; }
     }
 }

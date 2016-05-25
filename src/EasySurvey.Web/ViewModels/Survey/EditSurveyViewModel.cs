@@ -15,6 +15,8 @@ namespace EasySurvey.Web.ViewModels.Survey
             {
                 this.AnswerGroups.Add(new AnswerGroupViewModel(answerGroup));
             }
+
+            Comments = survey.Comment;
         }
 
         public int Id { get; set; }
@@ -26,5 +28,7 @@ namespace EasySurvey.Web.ViewModels.Survey
         public Common.Models.SurveyState SurveyState { get; set; }
 
         public ICollection<AnswerGroupViewModel> AnswerGroups { get; set; }
+
+        public ICollection<Common.Models.Comment> Comments { get; set; }
     }
 }

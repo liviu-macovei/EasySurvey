@@ -20,6 +20,7 @@ namespace EasySurvey.Web.ViewModels.Answers
             QuestionId = answer.QuestionId;
             AnswerText = answer.AnswerText;
             Comments = answer.DefaultComments;
+            
             InHighlighted = answer.InHighlighted;
             IsValid = answer.IsValid;
             IsFinal = answer.IsFinal;
@@ -41,6 +42,8 @@ namespace EasySurvey.Web.ViewModels.Answers
                     Options = answer.Question.OptionGroup.Option.ToList();
                 }
             }
+            if (string.IsNullOrEmpty(Comments) && !string.IsNullOrEmpty(DefaultComments))
+                Comments = DefaultComments;
         }
 
         public int Id { get; set; }

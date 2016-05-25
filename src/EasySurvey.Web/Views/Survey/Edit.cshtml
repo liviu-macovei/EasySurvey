@@ -7,6 +7,7 @@
 }
 <h3>Update Survey</h3>
 <form asp-action="Edit">
+    @*<input type="hidden" asp-for="Id" />*@
     <div class="form-horizontal">
         @Html.HiddenFor(m => m.Id)
         <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
@@ -39,11 +40,60 @@
             @{
                 await Html.RenderPartialAsync("~/views/Customers/_ViewCustomer.cshtml", Model.Customer, ViewData);
             }
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">Survey Comments</div>
+                <div class="panel-body">
+                    <p>
+                        <a data-toggle="modal" data-target="#commentModel" class="btn pull-right"><span class="glyphicon glyphicon-plus"></span> &nbsp; Create</a>
+                    </p>
+                    <div id="partialViewDiv"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="commentModel" tabindex="-1" role="dialog" aria-labelledby="commentModelLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="commentModelLabel">Add Comment</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-sm-offset-1">
+                        <div class="form-group">
+                            <label id="optionName" class="control-label">Comment*</label>
+                            <textarea type="text" id="commentText" rows="6" class="form-control input-lg col-xs-6" style="min-width: 90%"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <a id="submit1" name="submit1" href="#" class="btn btn-primary">Add</a>
+                </div>
+            </div>
         </div>
     </div>
 </form>
-@section Scripts {
+@*@section Scripts {
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-}
+}*@
+<script src="~/js/Comments/CommentsAjaxModule.js" asp-append-version="true"></script>
+<script type="text/javascript">
+    $(document)
+        .ready(function () {
+            var surveyId = $('input#Id').val();
+            CommentsAjax.populateView(surveyId);
+            $('a[name="submit1"]')
+                .click(function (event) {
+                    var name = $('#commentText').val();
+                    var surveyId = $('input#Id').val();
+                    CommentsAjax.addComment(name, surveyId);
+                    $('#commentModel').modal('toggle');
+                });
+        });
+</script>
