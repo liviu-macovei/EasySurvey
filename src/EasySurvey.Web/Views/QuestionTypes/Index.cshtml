@@ -5,62 +5,36 @@
 }
 
 <div class="row">
-    <h2>Index</h2>
-
+    <h2>Question Types</h2>
+    <br />
     <p>
-        <a asp-action="Create" class="btn btn-primary">Create New</a>
-        <br /><br />
+        <a asp-action="Create" class="btn pull-right"><span class="glyphicon glyphicon-plus"></span> &nbsp; Create</a>
     </p>
-    <table class="table">
-        <tr>
-            @*<th>
-                    @Html.DisplayNameFor(model => model.CreatedBy)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CreatedOn)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ModifiedBy)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ModifiedOn)
-                </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>Edit</th>
-            @*<th>Details</th>*@
-            <th>Delete</th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
+    <table class="table table-striped">
+        <thead>
             <tr>
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.CreatedBy)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CreatedOn)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ModifiedBy)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ModifiedOn)
-                    </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="glyphicon glyphicon-pencil"></a>
-                </td>
-                @*<td>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="glyphicon glyphicon-eye-open"></a>
-                </td>*@
-                <td>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="delete glyphicon glyphicon-remove"></a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th style="width: 7%;"></th>
+                <th style="width: 7%;"></th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="glyphicon glyphicon-pencil"></a>
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="delete glyphicon glyphicon-remove"></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
 </div>

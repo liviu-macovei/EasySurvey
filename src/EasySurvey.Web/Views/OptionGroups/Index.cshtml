@@ -4,12 +4,13 @@
 }
 
 <div class="row">
-    <h2>Option Groups</h2>
+    <h3>Option Groups</h3>
     <hr />
     <div class="form-group">
-        <a class="btn btn-primary" asp-action="Create">Create New Option Group</a>
+        @*<a class="btn btn-primary" asp-action="Create">Create New Option Group</a>*@
+        <a asp-action="Create" class="btn pull-right"><span class="glyphicon glyphicon-plus"></span> &nbsp; Add New Option Group</a>
     </div>
-    <table class="table" id="tblOptionGroups">
+    <table class="table table-striped" id="tblOptionGroups">
         <tr>
             <th style="width: 80%;">
                 @Html.DisplayNameFor(model => model.OptionGroups)
@@ -36,7 +37,7 @@
     <h2>Options</h2>
     <hr />
     <div class="form-group">
-        <a class="btn btn-primary" data-toggle="modal" data-target="#optionModal">Add New Option</a>
+        <a class="btn pull-right" data-toggle="modal" data-target="#optionModal"><span class="glyphicon glyphicon-plus"></span> &nbsp;Add New Option</a>
     </div>
     <br /><br />
     <div id="partialViewDiv"></div>

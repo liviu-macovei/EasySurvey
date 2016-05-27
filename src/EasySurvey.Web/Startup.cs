@@ -101,7 +101,7 @@ namespace EasySurvey.Web
             {
                 routes.MapRoute(
                     "default",
-                    "{controller=Home}/{action=Index}/{id?}");
+                    "{controller=Survey}/{action=Index}/{id?}");
             });
         }
 

@@ -280,3 +280,42 @@ INSERT [dbo].[Question] ([Id],[SectionId], [QuestionTypeId], [OptionGroupId], [Q
 SET IDENTITY_INSERT [dbo].[Question] OFF
 
 
+SET IDENTITY_INSERT [dbo].[SectionGroup] ON
+
+INSERT [dbo].[SectionGroup] ([Id], [Title], [IsMandatory], [SurveyTemplateId], [SortOrder], [CreatedOn], [CreatedBy], [ModifiedOn], [ModifiedBy]) VALUES (3, N'IT  Kasko', 0, 1, 30, CAST(0x0000A36C009DF4CA AS DateTime), N'bah', CAST(0x0000A36C009DF4CA AS DateTime), N'bah')
+
+SET IDENTITY_INSERT [dbo].[SectionGroup] OFF
+
+SET IDENTITY_INSERT [dbo].[Section] ON
+
+INSERT [dbo].[Section] ([Id], [SectionGroupId], [Title], [Description], [SortOrder], [CreatedOn], [CreatedBy], [ModifiedOn], [ModifiedBy]) VALUES (7, 3, N'Dækninger', N'Dækninger Info Section', 10, CAST(0x0000A36C009DF4CA AS DateTime), N'bah', CAST(0x0000A36C009DF4CA AS DateTime), N'bah')
+INSERT [dbo].[Section] ([Id], [SectionGroupId], [Title], [Description], [SortOrder], [CreatedOn], [CreatedBy], [ModifiedOn], [ModifiedBy]) VALUES (8, 3, N'Risikooplysninger', N'Risikooplysninger info section', 20, CAST(0x0000A36C009DF4CA AS DateTime), N'bah', CAST(0x0000A36C009DF4CA AS DateTime), N'bah')
+INSERT [dbo].[Section] ([Id], [SectionGroupId], [Title], [Description], [SortOrder], [CreatedOn], [CreatedBy], [ModifiedOn], [ModifiedBy]) VALUES (9, 3, N'Selvrisiko', N'Selvrisiko info section', 30, CAST(0x0000A36C009DF4CA AS DateTime), N'bah', CAST(0x0000A36C009DF4CA AS DateTime), N'bah')
+
+SET IDENTITY_INSERT [dbo].[Section] OFF
+
+SET IDENTITY_INSERT [dbo].[Question] ON
+
+INSERT [dbo].[Question] ([Id],[SectionId], [QuestionTypeId], [OptionGroupId], [QuestionText], [DefaultComments], [HelpText], [AnswerLabel], [AnswerValidationExpression], [IsMandatory], [SortOrder],[CreatedOn], [CreatedBy], [ModifiedOn], [ModifiedBy] ) 
+				 VALUES (76, 7, 4, 1, N'Skal andre selskaber medforsikres', null, N'(her må der gerne kopires fra løsøre, med mulighed for at rette)', 'Forsikres. Selskaber: ', null, 0, 10, CAST(0x0000A36C009DF4CA AS DateTime), N'bah', CAST(0x0000A36C009DF4CA AS DateTime), N'bah')
+INSERT [dbo].[Question] ([Id],[SectionId], [QuestionTypeId], [OptionGroupId], [QuestionText], [DefaultComments], [HelpText], [AnswerLabel], [AnswerValidationExpression], [IsMandatory], [SortOrder],[CreatedOn], [CreatedBy], [ModifiedOn], [ModifiedBy] ) 
+				 VALUES (77, 7, 4, 1, N'Virksomhedens samlede stationære IT udstyr.', N'Sum på forsikringsstederne, Sum udenfor forsikringsstederne, Dækningsområde', N'Enter sum amount...', 'Forsikres.', null, 0, 20, CAST(0x0000A36C009DF4CA AS DateTime), N'bah', CAST(0x0000A36C009DF4CA AS DateTime), N'bah')
+INSERT [dbo].[Question] ([Id],[SectionId], [QuestionTypeId], [OptionGroupId], [QuestionText], [DefaultComments], [HelpText], [AnswerLabel], [AnswerValidationExpression], [IsMandatory], [SortOrder],[CreatedOn], [CreatedBy], [ModifiedOn], [ModifiedBy] ) 
+				 VALUES (78, 7, 4, 1, N'Bærbart it udstyr', N'Sum på forsikringsstederne, Sum udenfor forsikringsstederne, Dækningsområde', N'Help text...', 'Forsikres.', null, 0, 30, CAST(0x0000A36C009DF4CA AS DateTime), N'bah', CAST(0x0000A36C009DF4CA AS DateTime), N'bah')
+INSERT [dbo].[Question] ([Id],[SectionId], [QuestionTypeId], [OptionGroupId], [QuestionText], [DefaultComments], [HelpText], [AnswerLabel], [AnswerValidationExpression], [IsMandatory], [SortOrder],[CreatedOn], [CreatedBy], [ModifiedOn], [ModifiedBy] ) 
+				 VALUES (79, 7, 4, 1, N'Meromkostning (Husk Backup)', N'Sum: Dækningsperiode mdr: Karens periode dage:', N'Enter all amounts in text...', 'Forsikres.', null, 0, 40, CAST(0x0000A36C009DF4CA AS DateTime), N'bah', CAST(0x0000A36C009DF4CA AS DateTime), N'bah')
+INSERT [dbo].[Question] ([Id],[SectionId], [QuestionTypeId], [OptionGroupId], [QuestionText], [DefaultComments], [HelpText], [AnswerLabel], [AnswerValidationExpression], [IsMandatory], [SortOrder],[CreatedOn], [CreatedBy], [ModifiedOn], [ModifiedBy] ) 
+				 VALUES (80, 7, 4, 1, N'Databærer (Husk Backup)', N'Sum: Dækningsperiode mdr: Karens periode dage:', N'Enter sum amount...', 'Forsikres. Sum: ', null, 0, 50, CAST(0x0000A36C009DF4CA AS DateTime), N'bah', CAST(0x0000A36C009DF4CA AS DateTime), N'bah')
+INSERT [dbo].[Question] ([Id],[SectionId], [QuestionTypeId], [OptionGroupId], [QuestionText], [DefaultComments], [HelpText], [AnswerLabel], [AnswerValidationExpression], [IsMandatory], [SortOrder],[CreatedOn], [CreatedBy], [ModifiedOn], [ModifiedBy] ) 
+				 VALUES (81, 7, 4, 1, N'It Driftstab ( husk Backup)', N'Sum: Dækningsperiode mdr: Karens periode dage: ', N'Enter mentioned detials in text area...', 'Forsikres. ', null, 0, 60, CAST(0x0000A36C009DF4CA AS DateTime), N'bah', CAST(0x0000A36C009DF4CA AS DateTime), N'bah')
+INSERT [dbo].[Question] ([Id],[SectionId], [QuestionTypeId], [OptionGroupId], [QuestionText], [DefaultComments], [HelpText], [AnswerLabel], [AnswerValidationExpression], [IsMandatory], [SortOrder],[CreatedOn], [CreatedBy], [ModifiedOn], [ModifiedBy] ) 
+				 VALUES (82, 7, 4, 1, N'Ønskes Brand, vandt og tyveri', null, N'Enter information here...', 'Forsikres.', null, 0, 70, CAST(0x0000A36C009DF4CA AS DateTime), N'bah', CAST(0x0000A36C009DF4CA AS DateTime), N'bah')
+
+INSERT [dbo].[Question] ([Id],[SectionId], [QuestionTypeId], [OptionGroupId], [QuestionText], [DefaultComments], [HelpText], [AnswerLabel], [AnswerValidationExpression], [IsMandatory], [SortOrder],[CreatedOn], [CreatedBy], [ModifiedOn], [ModifiedBy] ) 
+				 VALUES (83, 8, 4, 2, N'Er der risikooplysninger', null, null, 'Intet X.', null, 0, 10, CAST(0x0000A36C009DF4CA AS DateTime), N'bah', CAST(0x0000A36C009DF4CA AS DateTime), N'bah')
+
+INSERT [dbo].[Question] ([Id],[SectionId], [QuestionTypeId], [OptionGroupId], [QuestionText], [DefaultComments], [HelpText], [AnswerLabel], [AnswerValidationExpression], [IsMandatory], [SortOrder],[CreatedOn], [CreatedBy], [ModifiedOn], [ModifiedBy] ) 
+				 VALUES (84, 9, 1, null, N'Selvrisiko', null, null, null, null, 0, 10, CAST(0x0000A36C009DF4CA AS DateTime), N'bah', CAST(0x0000A36C009DF4CA AS DateTime), N'bah')
+
+SET IDENTITY_INSERT [dbo].[Question] OFF
+
