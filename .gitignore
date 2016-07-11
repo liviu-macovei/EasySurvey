@@ -210,3 +210,8 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+/SQLQuery1.sql
+/SQLQuery11.sql
+/SQLQuery2.sql
+/src/EasySurvey.Web/Properties/PublishProfiles/EasySurvey - Web Deploy (2).pubxml
+/src/EasySurvey.Web/Properties/PublishProfiles/EasySurvey - Web Deploy (2)-publish.ps1

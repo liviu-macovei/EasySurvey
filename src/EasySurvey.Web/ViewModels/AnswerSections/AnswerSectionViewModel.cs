@@ -16,7 +16,7 @@ namespace EasySurvey.Web.ViewModels.AnswerSections
         {
             Id = answerSection.Id;
             SectionId = answerSection.SectionId;
-            AnswerGroupId = answerSection.AnswerGroupId;
+            AnswerGroupId = answerSection.AnswerGroupId.Value;
             SortOrder = answerSection.Order;
 
             if (answerSection.Section != null)
@@ -27,9 +27,25 @@ namespace EasySurvey.Web.ViewModels.AnswerSections
                 IsRepeatable = answerSection.Section.IsRepeatable;
             }
             Answer = new AnswersViewModel();
-            foreach (var answer in answerSection.Answer.OrderBy(item=>item.Question.SortOrder))
+            List<int> childIds = new List<int>();
+            foreach (var answer in answerSection.Answer.OrderBy(item => item.Question.SortOrder))
             {
-                Answer.Add(new AnswerViewModel(answer));
+                if (answer.Question.NextQuestion.Count() > 0)
+                {
+                    foreach (var childQuestion in answer.Question.NextQuestion)
+                    {
+                        childIds.Add(childQuestion.NextQuestionId.Value);
+                    }
+
+
+                    if (!childIds.Contains(answer.Question.Id))
+                        Answer.Add(new AnswerViewModel(answer));
+                }
+                else
+                {
+                    if (!childIds.Contains(answer.Question.Id))
+                        Answer.Add(new AnswerViewModel(answer));
+                }
             }
         }
 

@@ -35,7 +35,7 @@ namespace EasySurvey.Web.Controllers
             }
             List<AnswerGroupViewModel> listModels = new List<AnswerGroupViewModel>();
             var answerGroups = _answerGroupService.GetBySurveyId(id.Value);
-            answerGroups.ToList().ForEach(item => listModels.Add(new AnswerGroupViewModel(item)));
+            answerGroups.OrderBy(item=> item.SectionGroup.SortOrder).ToList().ForEach(item => listModels.Add(new AnswerGroupViewModel(item)));
 
             AnswerGroupListViewModel listModel = new AnswerGroupListViewModel();
             listModel.SurveyId = id.Value;
@@ -117,6 +117,8 @@ namespace EasySurvey.Web.Controllers
             var existingAnswerGroup = _answerGroupService.GetById(answerGroup.Id);
             if (existingAnswerGroup != null)
             {
+                if (existingAnswerGroup.Address == null)
+                    existingAnswerGroup.Address = new Address();
                 existingAnswerGroup.Address.AddressLine1 = answerGroup.AddressLine1;
                 existingAnswerGroup.Address.PostalCode = answerGroup.PostalCode;
                 existingAnswerGroup.Address.City = answerGroup.City;
@@ -194,13 +196,14 @@ namespace EasySurvey.Web.Controllers
                 return HttpNotFound();
             }
 
-            AnswerGroup answerGroup = _context.AnswerGroup.Single(m => m.Id == id);
+            var answerGroup = _answerGroupService.GetById(id.Value);
             if (answerGroup == null)
             {
                 return HttpNotFound();
             }
 
-            return View(answerGroup);
+            var result = _answerGroupService.DeleteById(id.Value);
+            return RedirectToAction("Index", new { id = answerGroup.SurveyId });
         }
 
         // POST: AnswerGroups/Delete/5

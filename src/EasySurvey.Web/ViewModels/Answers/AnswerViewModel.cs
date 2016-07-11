@@ -66,5 +66,6 @@ namespace EasySurvey.Web.ViewModels.Answers
         public int SortOrder { get; set; }
         public string HelpText { get; set; }
         public List<Option> Options { get; set; }
+        //public Dictionary<int, AnswerViewModel> ChildAnswer { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace EasySurvey.Common.Models
         }
 
         public int Id { get; set; }
-        public int AnswerGroupId { get; set; }
+        public int? AnswerGroupId { get; set; }
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }
         public string ModifiedBy { get; set; }

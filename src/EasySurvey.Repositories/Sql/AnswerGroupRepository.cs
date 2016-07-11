@@ -30,6 +30,7 @@ namespace EasySurvey.Repositories.Sql
                 .Include(x => x.Address)
                 .Include(x => x.AnswerSection).ThenInclude(s => s.Section)
                 .Include(x => x.AnswerSection).ThenInclude(s => s.Answer).ThenInclude(q => q.Question).ThenInclude(q => q.QuestionType)
+                .Include(x => x.AnswerSection).ThenInclude(s => s.Answer).ThenInclude(q => q.Question).ThenInclude(q => q.NextQuestion)
                 .Include(x => x.AnswerSection).ThenInclude(s => s.Answer).ThenInclude(q => q.Question).ThenInclude(q => q.OptionGroup).ThenInclude(q => q.Option)
                 .Include(x => x.SectionGroup).ThenInclude(s => s.Section).ThenInclude(q => q.Question).ThenInclude(q => q.OptionGroup).ThenInclude(q => q.Option)
                             where answerGroup.Id == id
@@ -57,6 +58,8 @@ namespace EasySurvey.Repositories.Sql
             {
                 try
                 {
+                    var address = _context.Address.Add(answerGroup.Address);
+                    answerGroup.AddressId = address.Entity.Id;
                     _context.AnswerGroup.Add(answerGroup);
                     _context.SaveChanges();
                     dbContextTransaction.Commit();                 
@@ -149,6 +152,7 @@ namespace EasySurvey.Repositories.Sql
                     {
                         _context.AnswerGroup.Remove(query.First());
                         _context.SaveChanges();
+                        dbContextTransaction.Commit();
                     }
                     catch
                         (Exception)
@@ -160,6 +164,14 @@ namespace EasySurvey.Repositories.Sql
                 }
             }
             return false;
+        }
+
+        public ICollection<AnswerGroup> GetBySectionGroupId(int sectionGroupId)
+        {
+            var query = from answerGroup in _context.AnswerGroup
+                        where answerGroup.SectionGroupId == sectionGroupId
+                        select answerGroup;
+            return query.ToList();
         }
     }
 }

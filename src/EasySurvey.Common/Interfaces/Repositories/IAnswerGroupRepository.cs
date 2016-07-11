@@ -7,6 +7,7 @@ namespace EasySurvey.Common.Interfaces.Repositories
     public interface IAnswerGroupRepository
     { 
         ICollection<AnswerGroup> GetAll();
+        ICollection<AnswerGroup> GetBySectionGroupId(int sectionGroupId);
         AnswerGroup Find(int id);
         AnswerGroup Add(AnswerGroup answerGroup);
         AnswerGroup AddFromSurvey(AnswerGroup answerGroup);

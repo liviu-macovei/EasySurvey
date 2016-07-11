@@ -12,6 +12,13 @@
         <textarea asp-for="@Model.AnswerText" rows="1" class="form-control input-lg " style="min-width: 100%" placeholder="@Model.DefaultComments"></textarea>
     </div>
 }
+else if (Model != null && Model.QuestionTypeId == 7)
+{
+    <div class="col-xs-6">
+        <label>@Html.LabelFor(model => model.QuestionText, Model.QuestionText, new { title = Model.HelpText })</label>
+        <input asp-for="@Model.AnswerText" type="number" class="form-control input-lg" id="numberAnswer" min="0" style="min-width: 100%"/>
+    </div>
+}
 
 <div class="col-xs-6">
     <fieldset class="form-group">
@@ -21,7 +28,7 @@
                 <textarea asp-for="@Model.AnswerText" rows="1" class="form-control input-lg " style="min-width: 100%" placeholder="Answer here..."></textarea>
             }
             else*@
-            @if (Model != null && (Model.QuestionTypeId == 2 || Model.QuestionTypeId == 6 || Model.QuestionTypeId == 4 || Model.QuestionTypeId == 5))
+            @if (Model != null && (Model.QuestionTypeId == 2 || Model.QuestionTypeId == 6 || Model.QuestionTypeId == 4 || Model.QuestionTypeId == 5|| Model.QuestionTypeId == 8))
             {
                 <label>@Html.LabelFor(model => model.QuestionText, Model.QuestionText, new { title = Model.HelpText })</label>
                 <div role="form">
@@ -94,6 +101,11 @@
             {
                 <label>@Html.LabelFor(model => model.AnswerLabel, Model.AnswerLabel)</label>
                 <input type="number" class="form-control" id="exampleInputName2" min="0" style="min-width: 100%" asp-for="@Model.Comments" />
+            }
+            else if (Model != null && Model.QuestionTypeId == 8)
+            {
+                <label>@Html.LabelFor(model => model.AnswerLabel, Model.AnswerLabel)</label>
+                <input type="date" class="form-control" id="exampleInputName2" min="0" style="min-width: 100%" asp-for="@Model.Comments" />
             }
             @*else if (Model != null && Model.QuestionTypeId == 6)
             {

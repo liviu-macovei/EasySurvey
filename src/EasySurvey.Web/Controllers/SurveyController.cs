@@ -19,11 +19,7 @@ namespace EasySurvey.Web.Controllers
         private readonly ICustomerService customerService;
         private readonly ISurveyService surveyService;
         private readonly ISurveyTemplateService surveyTemplateService;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        private ISession _session => _httpContextAccessor.HttpContext.Session;
-
-        public SurveyController(IHttpContextAccessor httpContextAccessor
-            , ISurveyService surveyService
+        public SurveyController(ISurveyService surveyService
             , ISurveyTemplateService surveyTemplateService
             , ICustomerService customerService)
         {

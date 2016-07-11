@@ -106,17 +106,62 @@ namespace EasySurvey.Services.Implementation
             return _answerGroupRepo.FindBySectionGroupId(id);
         }
 
-        public bool Extend(AnswerGroup element)
+        public bool Extend(AnswerGroup answerGroup)
         {
-            int nextSortIndex = element.AnswerSection.Max(item => item.Order) + 1;
-            foreach (var section in element.SectionGroup.Section.OrderBy(item => item.SortOrder))
+            //int nextSortIndex = element.AnswerSection.Max(item => item.Order) + 1;
+            //foreach (var section in element.SectionGroup.Section.OrderBy(item => item.SortOrder))
+            //{
+            //    if (section.IsRepeatable)
+            //    {
+            //        var answerSection = new AnswerSection()
+            //        {
+            //            SectionId = section.Id,
+            //            Order = nextSortIndex++
+            //        };
+
+            //        foreach (var question in section.Question.OrderBy(item => item.SortOrder))
+            //        {
+            //            var answer = new Answer()
+            //            {
+            //                OptionId = null,
+            //                InHighlighted = false,
+            //                IsFinal = false,
+            //                IsValid = false,
+            //                QuestionId = question.Id,
+            //                OptionGroupId = question.OptionGroupId
+            //            };
+            //            answerSection.Answer.Add(answer);
+            //        }
+            //        element.AnswerSection.Add(answerSection);
+            //    }
+            //}
+
+            if (answerGroup.IsUsed)
             {
-                if (section.IsRepeatable)
+                Address address;
+                if (answerGroup.Survey != null)
+                {
+                    var customer = _customerRepo.Find(answerGroup.Survey.CustomerId);
+                    address = new Address() { Recipient = customer.Name, AddressLine1 = customer.Address };
+                }
+                else
+                    address = new Address();
+
+                var answerGroupForExtention = new AnswerGroup()
+                {
+                    Id = 0,
+                    SurveyId = answerGroup.SurveyId,
+                    SectionGroupId = answerGroup.SectionGroupId,
+                    IsUsed = answerGroup.IsUsed, 
+                    Address = address
+                };
+                
+                foreach (var section in answerGroup.SectionGroup.Section.OrderBy(item => item.SortOrder))
                 {
                     var answerSection = new AnswerSection()
                     {
                         SectionId = section.Id,
-                        Order = nextSortIndex++
+                        Order = answerGroup.AnswerSection.Count + 1
                     };
 
                     foreach (var question in section.Question.OrderBy(item => item.SortOrder))
@@ -132,11 +177,11 @@ namespace EasySurvey.Services.Implementation
                         };
                         answerSection.Answer.Add(answer);
                     }
-                    element.AnswerSection.Add(answerSection);
+                    answerGroupForExtention.AnswerSection.Add(answerSection);
                 }
+                return this.Save(answerGroupForExtention);
             }
-            element = _answerGroupRepo.Update(element);
-            return true;
+            return false;
         }
     }
 }
