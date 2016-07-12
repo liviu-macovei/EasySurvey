@@ -1,25 +1,7 @@
 @model EasySurvey.Web.ViewModels.AnswerGroups.AnswerGroupViewModel
 
 
-<div class="form-inline" role="form">
-    <br />
-    @*<div class="form-group row">
-        <div class="col-md-12 col-sm-offset-6">
-            @{
-                if (!Model.IsMandatory)
-                {
-                    <div class="checkbox">
-                        <div class="checkbox">
-                            <input id="@Model.Id" asp-for="@Model.IsUsed" />
-                            <label asp-for="@Model.IsUsed"></label>
-                        </div>
-                    </div>
-                }
-            }
-            <br />
-        </div>
-    </div>*@
-</div>
+
 <div class="form-horizontal">
     <div id="partialViewAnswerGroup_@(Model.Id)" class="partial"></div>
 </div>
@@ -29,11 +11,4 @@
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 }
-
 <script src="~/js/AnswerGroups/AnswerGroupsAjaxModule.js" asp-append-version="true"></script>
-@*<script type="text/javascript">
-    $(document)
-        .ready(function () {
-            
-        });
-</script>*@

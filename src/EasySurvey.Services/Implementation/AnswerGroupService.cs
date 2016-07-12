@@ -108,36 +108,11 @@ namespace EasySurvey.Services.Implementation
 
         public bool Extend(AnswerGroup answerGroup)
         {
-            //int nextSortIndex = element.AnswerSection.Max(item => item.Order) + 1;
-            //foreach (var section in element.SectionGroup.Section.OrderBy(item => item.SortOrder))
-            //{
-            //    if (section.IsRepeatable)
-            //    {
-            //        var answerSection = new AnswerSection()
-            //        {
-            //            SectionId = section.Id,
-            //            Order = nextSortIndex++
-            //        };
-
-            //        foreach (var question in section.Question.OrderBy(item => item.SortOrder))
-            //        {
-            //            var answer = new Answer()
-            //            {
-            //                OptionId = null,
-            //                InHighlighted = false,
-            //                IsFinal = false,
-            //                IsValid = false,
-            //                QuestionId = question.Id,
-            //                OptionGroupId = question.OptionGroupId
-            //            };
-            //            answerSection.Answer.Add(answer);
-            //        }
-            //        element.AnswerSection.Add(answerSection);
-            //    }
-            //}
-
             if (answerGroup.IsUsed)
             {
+                var existingAnswerGroups = _answerGroupRepo.GetBySectionGroupId(answerGroup.SectionGroupId);
+                int sortOrder = existingAnswerGroups.Max(item => item.SortOrder);
+
                 Address address;
                 if (answerGroup.Survey != null)
                 {
@@ -152,32 +127,36 @@ namespace EasySurvey.Services.Implementation
                     Id = 0,
                     SurveyId = answerGroup.SurveyId,
                     SectionGroupId = answerGroup.SectionGroupId,
-                    IsUsed = answerGroup.IsUsed, 
+                    IsUsed = answerGroup.IsUsed,
+                    SortOrder = sortOrder + 1,
                     Address = address
                 };
                 
                 foreach (var section in answerGroup.SectionGroup.Section.OrderBy(item => item.SortOrder))
                 {
-                    var answerSection = new AnswerSection()
+                    if (section.IsRepeatable)
                     {
-                        SectionId = section.Id,
-                        Order = answerGroup.AnswerSection.Count + 1
-                    };
-
-                    foreach (var question in section.Question.OrderBy(item => item.SortOrder))
-                    {
-                        var answer = new Answer()
+                        var answerSection = new AnswerSection()
                         {
-                            OptionId = null,
-                            InHighlighted = false,
-                            IsFinal = false,
-                            IsValid = false,
-                            QuestionId = question.Id,
-                            OptionGroupId = question.OptionGroupId
+                            SectionId = section.Id,
+                            Order = answerGroup.AnswerSection.Count + 1
                         };
-                        answerSection.Answer.Add(answer);
+
+                        foreach (var question in section.Question.OrderBy(item => item.SortOrder))
+                        {
+                            var answer = new Answer()
+                            {
+                                OptionId = null,
+                                InHighlighted = false,
+                                IsFinal = false,
+                                IsValid = false,
+                                QuestionId = question.Id,
+                                OptionGroupId = question.OptionGroupId
+                            };
+                            answerSection.Answer.Add(answer);
+                        }
+                        answerGroupForExtention.AnswerSection.Add(answerSection);
                     }
-                    answerGroupForExtention.AnswerSection.Add(answerSection);
                 }
                 return this.Save(answerGroupForExtention);
             }

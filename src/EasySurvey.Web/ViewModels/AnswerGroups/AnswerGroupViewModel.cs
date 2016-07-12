@@ -9,6 +9,13 @@ using System.Collections;
 
 namespace EasySurvey.Web.ViewModels.AnswerGroups
 {
+    public class AnswerGroupsViewModel : List<AnswerGroupViewModel>
+    {
+        public AnswerGroupsViewModel() : base()
+        {
+        }
+    }
+
     public class AnswerGroupViewModel
     {
         public AnswerGroupViewModel()
@@ -23,6 +30,7 @@ namespace EasySurvey.Web.ViewModels.AnswerGroups
             Title = answerGroup.SectionGroup.Title;
             IsMandatory = answerGroup.SectionGroup.IsMandatory;
             IsUsed = answerGroup.IsUsed;
+            SortOrder = answerGroup.SortOrder;
 
             if (answerGroup.AddressId.HasValue && answerGroup.Address != null)
             {
@@ -57,7 +65,7 @@ namespace EasySurvey.Web.ViewModels.AnswerGroups
         public string PostalCode { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
-
+        public int SortOrder { get; set; }
         public SectionGroup SectionGroup { get; set; }
         public virtual AnswerSectionsViewModel AnswerSection { get; set; }
     }

@@ -19,6 +19,7 @@ namespace EasySurvey.Common.Models
         public DateTime? ModifiedOn { get; set; }
         public int SectionGroupId { get; set; }
         public int SurveyId { get; set; }
+        public int SortOrder { get; set; }
         public virtual ICollection<AnswerSection> AnswerSection { get; set; }
         public virtual Address Address { get; set; }
         public virtual SectionGroup SectionGroup { get; set; }
