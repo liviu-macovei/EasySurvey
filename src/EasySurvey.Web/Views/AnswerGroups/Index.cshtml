@@ -25,7 +25,7 @@
                 {
                     var group = groups.ElementAt(i);
                     var answerGroup = group.Items.First();
-                    if (answerGroup.Id == Model.SelectedId)
+                    if (answerGroup.SectionGroupId == Model.SelectedId)
                     {
                         <li class="active"><a data-toggle="tab" href="#@(answerGroup.SectionGroupId)" name="@(answerGroup.SectionGroupId)">@answerGroup.Title</a></li>
                     }
@@ -43,7 +43,7 @@
                 {
                     var group = groups.ElementAt(i);
                     var answerGroup = group.Items.First();
-                    if (answerGroup.Id == Model.SelectedId)
+                    if (answerGroup.SectionGroupId == Model.SelectedId)
                     {
                         <div id="@(answerGroup.SectionGroupId)" class="tab-pane fade in active">
                             <div class="form-group row">

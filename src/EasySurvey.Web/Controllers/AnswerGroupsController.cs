@@ -40,7 +40,7 @@ namespace EasySurvey.Web.Controllers
             AnswerGroupListViewModel listModel = new AnswerGroupListViewModel();
             listModel.SurveyId = id.Value;
             listModel.AnswerGroupViewModel = listModels;
-            listModel.SelectedId = selected > 0 ? selected : listModels.First().Id;
+            listModel.SelectedId = selected > 0 ? selected : listModels.First().SectionGroupId;
             return View(listModel);
         }
 
@@ -117,66 +117,69 @@ namespace EasySurvey.Web.Controllers
                 var answerGroups = _answerGroupService.GetBySurveyAndSectionGroupId(surveyId, sectionGroupId);
                 if (answerGroups == null)
                     return HttpNotFound();
-                AnswerGroupsViewModel editAnswerGroupsViewModel = new AnswerGroupsViewModel() { SurveyId = surveyId, SectionGroupId = sectionGroupId };
+                AnswerGroupSelectViewModel selectViewModel = new AnswerGroupSelectViewModel() { SurveyId = surveyId, SectionGroupId = sectionGroupId };
                 foreach (var answerGroup in answerGroups)
-                    editAnswerGroupsViewModel.AnswerGroupViewModel.Add(new AnswerGroupViewModel(answerGroup));
-                return PartialView(@"_EditAnswerGroups", editAnswerGroupsViewModel);
+                    selectViewModel.AnswerGroupsViewModel.Add(new AnswerGroupViewModel(answerGroup));
+                return PartialView(@"_EditAnswerGroups", selectViewModel);
             }
             catch (Exception ex)
             {
                 throw ex;
-            }
+            }   
             
         }
 
         // POST: AnswerGroups/Edit/5
         [HttpPost("Edit")]
         //[ValidateAntiForgeryToken]
-        public IActionResult Edit(AnswerGroupsViewModel answerGroups, string command)
+        public IActionResult Edit(AnswerGroupSelectViewModel selectViewModel, string command)
         {
-            //var existingAnswerGroup = _answerGroupService.GetById(answerGroup.Id);
-            //if (existingAnswerGroup != null)
-            //{
-            //    if (existingAnswerGroup.Address == null)
-            //        existingAnswerGroup.Address = new Address();
-            //    existingAnswerGroup.Address.AddressLine1 = answerGroup.AddressLine1;
-            //    existingAnswerGroup.Address.PostalCode = answerGroup.PostalCode;
-            //    existingAnswerGroup.Address.City = answerGroup.City;
-            //    existingAnswerGroup.Address.Country = answerGroup.Country;
+            foreach (var answerGroup in selectViewModel.AnswerGroupsViewModel)
+            {
+                var existingAnswerGroup = _answerGroupService.GetById(answerGroup.Id);
+                if (existingAnswerGroup != null)
+                {
+                    if (existingAnswerGroup.Address == null)
+                        existingAnswerGroup.Address = new Address();
+                    existingAnswerGroup.Address.AddressLine1 = answerGroup.AddressLine1;
+                    existingAnswerGroup.Address.PostalCode = answerGroup.PostalCode;
+                    existingAnswerGroup.Address.City = answerGroup.City;
+                    existingAnswerGroup.Address.Country = answerGroup.Country;
 
-            //    foreach (var answerSection in answerGroup.AnswerSection)
-            //    {
-            //        AnswerSection existingAnswerSection = existingAnswerGroup.AnswerSection.Where(item => item.Id == answerSection.Id).FirstOrDefault();
-            //        if (existingAnswerSection != null)
-            //        {
-            //            foreach (var answer in answerSection.Answer)
-            //            {
-            //                Answer existingAnswer = existingAnswerSection.Answer.Where(item => item.Id == answer.Id).FirstOrDefault();
-            //                existingAnswer.AnswerText = answer.AnswerText;
-            //                existingAnswer.DefaultComments = answer.Comments;
-            //                existingAnswer.OptionId = answer.OptionId;
-            //            }
-            //        }
-            //    }
+                    foreach (var answerSection in answerGroup.AnswerSection)
+                    {
+                        AnswerSection existingAnswerSection = existingAnswerGroup.AnswerSection.Where(item => item.Id == answerSection.Id).FirstOrDefault();
+                        if (existingAnswerSection != null)
+                        {
+                            foreach (var answer in answerSection.Answer)
+                            {
+                                Answer existingAnswer = existingAnswerSection.Answer.Where(item => item.Id == answer.Id).FirstOrDefault();
+                                existingAnswer.AnswerText = answer.AnswerText;
+                                existingAnswer.DefaultComments = answer.Comments;
+                                existingAnswer.OptionId = answer.OptionId;
+                            }
+                        }
+                    }
+                    _answerGroupService.Save(existingAnswerGroup);
+                }
+            }
 
-            //    switch (command)
-            //    {
-            //        case "Save":
-            //            _answerGroupService.Save(existingAnswerGroup);
-            //            break;
-            //        case "Extend":
-            //            _answerGroupService.Extend(existingAnswerGroup);
-            //            break;
-            //    }
-            //}
+            switch (command)
+            {
+                case "Save":
+                        break;
+                case "Extend":
+                    AnswerGroupViewModel result = selectViewModel.AnswerGroupsViewModel.OrderBy(item => item.SortOrder).FirstOrDefault();
+                    var existingAnswerGroup = _answerGroupService.GetById(result.Id);
+                    _answerGroupService.Extend(existingAnswerGroup);
+                    break;
+            }
 
-            //if (ModelState.IsValid)
-            //{
-            //    return RedirectToAction("Index", new { id = answerGroup.SurveyId, selected = answerGroup.SectionGroupId });
-            //}
-            //ViewData["SectionGroupId"] = new SelectList(_context.SectionGroup, "Id", "SectionGroup", answerGroup.SectionGroupId);
-            //ViewData["SurveyId"] = new SelectList(_context.Survey, "Id", "Survey", answerGroup.SurveyId);
-            return RedirectToAction("Index", new { id = answerGroups.SurveyId, selected = answerGroups.SectionGroupId });
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index", new { id = selectViewModel.SurveyId, selected = selectViewModel.SectionGroupId });
+            }
+            return RedirectToAction("Index", new { id = selectViewModel.SurveyId, selected = selectViewModel.SectionGroupId });
         }
 
         [HttpPost]

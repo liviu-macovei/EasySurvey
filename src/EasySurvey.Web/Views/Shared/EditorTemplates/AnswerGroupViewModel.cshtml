@@ -1,6 +1,10 @@
 @model EasySurvey.Web.ViewModels.AnswerGroups.AnswerGroupViewModel
-<br />rrrrr
-<br />
+<input type="hidden" asp-for="Id" />
+<input type="hidden" asp-for="SectionGroupId" />
+<input type="hidden" asp-for="SurveyId" />
+<input type="hidden" asp-for="AddressId" />
+<input type="hidden" asp-for="SortOrder" />
+
 <div class="panel panel-primary">
     <div class="panel-heading">
         @Model.SortOrder - @Model.SectionGroup.Title

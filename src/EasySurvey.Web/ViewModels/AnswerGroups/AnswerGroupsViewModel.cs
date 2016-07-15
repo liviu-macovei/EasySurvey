@@ -5,14 +5,10 @@ using System.Threading.Tasks;
 
 namespace EasySurvey.Web.ViewModels.AnswerGroups
 {
-    public class AnswerGroupsViewModel 
+    public class AnswerGroupsViewModel : List<AnswerGroupViewModel>
     {
-        public int SurveyId { get; set; }
-        public int SectionGroupId { get; set; }
-        public ICollection<AnswerGroupViewModel> AnswerGroupViewModel { get; set; }
-        public AnswerGroupsViewModel()
+        public AnswerGroupsViewModel() : base()
         {
-            AnswerGroupViewModel = new List<AnswerGroupViewModel>();
         }
     }
 }
