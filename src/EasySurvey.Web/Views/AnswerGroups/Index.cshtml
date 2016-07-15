@@ -7,6 +7,7 @@
 </head>
 <body>
     <h3>Update Answer Groups</h3>
+    <input type="hidden" asp-for="SurveyId" />
     <div class="col-md-10 left">
         <ul class="pager">
             <li><a asp-action="Index" asp-controller="Survey" class="btn pull-left">Surveys</a></li>
@@ -14,18 +15,23 @@
         </ul>
     </div>
     <div class="col-md-10 left">
+        @{
+            var groups = Model.AnswerGroupViewModel.GroupBy(item => item.SectionGroupId)
+                            .Select(group => new { SectionGroupId = group.Key, Items = group.ToList() }).ToList();
+        }
         <ul class="nav nav-tabs">
             @{
-                for (int i = 0; i < Model.AnswerGroupViewModel.Count(); i++)
+                for (int i = 0; i < groups.Count(); i++)
                 {
-                    var answerGroup = Model.AnswerGroupViewModel.ElementAt(i);
+                    var group = groups.ElementAt(i);
+                    var answerGroup = group.Items.First();
                     if (answerGroup.Id == Model.SelectedId)
                     {
-                        <li class="active"><a data-toggle="tab" href="#@(answerGroup.Id)" name="@(answerGroup.Id)">@answerGroup.Title</a></li>
+                        <li class="active"><a data-toggle="tab" href="#@(answerGroup.SectionGroupId)" name="@(answerGroup.SectionGroupId)">@answerGroup.Title</a></li>
                     }
                     else
                     {
-                        <li><a data-toggle="tab" href="#@(answerGroup.Id)" name="@(answerGroup.Id)">@answerGroup.Title</a></li>
+                        <li><a data-toggle="tab" href="#@(answerGroup.SectionGroupId)" name="@(answerGroup.SectionGroupId)">@answerGroup.Title</a></li>
                     }
                 }
             }
@@ -33,12 +39,13 @@
 
         <div class="tab-content">
             @{
-                for (int i = 0; i < Model.AnswerGroupViewModel.Count(); i++)
+                for (int i = 0; i < groups.Count(); i++)
                 {
-                    var answerGroup = Model.AnswerGroupViewModel.ElementAt(i);
+                    var group = groups.ElementAt(i);
+                    var answerGroup = group.Items.First();
                     if (answerGroup.Id == Model.SelectedId)
                     {
-                        <div id="@(answerGroup.Id)" class="tab-pane fade in active">
+                        <div id="@(answerGroup.SectionGroupId)" class="tab-pane fade in active">
                             <div class="form-group row">
                                 <div class="col-md-12 col-sm-offset-0">
                                     @{
@@ -55,13 +62,13 @@
                                 </div>
                             </div>
                             <div class="form-horizontal">
-                                <div id="partialViewAnswerGroup_@(answerGroup.Id)" class="partial"></div>
+                                <div id="partialViewAnswerGroup_@(answerGroup.SectionGroupId)" class="partial"></div>
                             </div>
                         </div>
                     }
                     else
                     {
-                        <div id="@(answerGroup.Id)" class="tab-pane fade">
+                        <div id="@(answerGroup.SectionGroupId)" class="tab-pane fade">
                             <div class="form-group row">
                                 <div class="col-md-12 col-sm-offset-0">
                                     @{
@@ -78,7 +85,7 @@
                                 </div>
                             </div>
                             <div class="form-horizontal">
-                                <div id="partialViewAnswerGroup_@(answerGroup.Id)" class="partial"></div>
+                                <div id="partialViewAnswerGroup_@(answerGroup.SectionGroupId)" class="partial"></div>
                             </div>
                         </div>
                     }
@@ -97,8 +104,9 @@
         .ready(function () {
             $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
                 var target = $(e.target).attr("href");
-                var id = $(e.target).attr("name");
-                AnswerGroupAjax.populateView(id);
+                var sectionGroupId = $(e.target).attr("name");
+                var surveyId = $('input#SurveyId').val();
+                AnswerGroupAjax.populateAnswerGroupsView(surveyId, sectionGroupId);
             });
 
             $('input[class=isusedck]').change(function (e) {
@@ -135,7 +143,8 @@
                 //    }
                 //}
             });
-            var id = $('.nav-tabs .active').children().first().attr("name")
-            AnswerGroupAjax.populateView(id);
+            var surveyId = $('input#SurveyId').val();
+            var sectionGroupId = $('.nav-tabs .active').children().first().attr("name")
+            AnswerGroupAjax.populateAnswerGroupsView(surveyId, sectionGroupId);
         });
 </script>

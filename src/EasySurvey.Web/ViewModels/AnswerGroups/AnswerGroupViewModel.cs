@@ -9,13 +9,6 @@ using System.Collections;
 
 namespace EasySurvey.Web.ViewModels.AnswerGroups
 {
-    public class AnswerGroupsViewModel : List<AnswerGroupViewModel>
-    {
-        public AnswerGroupsViewModel() : base()
-        {
-        }
-    }
-
     public class AnswerGroupViewModel
     {
         public AnswerGroupViewModel()
@@ -70,10 +63,5 @@ namespace EasySurvey.Web.ViewModels.AnswerGroups
         public virtual AnswerSectionsViewModel AnswerSection { get; set; }
     }
 
-    public class AnswerSectionsViewModel : List<AnswerSectionViewModel>
-    {
-        public AnswerSectionsViewModel() : base()
-        {
-        }
-    }
+    
 }

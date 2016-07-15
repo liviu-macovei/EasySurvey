@@ -16,6 +16,7 @@ namespace EasySurvey.Common.Interfaces.Repositories
         bool Delete(AnswerGroup answerGroup);
         bool DeleteById(int id);
         ICollection<AnswerGroup> FindAllBySurveyId(int surveyId);
+        ICollection<AnswerGroup> FindAllBySurveyAndSectionGroupId(int surveyId, int sectionGroupId);
         AnswerGroup FindBySectionGroupId(int sectionGroupId);
     }
 }

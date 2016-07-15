@@ -1,64 +1,91 @@
 @model EasySurvey.Web.ViewModels.AnswerGroups.AnswerGroupViewModel
-
-<div class="form-inline" role="form">
-    <br />
-    <div class="form-group row">
-        <div class="col-md-12 col-sm-offset-6">
-            @{
-                if (!Model.IsMandatory)
-                {
-                    <div class="checkbox">
-                        <div class="checkbox">
-                            <input asp-for="@Model.IsUsed" />
-                            <label asp-for="@Model.IsUsed"></label>
-                        </div>
-                    </div>
-                }
+<br />rrrrr
+<br />
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        @Model.SortOrder - @Model.SectionGroup.Title
+        @{
+            if (@Model.SortOrder > 1)
+            {
+                <a id="button-delete" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-primary pull-right btn-sm">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </a>
             }
-            <br />
-        </div>
+        }
+    </div>
+    <div class="panel-body"> 
+        <table style="width:100%">
+            <thead>
+                <tr>
+                    <th colspan="2">
+                        <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Address Info</div>
+                            <div class="panel-body">
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Recipient"></label>
+                                            <input asp-for="Recipient" class="form-control" />
+                                            <span asp-validation-for="Recipient" class="text-danger" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="AddressLine1"></label>
+                                            <input asp-for="AddressLine1" class="form-control" />
+                                            <span asp-validation-for="AddressLine1" class="text-danger" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="PostalCode"></label>
+                                            <input asp-for="PostalCode" class="form-control" />
+                                            <span asp-validation-for="PostalCode" class="text-danger" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="City"></label>
+                                            <input asp-for="City" class="form-control" />
+                                            <span asp-validation-for="City" class="text-danger" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Country"></label>
+                                            <input asp-for="Country" class="form-control" />
+                                            <span asp-validation-for="Country" class="text-danger" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="AnswerSection">Answer Section Count: </label> @Model.AnswerSection.Count
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.EditorFor(model => model.AnswerSection)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
-<br />
-<br />
-<div class="form-horizontal">
-    <div id="partialViewAnswerGroup_@(Model.Id)" class="partial"></div>
-</div>
 
-@section Scripts {
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-}
-
-<script src="~/js/AnswerGroups/AnswerGroupsAjaxModule.js" asp-append-version="true"></script>
-<script type="text/javascript">
-    $(document)
-        .ready(function () {
-            $('input#IsUsed').change(function (e) {
-                var answerGroupId = $('input#Id').val();
-                var sectionGroupId = $('input#SectionGroupId').val();
-                var surveyId = $('input#SurveyId').val();
-                var isUsed;
-                var id = $('.nav-tabs .active').children().first().attr("name")
-                if ($('input#IsUsed').is(':checked')) {
-                    $('input#IsUsed').addClass('checked');
-                    isUsed = true;
-                    AnswerGroupAjax.useAnswerGroup(isUsed, answerGroupId, sectionGroupId, surveyId);
-                } else {
-                    if (confirm('This will delete all the data currently saved. Are you sure you want unuse this section?')) {
-                        $('input#IsUsed').removeClass('checked');
-                        isUsed = false;
-                        AnswerGroupAjax.useAnswerGroup(isUsed, answerGroupId, sectionGroupId, surveyId);
-                    }
-                }
-            });
-
-            $("#btnAdd").click(function () {
-                var answerGroupId = $('input#Id').val();
-                var sectionGroupId = $('input#SectionGroupId').val();
-                var surveyId = $('input#SurveyId').val();
-                AnswerGroupAjax.extendAnswerGroup(answerGroupId, sectionGroupId, surveyId);
-            });
-        });
-</script>

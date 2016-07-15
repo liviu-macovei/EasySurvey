@@ -58,7 +58,7 @@
                 data: { id: answerGroupId }
             })
             .done(function (response) {
-                $('.partialViewAnswerGroup_' + answerGroupId).each(function (i, obj) {
+                $('#partialViewAnswerGroup_' + answerGroupId).each(function (i, obj) {
                     $(this).html("");
                 });
                 var div = $("#partialViewAnswerGroup_" + answerGroupId);
@@ -72,9 +72,36 @@
             });
     };
 
+    var populateAnswerGroupsPartial = function (surveyId, sectionGroupId) {
+        $.ajax({
+            method: "GET",
+            cache: false,
+            url: "/AnswerGroups/EditAnswerGroupsAjax",
+            dataType: "HTML",
+            data: { surveyId: surveyId, sectionGroupId: sectionGroupId }
+        })
+            .done(function (response) {
+                var div = $("#partialViewAnswerGroup_" + sectionGroupId);
+                div.html("");
+                div.html(response);
+                //$('#partialViewAnswerGroup_' + sectionGroupId).each(function (i, obj) {
+                //    $(this).html("");
+                //});
+                //var div = $("#partialViewAnswerGroup_" + sectionGroupId);
+                //div.html(response);
+            })
+            .error(function (response) {
+                alert("error " + sectionGroupId);
+                var div = $("#partialViewAnswerGroup_" + sectionGroupId);
+                div.html("");
+                div.html(response);
+            });
+    };
+
     return {
         useAnswerGroup: useAnswerGroup,
         populateView: populatePartial,
+        populateAnswerGroupsView: populateAnswerGroupsPartial,
         extendAnswerGroup: extendAnswerGroup
     };
 })();

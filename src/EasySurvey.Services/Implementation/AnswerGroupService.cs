@@ -162,6 +162,11 @@ namespace EasySurvey.Services.Implementation
             }
             return false;
         }
+
+        public ICollection<AnswerGroup> GetBySurveyAndSectionGroupId(int surveyId, int sectionGroupId)
+        {
+            return _answerGroupRepo.FindAllBySurveyAndSectionGroupId(surveyId, sectionGroupId);
+        }
     }
 }
 

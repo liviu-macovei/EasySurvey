@@ -173,5 +173,20 @@ namespace EasySurvey.Repositories.Sql
                         select answerGroup;
             return query.ToList();
         }
+
+        public ICollection<AnswerGroup> FindAllBySurveyAndSectionGroupId(int surveyId, int sectionGroupId)
+        {
+            var query = from answerGroup in _context.AnswerGroup
+                .Include(x => x.Survey)
+                .Include(x => x.Address)
+                .Include(x => x.AnswerSection).ThenInclude(s => s.Section)
+                .Include(x => x.AnswerSection).ThenInclude(s => s.Answer).ThenInclude(q => q.Question).ThenInclude(q => q.QuestionType)
+                .Include(x => x.AnswerSection).ThenInclude(s => s.Answer).ThenInclude(q => q.Question).ThenInclude(q => q.NextQuestion)
+                .Include(x => x.AnswerSection).ThenInclude(s => s.Answer).ThenInclude(q => q.Question).ThenInclude(q => q.OptionGroup).ThenInclude(q => q.Option)
+                .Include(x => x.SectionGroup).ThenInclude(s => s.Section).ThenInclude(q => q.Question).ThenInclude(q => q.OptionGroup).ThenInclude(q => q.Option)
+                        where answerGroup.SurveyId == surveyId && answerGroup.SectionGroupId == sectionGroupId
+                        select answerGroup;
+            return query.ToList();
+        }
     }
 }

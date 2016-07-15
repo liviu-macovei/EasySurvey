@@ -32,6 +32,11 @@ namespace EasySurvey.Services.Mock
             return new AnswerGroup {Id = MockRandom.Random().Next(100), SurveyId = new int(), SectionGroupId = id};
         }
 
+        public ICollection<AnswerGroup> GetBySurveyAndSectionGroupId(int surveyId, int sectionGroupId)
+        {
+            throw new NotImplementedException();
+        }
+
         public ICollection<AnswerGroup> GetBySurveyId(int id)
         {
             return new List<AnswerGroup>

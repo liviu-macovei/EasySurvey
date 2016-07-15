@@ -8,6 +8,7 @@ namespace EasySurvey.Services.ServiceDefinitions
     public interface IAnswerGroupService:IProcessOperations<AnswerGroup>
     {
         ICollection<AnswerGroup> GetBySurveyId(int id);
+        ICollection<AnswerGroup> GetBySurveyAndSectionGroupId(int surveyId, int sectionGroupId);
         AnswerGroup GetBySectionGroupId(int id);
         bool Extend(AnswerGroup element);
     }
