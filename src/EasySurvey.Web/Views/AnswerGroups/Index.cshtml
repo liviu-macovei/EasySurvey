@@ -112,7 +112,11 @@
             $('input[class=isusedck]').change(function (e) {
                 //var answerGroupId = $('input#Id').val();
                 var answerGroupId = this.id;
-                var sectionGroupId = $('input#SectionGroupId').val();
+                alert(answerGroupId);
+                //var sectionGroupId = $('input#SectionGroupId').val();
+                var sectionGroupId = $('.nav-tabs .active').children().first().attr("name");
+                alert(sectionGroupId);
+
                 var surveyId = $('input#SurveyId').val();
                 var isUsed;
                 var id = $('.nav-tabs .active').children().first().attr("name")

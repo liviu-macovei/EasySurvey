@@ -205,9 +205,14 @@ namespace EasySurvey.Web.Controllers
             var toUpdate = _answerGroupService.GetById(answerGroup.Id);
             toUpdate.IsUsed = answerGroup.IsUsed;
             var result = _answerGroupService.Save(toUpdate);
-            toUpdate = _answerGroupService.GetById(answerGroup.Id);
-            AnswerGroupViewModel editAnswerGroupViewModel = new AnswerGroupViewModel(toUpdate);
-            return PartialView(@"_EditAnswerGroup", editAnswerGroupViewModel);
+
+            var answerGroups = _answerGroupService.GetBySurveyAndSectionGroupId(answerGroup.SurveyId, answerGroup.SectionGroupId);
+            if (answerGroups == null)
+                return HttpNotFound();
+            AnswerGroupSelectViewModel selectViewModel = new AnswerGroupSelectViewModel() { SurveyId = answerGroup.SurveyId, SectionGroupId = answerGroup.SectionGroupId };
+            foreach (var answerGroupUpdated in answerGroups)
+                selectViewModel.AnswerGroupsViewModel.Add(new AnswerGroupViewModel(answerGroupUpdated));
+            return PartialView(@"_EditAnswerGroups", selectViewModel);
         }
 
         // GET: AnswerGroups/Delete/5

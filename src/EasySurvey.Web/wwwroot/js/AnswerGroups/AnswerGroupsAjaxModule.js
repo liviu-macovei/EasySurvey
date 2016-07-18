@@ -19,7 +19,7 @@
                 data: JSON.stringify(data)
             })
             .success(function (response) {
-                var div = $("#partialViewAnswerGroup_" + answerGroupId);
+                var div = $("#partialViewAnswerGroup_" + sectionGroupId);
                 div.html("");
                 div.html(response);
             });
